@@ -646,13 +646,14 @@ body.role-active .sidebar-role-indicator{display:block}
     <div class="sidebar">
       <div class="sidebar-progress"><div class="prog-label">Verkenning</div><div class="prog-pct" id="prog-pct">0%</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div></div>
       <div class="sidebar-role-indicator" id="sidebar-role-ind"></div>
-      <div class="sidebar-label">6 lagen</div>
+      <div class="sidebar-label">7 lagen</div>
       <div class="sidebar-item active" data-step="step-1" onclick="goStep('step-1')"><div class="s-dot"></div>1. Platform</div>
       <div class="sidebar-item" data-step="step-2" onclick="goStep('step-2')"><div class="s-dot"></div>2. Bescherming</div>
       <div class="sidebar-item" data-step="step-3" onclick="goStep('step-3')"><div class="s-dot"></div>3. Informatie</div>
       <div class="sidebar-item" data-step="step-4" onclick="goStep('step-4')"><div class="s-dot"></div>4. Intelligentie</div>
       <div class="sidebar-item" data-step="step-5" onclick="goStep('step-5')"><div class="s-dot"></div>5. Mens</div>
-      <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Richting</div>
+      <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Organisatie</div>
+      <div class="sidebar-item" data-step="step-7" onclick="goStep('step-7')"><div class="s-dot"></div>7. Richting</div>
       <div class="sidebar-label">Extra</div>
       <div class="sidebar-item" data-step="step-results" onclick="goStep('step-results')"><div class="s-dot"></div>📊 Resultaten</div>
       <div class="sidebar-item" data-step="step-budget" onclick="goStep('step-budget')"><div class="s-dot"></div>💶 Budget</div>
@@ -667,7 +668,7 @@ body.role-active .sidebar-role-indicator{display:block}
     <div class="main-area">
 
 <!-- STEP 1 --><div class="step active" id="step-1">
-<div class="step-badge">Laag 1 van 6 · Platform</div><h2>Werkt uw digitale werkplek?</h2>
+<div class="step-badge">Laag 1 van 7 · Platform</div><h2>Werkt uw digitale werkplek?</h2>
 <p class="step-desc">We beginnen bij het fundament. Zonder werkende, gestandaardiseerde werkplek is alles erboven instabiel.</p>
 <div class="context-box"><div class="c-icon">💡</div><div class="c-body"><strong>Waarom dit belangrijk is:</strong> 67% van MKB-organisaties heeft onvoldoende inzicht in hun IT-omgeving.<div class="c-source">Bron: OECD SME Digital Gap Report 2025 · Microsoft Work Trend Index 2025</div></div></div>
 <div class="q-group"><div class="q-label">Hoe zou u uw digitale werkplek omschrijven?</div><div class="q-help">Laptops, telefoons, software voor dagelijks werk.</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goede basis</strong><span class="sub">Standaard laptops, M365, duidelijke afspraken</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Lappendeken</strong><span class="sub">Verschillende systemen, niet gestandaardiseerd</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Weten we niet precies</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We hebben hulp nodig</strong></div></div></div></div>
@@ -678,7 +679,7 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- STEP 2 --><div class="step" id="step-2">
-<div class="step-badge">Laag 2 van 6 · Bescherming</div><h2>Is uw organisatie beschermd?</h2>
+<div class="step-badge">Laag 2 van 7 · Bescherming</div><h2>Is uw organisatie beschermd?</h2>
 <p class="step-desc">Security en compliance worden steeds belangrijker met nieuwe Europese wetgeving.</p>
 <div class="context-box"><div class="c-icon">⚠️</div><div class="c-body"><strong>Actueel:</strong> In 2026 worden AI Act, NIS2, DORA en Data Act van kracht. Veel MKB-organisaties zijn onvoldoende voorbereid.<div class="c-source">Bron: Europese Commissie · Autoriteit Persoonsgegevens · DNB 2026</div></div></div>
 <div class="q-group"><div class="q-label">Hoe gaat u om met informatiebeveiliging?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed beleid, voeren we uit</strong><span class="sub">MFA, audits, training</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Redelijk, kan beter</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Vertrouwen op IT-leverancier</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Blinde vlek</strong></div></div></div></div>
@@ -689,7 +690,7 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- STEP 3 --><div class="step" id="step-3">
-<div class="step-badge">Laag 3 van 6 · Informatie</div><h2>Hoe goed is uw informatie op orde?</h2>
+<div class="step-badge">Laag 3 van 7 · Informatie</div><h2>Hoe goed is uw informatie op orde?</h2>
 <p class="step-desc">AI werkt alleen als de onderliggende informatie betrouwbaar en vindbaar is.</p>
 <div class="context-box"><div class="c-icon">📊</div><div class="c-body"><strong>Cruciaal:</strong> Organisaties met gestructureerde data halen 3x meer waarde uit AI. "Garbage in, garbage out" geldt sterker dan ooit.<div class="c-source">Bron: McKinsey Global AI Survey 2025 · Gartner Data Quality Guide</div></div></div>
 <div class="q-group"><div class="q-label">Hoe is informatie georganiseerd?</div><div class="q-help">Documenten, mappen, SharePoint, gedeelde schijven.</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed gestructureerd</strong><span class="sub">Mappenstructuur, naamconventies, metadata</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Per afdeling verschilt het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Veel dubbel en verouderd</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Iedereen doet eigen ding</strong></div></div></div></div>
@@ -698,7 +699,7 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- STEP 4 --><div class="step" id="step-4">
-<div class="step-badge">Laag 4 van 6 · Intelligentie</div><h2>Hoe zet u AI in?</h2>
+<div class="step-badge">Laag 4 van 7 · Intelligentie</div><h2>Hoe zet u AI in?</h2>
 <p class="step-desc">De laag waar het om draait — maar alleen zinvol als de onderliggende lagen op orde zijn.</p>
 <div class="context-box"><div class="c-icon">🤖</div><div class="c-body"><strong>Realiteit:</strong> Slechts 3,3% van M365-gebruikers zet Copilot productief in. Het probleem is zelden de technologie — het is het fundament.<div class="c-source">Bron: Directions on Microsoft 2025 · M365 Copilot Adoption Report</div></div></div>
 <div class="q-group"><div class="q-label">Wordt er AI gebruikt in uw organisatie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel met beleid</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, maar ad hoc</strong><span class="sub">Individueel, geen beleid</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We verkennen het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
@@ -707,21 +708,31 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- STEP 5 --><div class="step" id="step-5">
-<div class="step-badge">Laag 5 van 6 · Mens</div><h2>Zijn uw mensen klaar?</h2>
+<div class="step-badge">Laag 5 van 7 · Mens</div><h2>Zijn uw mensen klaar?</h2>
 <p class="step-desc">Technologie werkt alleen als mensen het omarmen.</p>
 <div class="context-box"><div class="c-icon">👥</div><div class="c-body"><strong>Wettelijk verplicht:</strong> Sinds feb 2025 moeten alle medewerkers die met AI werken een basisniveau "AI-geletterdheid" hebben.<div class="c-source">Bron: EU AI Act, Artikel 4 · Autoriteit Persoonsgegevens 2025</div></div></div>
 <div class="q-group"><div class="q-label">Hoe digitaal vaardig zijn uw medewerkers?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Hoog niveau</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Wisselend per team</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Beperkt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Groot probleem</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Is er een trainingsprogramma?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Soms, ad hoc</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-4')">← Intelligentie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-5');goStep('step-6')">Volgende: Richting →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-4')">← Intelligentie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-5');goStep('step-6')">Volgende: Organisatie →</button></div></div>
 </div>
 
+
 <!-- STEP 6 --><div class="step" id="step-6">
-<div class="step-badge">Laag 6 van 6 · Richting</div><h2>Heeft u een digitale koers?</h2>
+<div class="step-badge">Laag 6 van 7 · Organisatie</div><h2>Is uw organisatie klaar voor verandering?</h2>
+<p class="step-desc">AI en nieuwe regelgeving vragen om aanpassingen in structuur, processen en governance van uw organisatie.</p>
+<div class="context-box"><div class="c-icon">🏢</div><div class="c-body"><strong>Waarom dit ertoe doet:</strong> 73% van AI-transformaties faalt niet door technologie maar door organisatorische weerstand. Structuur, besluitvorming en processen moeten meebewegen.<div class="c-source">Bron: McKinsey State of AI 2025 · MIT Sloan Management Review</div></div></div>
+<div class="q-group"><div class="q-label">Hoe snel kan uw organisatie zich aanpassen aan veranderingen?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Wendbaar</strong><span class="sub">Korte beslislijnen, snel schakelen</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Redelijk flexibel</strong><span class="sub">Aanpassingen kosten enkele maanden</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Stroperig</strong><span class="sub">Veel lagen, trage besluitvorming</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Star</strong><span class="sub">Verandering stuit op grote weerstand</span></div></div></div></div>
+<div class="q-group"><div class="q-label">Zijn rollen en verantwoordelijkheden voor AI en compliance belegd?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, formeel vastgelegd</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Gedeeltelijk, informeel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee, nog niet</strong></div></div></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-5')">← Mens</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-6');goStep('step-7')">Volgende: Richting →</button></div></div>
+</div>
+
+<!-- STEP 7 --><div class="step" id="step-7">
+<div class="step-badge">Laag 7 van 7 · Richting</div><h2>Heeft u een digitale koers?</h2>
 <p class="step-desc">Strategie en governance. Wie stuurt? Waar wilt u over 2 jaar staan?</p>
 <div class="context-box"><div class="c-icon">🧭</div><div class="c-body"><strong>Het verschil:</strong> Organisaties met expliciete digitale strategie realiseren 2,5x meer waarde uit tech-investeringen.<div class="c-source">Bron: Deloitte Digital Maturity Index 2025 · MIT CISR</div></div></div>
 <div class="q-group"><div class="q-label">Heeft u een digitale strategie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, helder en actueel</strong><span class="sub">Vastgesteld, met budget en roadmap</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins, niet formeel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Moet, maar nog niet aan toegekomen</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Wie is verantwoordelijk?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>CIO of CDO</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Directie gezamenlijk</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>IT-manager (naast andere taken)</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niemand specifiek</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-5')">← Mens</button><div class="step-nav-right"><button class="btn btn-primary" onclick="completeStep('step-6');goStep('step-results')">Bekijk eindresultaten →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-6')">← Organisatie</button><div class="step-nav-right"><button class="btn btn-primary" onclick="completeStep('step-7');goStep('step-results')">Bekijk eindresultaten →</button></div></div>
 </div>
 
 <!-- RESULTS --><div class="step" id="step-results">
@@ -735,7 +746,8 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="layer-row"><div class="layer-name">3. Informatie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:42%;background:var(--accent)"></div></div><div class="layer-val">4.2</div></div>
 <div class="layer-row"><div class="layer-name">4. Intelligentie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:35%;background:var(--accent)"></div></div><div class="layer-val">3.5</div></div>
 <div class="layer-row"><div class="layer-name">5. Mens</div><div class="layer-bar"><div class="layer-bar-fill" style="width:55%;background:var(--blue)"></div></div><div class="layer-val">5.5</div></div>
-<div class="layer-row"><div class="layer-name">6. Richting</div><div class="layer-bar"><div class="layer-bar-fill" style="width:38%;background:var(--accent)"></div></div><div class="layer-val">3.8</div></div>
+<div class="layer-row"><div class="layer-name">6. Organisatie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:32%;background:var(--accent)"></div></div><div class="layer-val">3.2</div></div>
+<div class="layer-row"><div class="layer-name">7. Richting</div><div class="layer-bar"><div class="layer-bar-fill" style="width:38%;background:var(--accent)"></div></div><div class="layer-val">3.8</div></div>
 </div></div>
 <h3 style="font-size:17px;margin-bottom:12px">Wat opvalt</h3>
 <div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text" data-roles="ciso,dga,cfo"><h4>Regelgeving verdient aandacht</h4><p>Uw sector valt onder nieuwe Europese regelgeving. Geen paniek, maar actie nodig.</p><div class="finding-source">EU AI Act Art. 6 · NIS2 2022/2555</div></div></div>
@@ -878,9 +890,32 @@ body.role-active .sidebar-role-indicator{display:block}
       </div></td>
     </tr>
 
-    <!-- 6. RICHTING -->
+    
+    <!-- 6. ORGANISATIE -->
+    <tr data-roles="dga,coo,cfo">
+      <td><div class="layer-label"><div class="layer-dot" style="background:#E67E22"></div>6. Organisatie</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>Huidige structuur in kaart</strong></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>AI-governance rollen definiëren</strong><div class="mx-sub">Wie beslist over AI-inzet?</div></div>
+        <div class="mx-item deadline"><strong>AI Act organisatie-eisen</strong><div class="mx-sub">Verantwoordelijkheden beleggen</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Procesherontwerp AI-integratie</strong><div class="mx-sub">Werkprocessen aanpassen</div></div>
+        <div class="mx-item planned"><strong>Compliance-structuur NIS2/AI Act</strong><div class="mx-sub">Rollen, rapportage, audit trail</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Organisatie-evaluatie</strong><div class="mx-sub">Past de structuur bij AI-werkwijze?</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Aanpassingsplan 2027</strong><div class="mx-sub">Structuur, teams, besluitvorming</div></div>
+      </div></td>
+    </tr>
+
+    <!-- 7. RICHTING -->
     <tr data-roles="dga,cfo">
-      <td><div class="layer-label"><div class="layer-dot" style="background:#555"></div>6. Richting</div></td>
+      <td><div class="layer-label"><div class="layer-dot" style="background:#555"></div>7. Richting</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>Navigator assessment</strong><div class="mx-sub">Deze verkenning</div></div>
       </div></td>
@@ -995,7 +1030,7 @@ body.role-active .sidebar-role-indicator{display:block}
     </div>
     <div class="risk-row" data-roles="ciso,dga,cfo">
       <div class="risk-level high">Hoog</div>
-      <div class="risk-info"><h5>NIS2 bestuurlijke aansprakelijkheid</h5><p>Bestuurders zijn persoonlijk aansprakelijk voor informatiebeveiliging. Onvoldoende maatregelen = persoonlijke boete.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 6 · Richting</div></div>
+      <div class="risk-info"><h5>NIS2 bestuurlijke aansprakelijkheid</h5><p>Bestuurders zijn persoonlijk aansprakelijk voor informatiebeveiliging. Onvoldoende maatregelen = persoonlijke boete.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 7 · Richting</div></div>
     </div>
     <div class="risk-row" data-roles="coo,cco">
       <div class="risk-level medium">Midden</div>
@@ -1202,9 +1237,26 @@ body.role-active .sidebar-role-indicator{display:block}
 <tr><td class="bt-project">Adoptie-meting</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 3.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
 <tr class="budget-total-row"><td>Totaal Mens</td><td>6 projecten</td><td>€ 48.000</td><td>€ 5.300</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:11%;background:var(--accent)"></div></div>11%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
 </tbody></table></div></div>
-<div class="budget-layer" id="bl-6" data-roles="dga,cfo">
+<div class="budget-layer" id="bl-6" data-roles="dga,coo,cfo">
 <div class="budget-layer-header" onclick="document.getElementById('bl-6').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#555"></div><div class="budget-layer-name">6. Richting</div></div>
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#E67E22"></div><div class="budget-layer-name">6. Organisatie</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 42.000</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">Huidige structuur in kaart</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">AI-governance rollen definiëren</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 6.000</td><td>€ 3.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:58%;background:var(--blue)"></div></div>58%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI Act organisatie-eisen</td><td><span class="bt-status bt-deadline">⚠️ Deadline</span></td><td>€ 5.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:30%;background:var(--accent)"></div></div>30%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+<tr><td class="bt-project">Procesherontwerp AI-integratie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Compliance-structuur NIS2/AI Act</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Organisatie-evaluatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Aanpassingsplan 2027</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Organisatie</td><td>7 projecten</td><td>€ 42.000</td><td>€ 6.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:16%;background:var(--accent)"></div></div>16%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer" id="bl-7" data-roles="dga,cfo">
+<div class="budget-layer-header" onclick="document.getElementById('bl-7').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#555"></div><div class="budget-layer-name">7. Richting</div></div>
 <div class="budget-layer-totals"><span class="blt-budget">€ 24.000</span></div>
 <div class="budget-layer-chevron">▼</div>
 </div>
@@ -1293,7 +1345,8 @@ Projecten uit de <a href="#" onclick="goStep('step-results');return false" style
     <div class="teams-row"><div class="teams-dot" style="background:var(--warm)"></div><div class="teams-layer">3. Informatie</div><div class="teams-channel">#navigator-data</div><div class="teams-members">👥 IT, Afdelingen</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
     <div class="teams-row"><div class="teams-dot" style="background:var(--purple)"></div><div class="teams-layer">4. Intelligentie</div><div class="teams-channel">#navigator-ai</div><div class="teams-members">👥 MT, IT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
     <div class="teams-row"><div class="teams-dot" style="background:var(--green)"></div><div class="teams-layer">5. Mens</div><div class="teams-channel">#navigator-adoptie</div><div class="teams-members">👥 HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:#555"></div><div class="teams-layer">6. Richting</div><div class="teams-channel">#navigator-strategie</div><div class="teams-members">👥 MT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:#E67E22"></div><div class="teams-layer">6. Organisatie</div><div class="teams-channel">#navigator-organisatie</div><div class="teams-members">👥 MT + HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:#555"></div><div class="teams-layer">7. Richting</div><div class="teams-channel">#navigator-strategie</div><div class="teams-members">👥 MT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
   </div>
   </div>
 
@@ -1415,7 +1468,7 @@ Projecten uit de <a href="#" onclick="goStep('step-results');return false" style
 <div class="news-title">Microsoft erkent in Franse Senaat: datasoevereiniteit niet volledig te garanderen</div>
 <div class="news-summary">Microsoft heeft voor de Franse Senaat verklaard dat het de volledige datasoevereiniteit van Europese klanten niet kan garanderen als de Amerikaanse overheid via de CLOUD Act toegang eist. Het bedrijf zegt "ongegronde verzoeken te weerstaan", maar erkent dat de juridische realiteit niet veranderd is. Ondertussen opent Microsoft drie Sovereignty Studios in Brussel, München en Amsterdam, en investeert het miljarden in Europese datacenters — een signaal van urgentie, niet van oplossing.</div>
 <div class="news-ref">
-<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 6 · Richting</div>
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 7 · Richting</div>
 <div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
 </div>
 </div>
@@ -1474,7 +1527,7 @@ Projecten uit de <a href="#" onclick="goStep('step-results');return false" style
 <div class="news-title">Europese soevereine cloud groeit 20% per jaar — alternatieven nemen toe</div>
 <div class="news-summary">De Europese cloudmarkt zal naar verwachting in 2028 €110 miljard waard zijn. Gemeenten starten met Nextcloud, landen als Frankrijk (Bleu) en Duitsland (Delos) bouwen nationale clouds, en het Dutch Cloud Community pleit voor een keurmerk Digitale Soevereiniteit. Het regeerakkoord stelt: "Digitale autonomie wordt het leidende principe." Dit betekent niet dat u morgen van Microsoft af moet, maar wel dat u hybride scenario's moet doordenken — welke data en processen wilt u écht zelf in handen houden?</div>
 <div class="news-ref">
-<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 6 · Richting</div>
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 7 · Richting</div>
 <div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
 <div class="news-action">○ Digitale strategie 1.0 — Q2 2026</div>
 </div>
@@ -1781,7 +1834,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
-const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Richting','step-results':'Resultaten','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
+const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-results':'Resultaten','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
 
 function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
 
@@ -1799,7 +1852,7 @@ function goStep(id){
 }
 
 function completeStep(id){completedSteps.add(id);document.querySelector(`.sidebar-item[data-step="${id}"]`)?.classList.add('completed');updateProgress()}
-function updateProgress(){const p=Math.round(completedSteps.size/6*100);document.getElementById('prog-pct').textContent=p+'%';document.getElementById('prog-bar').style.width=p+'%'}
+function updateProgress(){const p=Math.round(completedSteps.size/7*100);document.getElementById('prog-pct').textContent=p+'%';document.getElementById('prog-bar').style.width=p+'%'}
 
 function pick(el){el.closest('.option-list').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected')}
 function pickChip(el){el.closest('.chip-grid').querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
