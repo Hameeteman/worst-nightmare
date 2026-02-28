@@ -539,6 +539,46 @@ body.role-active tr.role-dimmed{opacity:.2}
 .sidebar-role-indicator{padding:6px 12px;margin:4px 8px;border-radius:var(--radius-sm);background:var(--blue-bg);border:1px solid var(--blue-border);font-size:11px;color:var(--blue);text-align:center;font-weight:600;display:none}
 body.role-active .sidebar-role-indicator{display:block}
 @media(max-width:800px){.role-bar{padding:6px 10px;gap:4px}.role-btn{padding:5px 8px;font-size:11px}.role-bar-label{display:none}}
+
+/* ===== BUDGET PAGE ===== */
+.budget-layer{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.budget-layer-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;user-select:none;transition:background .2s}
+.budget-layer-header:hover{background:var(--bg)}
+.budget-layer-left{display:flex;align-items:center;gap:10px}
+.budget-layer-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.budget-layer-name{font-size:14px;font-weight:600}
+.budget-layer-totals{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text-sec)}
+.budget-layer-totals .blt-budget{font-weight:600;color:var(--text)}
+.budget-layer-chevron{font-size:11px;color:var(--text-muted);transition:transform .2s}
+.budget-layer.open .budget-layer-chevron{transform:rotate(180deg)}
+.budget-layer-body{display:none;border-top:1px solid var(--border)}
+.budget-layer.open .budget-layer-body{display:block}
+.budget-table{width:100%;border-collapse:collapse;font-size:13px}
+.budget-table th{text-align:left;padding:8px 14px;background:var(--bg);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:var(--text-muted);border-bottom:1px solid var(--border)}
+.budget-table th:not(:first-child){text-align:right}
+.budget-table td{padding:8px 14px;border-bottom:1px solid var(--border)}
+.budget-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.budget-table tr:last-child td{border-bottom:none}
+.budget-table .bt-project{font-weight:500}
+.budget-table .bt-status{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:10px}
+.bt-done{background:var(--green-bg);color:var(--green)}
+.bt-active{background:var(--blue-bg);color:var(--blue)}
+.bt-planned{background:var(--bg);color:var(--text-muted)}
+.bt-deadline{background:var(--accent-bg);color:var(--accent)}
+.budget-prog-bar{width:60px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:6px}
+.budget-prog-fill{height:100%;border-radius:3px}
+.bt-prognose{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+.bt-under{background:var(--green-bg);color:var(--green)}
+.bt-on{background:var(--blue-bg);color:var(--blue)}
+.bt-over{background:var(--accent-bg);color:var(--accent)}
+.budget-total-row{background:var(--bg);font-weight:600}
+.budget-total-row td{border-top:2px solid var(--border) !important;border-bottom:none !important}
+.budget-grand{background:var(--card);border:2px solid var(--blue);border-radius:var(--radius);padding:18px;margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px}
+.budget-grand-item{text-align:center}
+.budget-grand-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.budget-grand-value{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.budget-grand-sub{font-size:11px;color:var(--text-sec);margin-top:2px}
+@media(max-width:800px){.budget-grand{grid-template-columns:1fr 1fr;gap:12px}.budget-layer-totals{display:none}}
 </style>
 </head>
 <body>
@@ -584,23 +624,23 @@ body.role-active .sidebar-role-indicator{display:block}
 
 <!-- APP -->
 <div class="screen" id="screen-app">
-  <div class="topbar">
-    <div class="topbar-brand"><div class="mark">N</div> Navigator</div>
-    <div class="topbar-right">
-      <button class="topbar-btn" onclick="openM('m-pres')">📊 Presentatie</button>
-      <div class="privacy-badge">🔒 Versleuteld</div>
+  <div class="topbar" style="height:auto;flex-direction:column;align-items:stretch">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 24px">
+      <div class="topbar-brand"><div class="mark">N</div> Navigator</div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="openM('m-pres')">📊 Presentatie</button>
+        <div class="privacy-badge">🔒 Versleuteld</div>
+      </div>
     </div>
-  </div>
-
-
-  <div class="role-bar" id="role-bar">
-    <div class="role-bar-label">Perspectief</div>
-    <button class="role-btn active" onclick="setRole('all',this)"><span class="role-icon">👁️</span> Alle rollen</button>
-    <button class="role-btn" onclick="setRole('dga',this)"><span class="role-icon">👤</span> DGA / Bestuurder</button>
-    <button class="role-btn" onclick="setRole('cfo',this)"><span class="role-icon">💰</span> CFO / Financieel</button>
-    <button class="role-btn" onclick="setRole('coo',this)"><span class="role-icon">⚙️</span> COO / Operationeel</button>
-    <button class="role-btn" onclick="setRole('ciso',this)"><span class="role-icon">🛡️</span> CISO / Security</button>
-    <button class="role-btn" onclick="setRole('cco',this)"><span class="role-icon">📈</span> CCO / Sales &amp; Marketing</button>
+    <div class="role-bar" id="role-bar">
+      <div class="role-bar-label">Perspectief</div>
+      <button class="role-btn active" onclick="setRole('all',this)"><span class="role-icon">👁️</span> Alle rollen</button>
+      <button class="role-btn" onclick="setRole('dga',this)"><span class="role-icon">👤</span> DGA / Bestuurder</button>
+      <button class="role-btn" onclick="setRole('cfo',this)"><span class="role-icon">💰</span> CFO / Financieel</button>
+      <button class="role-btn" onclick="setRole('coo',this)"><span class="role-icon">⚙️</span> COO / Operationeel</button>
+      <button class="role-btn" onclick="setRole('ciso',this)"><span class="role-icon">🛡️</span> CISO / Security</button>
+      <button class="role-btn" onclick="setRole('cco',this)"><span class="role-icon">📈</span> CCO / Sales &amp; Marketing</button>
+    </div>
   </div>
   <div class="app-layout">
     <div class="sidebar">
@@ -615,6 +655,7 @@ body.role-active .sidebar-role-indicator{display:block}
       <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Richting</div>
       <div class="sidebar-label">Extra</div>
       <div class="sidebar-item" data-step="step-results" onclick="goStep('step-results')"><div class="s-dot"></div>📊 Resultaten</div>
+      <div class="sidebar-item" data-step="step-budget" onclick="goStep('step-budget')"><div class="s-dot"></div>💶 Budget</div>
       <div class="sidebar-item" data-step="step-integrations" onclick="goStep('step-integrations')"><div class="s-dot"></div>🔗 Integraties</div>
       <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
       <div class="sidebar-label">Info</div>
@@ -1064,6 +1105,131 @@ body.role-active .sidebar-role-indicator{display:block}
 <button class="btn btn-ghost" onclick="goStep('step-1')">← Terug</button>
 </div>
 </div>
+
+<!-- ===== BUDGET ===== -->
+<div class="step" id="step-budget">
+<div class="step-badge" style="background:var(--green-bg);color:var(--green)">💶 Budget</div>
+<h2>Budget &amp; Voortgang</h2>
+<p class="step-desc">Overzicht per laag: geplande investeringen, realisatie en prognose. Gebaseerd op uw Strategische Roadmap.</p>
+<div class="role-summary" id="rs-budget"></div>
+<div class="budget-grand" data-roles="dga,cfo">
+<div class="budget-grand-item"><div class="budget-grand-label">Totaal Budget</div><div class="budget-grand-value">€ 377.500</div><div class="budget-grand-sub">40 projecten</div></div>
+<div class="budget-grand-item"><div class="budget-grand-label">Gerealiseerd</div><div class="budget-grand-value">€ 52.300</div><div class="budget-grand-sub">14% besteed</div></div>
+<div class="budget-grand-item"><div class="budget-grand-label">Resterend</div><div class="budget-grand-value">€ 325.200</div><div class="budget-grand-sub">3 kwartalen</div></div>
+<div class="budget-grand-item"><div class="budget-grand-label">Status</div><div class="budget-grand-value" style="font-size:16px">7 ✅ 9 ▶️ 24 ⏳</div><div class="budget-grand-sub">afgerond / actief / gepland</div></div>
+</div>
+<div style="margin-top:20px">
+<div class="budget-layer open" id="bl-1" data-roles="coo,cfo">
+<div class="budget-layer-header" onclick="document.getElementById('bl-1').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--blue)"></div><div class="budget-layer-name">1. Platform</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 105.000</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">M365 licentie-inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.500</td><td>€ 2.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">Werkplek-standaardisatie</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 18.000</td><td>€ 9.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:55%;background:var(--blue)"></div></div>55%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Cloud PC pilot</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 8.500</td><td>€ 4.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:45%;background:var(--blue)"></div></div>45%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Cloud PC uitrol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 45.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Intune device management</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI-Ready werkplek</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Evaluatie &amp; optimalisatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Platform</td><td>7 projecten</td><td>€ 105.000</td><td>€ 15.900</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:15%;background:var(--accent)"></div></div>15%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer open" id="bl-2" data-roles="ciso,dga,cfo">
+<div class="budget-layer-header" onclick="document.getElementById('bl-2').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--accent)"></div><div class="budget-layer-name">2. Bescherming</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 52.000</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">MFA uitgerold</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 3.500</td><td>€ 3.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">AVG-register bijgewerkt</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">NIS2 gap-analyse</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 12.000</td><td>€ 7.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:60%;background:var(--blue)"></div></div>60%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Information protection labels</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Incident-respons protocol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 6.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI-register opstellen</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Security audit</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Bescherming</td><td>7 projecten</td><td>€ 52.000</td><td>€ 12.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:24%;background:var(--accent)"></div></div>24%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer" id="bl-3" data-roles="coo,ciso">
+<div class="budget-layer-header" onclick="document.getElementById('bl-3').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--warm)"></div><div class="budget-layer-name">3. Informatie</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 55.500</span> <span class="bt-prognose bt-over">1x boven budget</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">SharePoint inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 3.000</td><td>€ 2.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">Rechtenstructuur opzetten</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 9.000</td><td>€ 5.400</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:58%;background:var(--blue)"></div></div>58%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+<tr><td class="bt-project">Data opschoning</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 14.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Metadata &amp; labels</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 7.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Copilot data-readiness test</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Kennismanagement inrichten</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 18.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Informatie</td><td>6 projecten</td><td>€ 55.500</td><td>€ 8.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:15%;background:var(--accent)"></div></div>15%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer" id="bl-4" data-roles="ciso,coo,cco">
+<div class="budget-layer-header" onclick="document.getElementById('bl-4').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--purple)"></div><div class="budget-layer-name">4. Intelligentie</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 93.000</span> <span class="bt-prognose bt-over">1x boven budget</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">AI-tools inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">AI-beleid opstellen</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 6.000</td><td>€ 3.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:62%;background:var(--blue)"></div></div>62%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI-geletterdheid (Art. 4)</td><td><span class="bt-status bt-deadline">⚠️ Deadline</span></td><td>€ 8.000</td><td>€ 2.400</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:30%;background:var(--accent)"></div></div>30%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+<tr><td class="bt-project">Copilot pilot (20 users)</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 22.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Copilot evaluatie &amp; uitrol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 35.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Custom agents verkennen</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI-orkestratie strategie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Intelligentie</td><td>7 projecten</td><td>€ 93.000</td><td>€ 7.700</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:8%;background:var(--accent)"></div></div>8%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer" id="bl-5" data-roles="coo,cco">
+<div class="budget-layer-header" onclick="document.getElementById('bl-5').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--green)"></div><div class="budget-layer-name">5. Mens</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 48.000</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">Digitale vaardigheden-scan</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.500</td><td>€ 2.100</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
+<tr><td class="bt-project">AI-geletterdheid management</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 5.000</td><td>€ 3.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:65%;background:var(--blue)"></div></div>65%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">AI-geletterdheid medewerkers</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 18.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Champions-netwerk opzetten</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Copilot-training per rol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Adoptie-meting</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 3.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Mens</td><td>6 projecten</td><td>€ 48.000</td><td>€ 5.300</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:11%;background:var(--accent)"></div></div>11%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+</tbody></table></div></div>
+<div class="budget-layer" id="bl-6" data-roles="dga,cfo">
+<div class="budget-layer-header" onclick="document.getElementById('bl-6').classList.toggle('open')">
+<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#555"></div><div class="budget-layer-name">6. Richting</div></div>
+<div class="budget-layer-totals"><span class="blt-budget">€ 24.000</span></div>
+<div class="budget-layer-chevron">▼</div>
+</div>
+<div class="budget-layer-body"><table class="budget-table">
+<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
+<tr><td class="bt-project">Navigator assessment</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>-</td><td>-</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">MT-presentatie &amp; besluit</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 3.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:50%;background:var(--blue)"></div></div>50%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Budget allocatie 2026</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 2.000</td><td>€ 1.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:60%;background:var(--blue)"></div></div>60%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Digitale strategie 1.0</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Soevereiniteits-evaluatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Kwartaalreview</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 2.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr><td class="bt-project">Strategie 2027 voorbereiden</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+<tr class="budget-total-row"><td>Totaal Richting</td><td>7 projecten</td><td>€ 24.000</td><td>€ 2.700</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:11%;background:var(--accent)"></div></div>11%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
+</tbody></table></div></div>
+</div>
+<div style="background:var(--bg);border-radius:var(--radius);padding:16px;margin-top:16px"><div style="font-size:13px;color:var(--text-sec);line-height:1.6">
+<strong>💡 Toelichting</strong><br>
+Budgetten zijn indicatief en gebaseerd op marktgemiddelden voor MKB-organisaties (200-500 medewerkers). 
+Werkelijke kosten hangen af van uw huidige situatie, licentiemodel en interne capaciteit. 
+Projecten uit de <a href="#" onclick="goStep('step-results');return false" style="color:var(--blue)">Strategische Roadmap</a> zijn hier vertaald naar budget-regels.
+</div></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+<button class="btn btn-primary" onclick="goStep('step-results')">📊 Naar Resultaten</button>
+<button class="btn btn-outline" onclick="openM('m-pres')">📊 Presentatie</button>
+</div></div>
 
 <!-- ===== INTEGRATIES ===== -->
 <div class="step" id="step-integrations">
@@ -1728,7 +1894,7 @@ function setRole(role,btn){
     if(role==='all'){ind.style.display='none'}
     else{ind.style.display='block';ind.textContent=roleNames[role]||role}
   }
-  var rsList=['rs-results','rs-news'];
+  var rsList=['rs-results','rs-news','rs-budget'];
   for(var i=0;i<rsList.length;i++){
     var el=document.getElementById(rsList[i]);
     if(el){
