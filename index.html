@@ -3,1273 +3,1174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE WORST NIGHTMARE — Platform Blueprint</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<title>Navigator — Uw digitale toekomst, stap voor stap</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0a0f;
-  --surface: #12121a;
-  --surface-2: #1a1a28;
-  --accent: #ff3d00;
-  --accent-glow: rgba(255, 61, 0, 0.15);
-  --blue: #0078d4;
-  --blue-glow: rgba(0, 120, 212, 0.12);
-  --green: #00c853;
-  --gold: #ffd600;
-  --text: #e8e8f0;
-  --text-dim: #8888a0;
-  --text-muted: #555570;
-  --border: rgba(255,255,255,0.06);
-  --radius: 12px;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 60px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 30% 50%, rgba(255,61,0,0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 30%, rgba(0,120,212,0.06) 0%, transparent 50%);
-  animation: drift 20s ease-in-out infinite;
-}
-
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-3%, 2%); }
-}
-
-.hero-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: var(--accent);
-  position: relative;
-  z-index: 1;
-  margin-bottom: 30px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.2s;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(48px, 8vw, 120px);
-  font-weight: 900;
-  line-height: 1.05;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.4s;
-}
-
-.hero h1 .red { color: var(--accent); }
-
-.hero-sub {
-  font-size: clamp(16px, 2vw, 22px);
-  font-weight: 300;
-  color: var(--text-dim);
-  max-width: 700px;
-  margin-top: 30px;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.6s;
-}
-
-.hero-meta {
-  display: flex;
-  gap: 40px;
-  margin-top: 50px;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.8s;
-}
-
-.hero-meta span {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* NAV */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 16px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(10,10,15,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-family: 'Space Mono', monospace;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 2px;
-}
-
-.nav-links { display: flex; gap: 30px; }
-.nav-links a {
-  font-size: 13px;
-  color: var(--text-dim);
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: color 0.3s;
-}
-.nav-links a:hover { color: var(--text); }
-
-/* SECTIONS */
-.section {
-  padding: 100px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-
-.section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 700;
-  margin-bottom: 30px;
-  line-height: 1.2;
-}
-
-.section p {
-  font-size: 17px;
-  color: var(--text-dim);
-  max-width: 800px;
-  margin-bottom: 20px;
-}
-
-/* CARDS */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card:hover {
-  border-color: rgba(255,61,0,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.card:hover::before { opacity: 1; }
-
-.card-icon {
-  font-size: 28px;
-  margin-bottom: 16px;
-}
-
-.card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.card p {
-  font-size: 14px;
-  color: var(--text-dim);
-  line-height: 1.65;
-}
-
-/* LAYER STACK */
-.layer-stack {
-  margin-top: 50px;
-}
-
-.layer {
-  display: grid;
-  grid-template-columns: 60px 1fr 1fr;
-  gap: 24px;
-  align-items: center;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.3s;
-}
-
-.layer:hover {
-  background: var(--accent-glow);
-  padding-left: 16px;
-  border-radius: 8px;
-}
-
-.layer-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.layer-name {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.layer-name small {
-  display: block;
-  font-weight: 400;
-  font-size: 13px;
-  color: var(--text-dim);
-  margin-top: 4px;
-}
-
-.layer-ai {
-  font-size: 13px;
-  color: var(--text-dim);
-  font-family: 'Space Mono', monospace;
-}
-
-/* TIMELINE */
-.timeline {
-  margin-top: 50px;
-  position: relative;
-  padding-left: 40px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--accent), var(--blue), var(--green));
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 50px;
-  padding-left: 30px;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -46px;
-  top: 8px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid var(--bg);
-}
-
-.timeline-item:nth-child(2)::before { background: var(--blue); }
-.timeline-item:nth-child(3)::before { background: var(--green); }
-.timeline-item:nth-child(4)::before { background: var(--gold); }
-
-.timeline-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.timeline-item:nth-child(2) .timeline-label { color: var(--blue); }
-.timeline-item:nth-child(3) .timeline-label { color: var(--green); }
-.timeline-item:nth-child(4) .timeline-label { color: var(--gold); }
-
-.timeline-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.timeline-content {
-  font-size: 14px;
-  color: var(--text-dim);
-  line-height: 1.7;
-}
-
-/* TECH STACK */
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.tech-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.tech-item:hover {
-  border-color: rgba(0,120,212,0.4);
-  background: var(--blue-glow);
-}
-
-.tech-item .tech-name {
-  font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.tech-item .tech-role {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* COMPARISON */
-.comparison {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  margin-top: 40px;
-}
-
-.comp-col {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-}
-
-.comp-col.nightmare {
-  border-color: rgba(255,61,0,0.3);
-  background: linear-gradient(135deg, var(--surface), rgba(255,61,0,0.04));
-}
-
-.comp-col h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.comp-col.nightmare h3 { color: var(--accent); }
-
-.comp-item {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  color: var(--text-dim);
-}
-
-.comp-item:last-child { border: none; }
-
-.comp-item strong {
-  color: var(--text);
-  display: block;
-  margin-bottom: 4px;
-}
-
-/* REVENUE MODEL */
-.revenue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.revenue-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-  text-align: center;
-}
-
-.revenue-card .price {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  font-weight: 900;
-  color: var(--accent);
-  margin: 16px 0 8px;
-}
-
-.revenue-card .price-period {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-
-.revenue-card .tier-name {
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--blue);
-}
-
-.revenue-card ul {
-  list-style: none;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.revenue-card li {
-  font-size: 13px;
-  color: var(--text-dim);
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.revenue-card li::before {
-  content: '→ ';
-  color: var(--accent);
-}
-
-/* QUOTE */
-.quote-block {
-  background: var(--surface);
-  border-left: 3px solid var(--accent);
-  padding: 32px 40px;
-  margin: 40px 0;
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.quote-block p {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  font-style: italic;
-  max-width: 100%;
-}
-
-.quote-block cite {
-  display: block;
-  margin-top: 16px;
-  font-size: 13px;
-  color: var(--text-muted);
-  font-style: normal;
-  font-family: 'Space Mono', monospace;
-}
-
-/* EU MAP SECTION */
-.eu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.eu-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.eu-item:hover {
-  border-color: rgba(0,200,83,0.4);
-  transform: translateY(-2px);
-}
-
-.eu-flag { font-size: 32px; margin-bottom: 8px; }
-.eu-name { font-weight: 600; font-size: 14px; }
-.eu-focus { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-
-/* STATS ROW */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin: 60px 0;
-}
-
-.stat {
-  text-align: center;
-  padding: 32px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-.stat-label {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 8px;
-  font-family: 'Space Mono', monospace;
-  letter-spacing: 1px;
-}
-
-/* FLOW DIAGRAM */
-.flow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 50px 0;
-  flex-wrap: wrap;
-}
-
-.flow-step {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px 24px;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  min-width: 140px;
-}
-
-.flow-arrow {
-  color: var(--accent);
-  font-size: 20px;
-}
-
-/* FOOTER */
-.footer {
-  padding: 60px 40px;
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
-
-.footer p {
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 100%;
-}
-
-/* DIVIDER */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 0 40px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .section { padding: 60px 20px; }
-  .nav { padding: 12px 20px; }
-  .nav-links { display: none; }
-  .comparison { grid-template-columns: 1fr; }
-  .revenue-grid { grid-template-columns: 1fr; }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .layer { grid-template-columns: 40px 1fr; }
-  .layer-ai { display: none; }
-  .hero-meta { flex-direction: column; gap: 12px; }
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8f7f4;--white:#fff;--text:#2c2c3a;--text-sec:#5a5a72;--text-muted:#9898aa;
+  --warm:#8b6914;--warm-bg:#fdf8ed;--warm-border:#f0e4c4;
+  --blue:#2d5a8c;--blue-bg:#edf3fa;--blue-border:#c4d8ed;
+  --green:#2d7a5a;--green-bg:#edf8f2;--green-border:#c4edda;
+  --accent:#c75a28;--accent-bg:#fef0ea;
+  --purple:#6c5ce7;--purple-bg:#f0edff;--purple-border:#d5cffc;
+  --border:#e8e6e2;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow:0 2px 8px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.08);--shadow-xl:0 16px 48px rgba(0,0,0,.12);
+  --radius:12px;--radius-sm:8px;--radius-lg:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.3}
+
+.screen{display:none}.screen.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,247,244,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.topbar-brand{display:flex;align-items:center;gap:10px;font-family:'Source Serif 4',serif;font-weight:700;font-size:17px;color:var(--text);cursor:pointer;white-space:nowrap}
+.topbar-brand .mark{width:28px;height:28px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-btn{font-size:13px;color:var(--text-sec);cursor:pointer;padding:6px 12px;border-radius:6px;transition:all .15s;display:flex;align-items:center;gap:6px;background:none;border:none;font-family:inherit;white-space:nowrap}
+.topbar-btn:hover{background:var(--white);color:var(--text)}
+.privacy-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--green);background:var(--green-bg);padding:4px 10px;border-radius:20px;font-weight:500;white-space:nowrap}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:#24496f;transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-outline{background:var(--white);color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--text-muted)}
+.btn-ghost{background:none;color:var(--text-sec);padding:8px 14px}.btn-ghost:hover{color:var(--text);background:rgba(0,0,0,.03)}
+.btn-sm{padding:8px 14px;font-size:13px}
+
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
+
+/* WELCOME */
+.welcome-wrap{padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.welcome-hero{text-align:center;padding:100px 24px 80px;max-width:640px;margin:0 auto}
+.welcome-hero h1{font-size:clamp(28px,4vw,38px);margin-bottom:20px}
+.welcome-hero .subtitle{font-size:17px;color:var(--text-sec);margin-bottom:40px;line-height:1.7}
+.promise-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:720px;margin:48px auto 0}
+.promise-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:left}
+.promise-card .p-icon{font-size:24px;margin-bottom:12px}
+.promise-card h3{font-size:15px;margin-bottom:6px;font-family:'DM Sans',sans-serif;font-weight:600}
+.promise-card p{font-size:13px;color:var(--text-sec);line-height:1.55}
+.trust-row{display:flex;justify-content:center;gap:28px;margin-top:48px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted)}
+
+/* INTRO */
+.intro-container{max-width:520px;margin:40px auto;padding:0 24px}
+.intro-container .card{margin-bottom:16px}
+.intro-container label{font-size:14px;font-weight:600;display:block;margin-bottom:8px}
+.intro-input{width:100%;padding:11px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:inherit;outline:none;transition:border-color .15s}
+.intro-input:focus{border-color:var(--blue)}
+.chip-grid{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;background:var(--white);border:1px solid var(--border);cursor:pointer;transition:all .15s;font-family:inherit}
+.chip:hover{border-color:var(--blue-border);background:var(--blue-bg)}
+.chip.selected{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* APP LAYOUT */
+.app-layout{display:flex;min-height:100vh;padding-top:56px}
+.sidebar{width:240px;min-width:240px;background:var(--white);border-right:1px solid var(--border);padding:24px 16px;position:fixed;top:56px;left:0;bottom:0;overflow-y:auto}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;padding:0 8px;margin-top:20px}
+.sidebar-label:first-child{margin-top:0}
+.sidebar-progress{background:var(--bg);border-radius:8px;padding:14px;margin-bottom:8px}
+.prog-label{font-size:12px;color:var(--text-sec);font-weight:500}
+.prog-pct{font-size:22px;font-weight:700;color:var(--text);margin:2px 0 6px}
+.progress-bar-bg{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-bar-fill{height:100%;background:var(--green);border-radius:2px;transition:width .5s ease}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;font-size:13px;color:var(--text-sec);cursor:pointer;transition:all .12s;margin-bottom:2px}
+.sidebar-item:hover{background:var(--bg)}
+.sidebar-item.active{background:var(--blue-bg);color:var(--blue);font-weight:600}
+.sidebar-item.completed .s-dot{background:var(--green)}.sidebar-item.completed{color:var(--green)}
+.s-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0}
+.sidebar-item.active .s-dot{background:var(--blue)}
+
+.main-area{flex:1;margin-left:240px;padding:32px 48px 100px;max-width:820px;min-width:0}
+
+/* STEP */
+.step{display:none}.step.active{display:block;animation:fadeIn .35s ease}
+.step-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--blue);background:var(--blue-bg);padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.step h2{font-size:clamp(22px,3vw,28px);margin-bottom:8px}
+.step-desc{font-size:15px;color:var(--text-sec);margin-bottom:28px;max-width:580px}
+
+.context-box{background:var(--warm-bg);border:1px solid var(--warm-border);border-radius:var(--radius);padding:20px 24px;margin-bottom:28px;display:flex;gap:14px}
+.context-box .c-icon{font-size:20px;flex-shrink:0;line-height:1.6}
+.context-box .c-body{font-size:14px;color:var(--text-sec);line-height:1.65}
+.context-box .c-body strong{color:var(--text)}
+.context-box .c-source{font-size:11px;color:var(--text-muted);margin-top:8px;font-style:italic}
+
+.q-group{margin-bottom:28px}
+.q-label{font-size:15px;font-weight:600;margin-bottom:4px}
+.q-help{font-size:13px;color:var(--text-muted);margin-bottom:12px}
+.option-list{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .15s}
+.opt:hover{border-color:var(--blue-border);background:#fafbfd}
+.opt.selected{border-color:var(--blue);background:var(--blue-bg)}
+.opt-radio{width:20px;height:20px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.opt.selected .opt-radio{border-color:var(--blue);background:var(--blue)}
+.opt.selected .opt-radio::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.opt-text{font-size:14px;line-height:1.5}
+.opt-text strong{display:block;margin-bottom:2px}
+.opt-text .sub{color:var(--text-sec);font-size:13px}
+
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;transition:all .15s;margin-top:8px}
+.upload-zone:hover{border-color:var(--blue-border);background:var(--blue-bg)}
+.upload-zone .uz-icon{font-size:24px;margin-bottom:6px}
+.upload-zone .uz-text{font-size:13px;color:var(--text-sec)}
+.upload-zone .uz-hint{font-size:11px;color:var(--text-muted);margin-top:4px}
+
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid var(--border);gap:12px;flex-wrap:wrap}
+.step-nav-right{display:flex;gap:8px;flex-wrap:wrap}
+
+/* RESULTS */
+.score-hero{text-align:center;padding:28px 0}
+.score-ring{width:130px;height:130px;border-radius:50%;border:6px solid var(--green);margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-ring .s-num{font-family:'Source Serif 4',serif;font-size:40px;font-weight:700}
+.score-ring .s-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.layer-row{display:grid;grid-template-columns:120px 1fr 44px;align-items:center;gap:14px;margin-bottom:8px}
+.layer-name{font-size:13px;font-weight:500}
+.layer-bar{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.layer-bar-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.layer-val{font-size:13px;font-weight:700;text-align:right}
+.finding{display:flex;gap:12px;padding:14px;margin-bottom:10px;border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.finding.warn{border-left:3px solid var(--accent);background:var(--accent-bg)}
+.finding.good{border-left:3px solid var(--green);background:var(--green-bg)}
+.finding.info{border-left:3px solid var(--blue);background:var(--blue-bg)}
+.finding-icon{font-size:16px;flex-shrink:0}
+.finding-text h4{font-size:14px;font-weight:600;margin-bottom:3px;font-family:'DM Sans',sans-serif}
+.finding-text p{font-size:13px;color:var(--text-sec);line-height:1.55}
+.finding-source{font-size:11px;color:var(--text-muted);margin-top:5px;font-style:italic}
+
+/* ============================
+   SUPPORT PANEL (THE BIG ONE)
+   ============================ */
+.support-fab{
+  position:fixed;bottom:24px;right:24px;z-index:150;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--blue);color:#fff;border:none;
+  box-shadow:0 4px 16px rgba(45,90,140,.35);
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+}
+.support-fab:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,90,140,.45)}
+.support-fab.open{background:var(--text);transform:rotate(45deg)}
+
+.support-overlay{
+  display:none;position:fixed;inset:0;z-index:140;
+  background:rgba(0,0,0,.25);
+  opacity:0;transition:opacity .25s ease;
+}
+.support-overlay.open{display:block;opacity:1}
+
+.support-panel{
+  position:fixed;bottom:0;right:0;z-index:145;
+  width:420px;max-width:calc(100vw - 32px);
+  max-height:calc(100vh - 80px);
+  background:var(--white);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow:var(--shadow-xl);
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.32,.72,.37,1.12);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.support-panel.open{transform:translateY(0)}
+
+.sp-header{
+  padding:20px 24px 16px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.sp-header h3{font-size:18px;margin-bottom:4px}
+.sp-header p{font-size:13px;color:var(--text-sec)}
+
+.sp-tabs{
+  display:flex;border-bottom:1px solid var(--border);
+  flex-shrink:0;padding:0 24px;
+}
+.sp-tab{
+  flex:1;padding:12px 8px;text-align:center;
+  font-size:13px;font-weight:600;color:var(--text-muted);
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:all .15s;background:none;border-top:none;
+  border-left:none;border-right:none;font-family:inherit;
+}
+.sp-tab:hover{color:var(--text)}
+.sp-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.sp-tab .tab-icon{display:block;font-size:18px;margin-bottom:4px}
+
+.sp-body{
+  flex:1;overflow-y:auto;padding:20px 24px;
+}
+
+/* Tab: Vraag stellen */
+.sp-chat-area{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.sp-chat-msg{display:flex;gap:8px;max-width:92%}
+.sp-chat-msg.ai{align-self:flex-start}
+.sp-chat-msg.user{align-self:flex-end;flex-direction:row-reverse}
+.sp-chat-av{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;font-weight:700}
+.sp-chat-msg.ai .sp-chat-av{background:var(--blue-bg);color:var(--blue)}
+.sp-chat-msg.user .sp-chat-av{background:var(--warm-bg);color:var(--warm)}
+.sp-chat-bubble{padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.55}
+.sp-chat-msg.ai .sp-chat-bubble{background:var(--bg);border:1px solid var(--border)}
+.sp-chat-msg.user .sp-chat-bubble{background:var(--blue);color:#fff}
+.sp-chat-source{display:inline-block;font-size:10px;color:var(--blue);background:var(--blue-bg);padding:1px 6px;border-radius:3px;margin-top:6px}
+
+.sp-input-bar{
+  display:flex;gap:6px;padding:14px 24px;
+  border-top:1px solid var(--border);flex-shrink:0;
+  background:var(--white);
+}
+.sp-input{
+  flex:1;padding:9px 12px;border:1px solid var(--border);
+  border-radius:var(--radius-sm);font-size:13px;font-family:inherit;
+  outline:none;transition:border-color .15s;
+}
+.sp-input:focus{border-color:var(--blue)}
+
+/* Tab: Online diensten */
+.service-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:10px;
+  cursor:pointer;transition:all .15s;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.service-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow);transform:translateY(-1px)}
+.service-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.service-info h4{font-size:14px;font-weight:600;margin-bottom:3px;font-family:'DM Sans',sans-serif}
+.service-info p{font-size:12px;color:var(--text-sec);line-height:1.45}
+.service-meta{display:flex;gap:8px;margin-top:8px;align-items:center}
+.service-tag{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500}
+.service-tag.free{background:var(--green-bg);color:var(--green)}
+.service-tag.paid{background:var(--warm-bg);color:var(--warm)}
+.service-tag.time{background:var(--bg);color:var(--text-muted)}
+
+/* Tab: Partners */
+.partner-card-sp{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:10px;
+  cursor:pointer;transition:all .15s;
+}
+.partner-card-sp:hover{border-color:var(--blue-border);box-shadow:var(--shadow)}
+.pc-sp-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.pc-sp-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.pc-sp-name{font-size:14px;font-weight:600}
+.pc-sp-loc{font-size:11px;color:var(--text-muted)}
+.pc-sp-desc{font-size:12px;color:var(--text-sec);line-height:1.45;margin-bottom:8px}
+.pc-sp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.pc-sp-tag{font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg);color:var(--text-sec);font-weight:500}
+.pc-sp-footer{display:flex;justify-content:space-between;align-items:center}
+.pc-sp-rating{font-size:12px;color:var(--warm);font-weight:600}
+.pc-sp-cta{font-size:12px;color:var(--blue);font-weight:600;cursor:pointer}
+.pc-sp-verified{font-size:10px;background:var(--green-bg);color:var(--green);padding:1px 6px;border-radius:3px;font-weight:600;margin-left:auto}
+
+.mp-join{
+  background:var(--blue-bg);border:1px solid var(--blue-border);
+  border-radius:var(--radius-sm);padding:12px 14px;margin-top:8px;
+  display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-sec);
+}
+.mp-join a{color:var(--blue);font-weight:600}
+
+/* Context label in support panel */
+.sp-context{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--blue);background:var(--blue-bg);
+  padding:3px 10px;border-radius:12px;margin-bottom:14px;font-weight:500;
+}
+
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;width:100%;max-height:85vh;overflow:hidden;box-shadow:var(--shadow-lg);animation:modalIn .25s ease;display:flex;flex-direction:column}
+@keyframes modalIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-md{max-width:600px}
+.modal-head{padding:18px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-head h3{font-size:17px}
+.modal-x{width:32px;height:32px;border:none;background:var(--bg);border-radius:8px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-body{padding:24px;overflow-y:auto;flex:1}
+
+.pres-dark{background:var(--text);border-radius:var(--radius);padding:32px;color:#fff;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;margin:12px 0}
+.pres-dark::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 60%,rgba(45,90,140,.3) 0%,transparent 60%)}
+.pres-dark *{position:relative}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main-area{margin-left:0;padding:24px 20px 100px}
+  .support-panel{width:100%;max-width:100%;right:0;left:0;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes loading{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+
+/* ROADMAP MATRIX */
+.matrix-wrap{overflow-x:auto;margin:0 -4px;padding:0 4px 8px}
+.matrix{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+.matrix th{position:sticky;top:0;z-index:2;background:var(--white);padding:10px 8px;font-weight:600;text-align:center;border-bottom:2px solid var(--border);white-space:nowrap;font-family:'DM Sans',sans-serif}
+.matrix th:first-child{text-align:left;min-width:110px;position:sticky;left:0;z-index:3;background:var(--white)}
+.matrix th.q-current{color:var(--blue);background:var(--blue-bg);border-radius:6px 6px 0 0}
+.matrix th .q-sub{font-size:10px;font-weight:400;color:var(--text-muted);display:block;margin-top:2px}
+.matrix td{padding:6px;vertical-align:top;border-bottom:1px solid var(--border)}
+.matrix td:first-child{position:sticky;left:0;background:var(--white);z-index:1;padding:10px 8px;font-weight:600;white-space:nowrap}
+.matrix tr:last-child td{border-bottom:none}
+.matrix td.q-current-col{background:rgba(45,90,140,.03)}
+.matrix .layer-label{display:flex;align-items:center;gap:6px;font-size:12px}
+.matrix .layer-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mx-cell{min-height:32px}
+.mx-item{
+  padding:7px 10px;border-radius:6px;margin-bottom:4px;
+  font-size:11px;line-height:1.4;position:relative;
+  cursor:default;transition:all .15s;
+}
+.mx-item:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.mx-item:last-child{margin-bottom:0}
+.mx-item strong{display:block;font-size:11px;font-weight:600;margin-bottom:1px}
+.mx-item .mx-sub{opacity:.7;font-size:10px}
+.mx-item.done{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+.mx-item.done::before{content:'✓ ';font-weight:700}
+.mx-item.active{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue);animation:mxPulse 3s ease infinite}
+.mx-item.active::before{content:'◉ ';font-weight:700}
+.mx-item.planned{background:var(--bg);border:1px solid var(--border);color:var(--text-sec)}
+.mx-item.planned::before{content:'○ '}
+.mx-item.deadline{background:var(--accent-bg);border:1px solid var(--accent);color:var(--accent)}
+.mx-item.deadline::before{content:'⚡'}
+@keyframes mxPulse{0%,100%{box-shadow:0 0 0 0 rgba(45,90,140,0)}50%{box-shadow:0 0 0 3px rgba(45,90,140,.1)}}
+.mx-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.mx-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sec)}
+.mx-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+/* EXPANDABLE INSIGHT CARDS */
+.insight-cards{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.insight-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .2s}
+.insight-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow)}
+.insight-header{
+  display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;
+  transition:all .15s;user-select:none;
+}
+.insight-header:hover{background:var(--bg)}
+.insight-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.insight-title{flex:1}
+.insight-title h4{font-size:15px;font-weight:600;font-family:'DM Sans',sans-serif;margin-bottom:2px}
+.insight-title p{font-size:12px;color:var(--text-muted);line-height:1.4}
+.insight-chevron{
+  width:28px;height:28px;border-radius:50%;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--text-muted);transition:all .25s;flex-shrink:0;
+}
+.insight-card.open .insight-chevron{transform:rotate(180deg);background:var(--blue-bg);color:var(--blue)}
+.insight-body{
+  max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);
+}
+.insight-card.open .insight-body{max-height:2000px}
+.insight-content{padding:0 22px 22px;border-top:1px solid var(--border);margin-top:0;padding-top:18px}
+
+/* Roadmap timeline */
+.roadmap-tl{position:relative;padding-left:28px;margin:8px 0}
+.roadmap-tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--border);border-radius:1px}
+.tl-item{position:relative;padding-bottom:22px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:var(--white)}
+.tl-item.urgent .tl-dot{border-color:var(--accent);background:var(--accent)}
+.tl-item.soon .tl-dot{border-color:var(--warm);background:var(--warm)}
+.tl-item.planned .tl-dot{border-color:var(--blue);background:var(--blue-bg)}
+.tl-date{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.tl-item.urgent .tl-date{color:var(--accent)}
+.tl-item.soon .tl-date{color:var(--warm)}
+.tl-item.planned .tl-date{color:var(--blue)}
+.tl-title{font-size:14px;font-weight:600;margin-bottom:2px}
+.tl-desc{font-size:12px;color:var(--text-sec);line-height:1.5}
+.tl-source{font-size:10px;color:var(--text-muted);font-style:italic;margin-top:3px}
+
+/* Risk rows */
+.risk-grid{display:flex;flex-direction:column;gap:8px}
+.risk-row{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:var(--radius-sm);background:var(--bg)}
+.risk-level{flex-shrink:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;border-radius:4px;min-width:56px;text-align:center}
+.risk-level.high{background:var(--accent);color:#fff}
+.risk-level.medium{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
+.risk-level.low{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.risk-info h5{font-size:13px;font-weight:600;margin-bottom:2px;font-family:'DM Sans',sans-serif}
+.risk-info p{font-size:12px;color:var(--text-sec);line-height:1.45}
+.risk-layer{font-size:10px;color:var(--text-muted);margin-top:3px}
+
+/* Action timeline */
+.action-group{margin-bottom:18px}
+.action-group:last-child{margin-bottom:0}
+.action-period{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.action-period-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:4px}
+.action-period-label.now{background:var(--accent);color:#fff}
+.action-period-label.month{background:var(--warm-bg);color:var(--warm)}
+.action-period-label.quarter{background:var(--blue-bg);color:var(--blue)}
+.action-period-line{flex:1;height:1px;background:var(--border)}
+.action-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0 8px 12px;border-left:2px solid var(--border);margin-left:6px}
+.action-check{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.action-check:hover{border-color:var(--blue)}
+.action-check.done{background:var(--green);border-color:var(--green)}
+.action-check.done::after{content:'✓';color:#fff;font-size:10px;font-weight:700}
+.action-text{font-size:13px;line-height:1.5}
+.action-text strong{display:block;margin-bottom:1px}
+.action-text .sub{color:var(--text-sec);font-size:12px}
+
+/* Sovereignty meter */
+.sov-section{margin-bottom:18px}
+.sov-label{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sov-meter{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.sov-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.sov-desc{font-size:12px;color:var(--text-sec);line-height:1.5;margin-bottom:4px}
+.sov-alt{background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px}
+.sov-alt h5{font-size:12px;font-weight:600;margin-bottom:4px;font-family:'DM Sans',sans-serif}
+.sov-alt p{font-size:12px;color:var(--text-sec);line-height:1.45}
+.sov-alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.sov-source{font-size:10px;color:var(--text-muted);font-style:italic;margin-top:6px}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">TWN://</div>
-  <div class="nav-links">
-    <a href="#concept">Concept</a>
-    <a href="#waarom">Waarom</a>
-    <a href="#architectuur">Architectuur</a>
-    <a href="#platform">Platform</a>
-    <a href="#revenue">Revenue</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#europa">Europa</a>
-    <a href="#tech">Tech Stack</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-label">e-office strategic initiative</div>
-  <h1>THE WORST<br><span class="red">NIGHTMARE</span></h1>
-  <p class="hero-sub">Bouw je eigen grootste concurrent. Een AI-gedreven McKinsey voor het Europese MKB. Zonder consultants. Zonder kantoor. Alleen intelligentie, kennis en schaal.</p>
-  <div class="hero-meta">
-    <span>Platform Blueprint v1.0</span>
-    <span>Februari 2026</span>
-    <span>Vertrouwelijk</span>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CONCEPT -->
-<section class="section" id="concept">
-  <div class="section-num">01 — Het Concept</div>
-  <h2>Waarom je eigen nachtmerrie bouwen?</h2>
-  
-  <p>Andy Grove zei het al: "Only the paranoid survive." De vraag is niet óf een AI-platform de consultancy-markt gaat disrupten — de vraag is wanneer en door wie. Als dat onvermijdelijk is, waarom zou e-office die disruptor dan niet zelf bouwen?</p>
-
-  <div class="quote-block">
-    <p>"Als wij het niet bouwen, bouwt iemand anders het. En dan zijn wij het slachtoffer in plaats van de architect."</p>
-    <cite>— De logica achter The Worst Nightmare</cite>
-  </div>
-
-  <p>The Worst Nightmare is een online platform dat MKB-ondernemers (200-2000 medewerkers) in heel Europa helpt om AI, digitale soevereiniteit en organisatieontwikkeling te begrijpen en toe te passen — zonder dat er ooit een fysieke consultant aan te pas komt.</p>
-
-  <p>Het platform functioneert als een McKinsey voor het MKB: strategisch advies van hoog niveau, maar betaalbaar, schaalbaar en 24/7 beschikbaar. Gebaseerd op het bewezen 6-lagen Stapelmodel van e-office, aangevuld met AI-gestuurde assessments, roadmaps en concrete implementatie-adviezen.</p>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h3>Drie Strategische Doelen</h3>
-      <p><strong>1. Inspireer het team</strong> — Laat medewerkers zien hoe hun kennis schaalt via AI. Niet als bedreiging maar als versterking.</p>
-      <p><strong>2. Nieuwe recurring revenue</strong> — SaaS-model naast consultancy. Voorspelbaar, schaalbaar, Europees.</p>
-      <p><strong>3. Leren door te doen</strong> — De beste manier om AI te begrijpen is het zelf bouwen. Het platform is het leerproces.</p>
+<!-- WELCOME -->
+<div class="screen active" id="screen-welcome">
+  <div class="welcome-wrap"><div class="topbar-brand"><div class="mark">N</div> Navigator</div><div class="privacy-badge">🔒 Uw data blijft van u</div></div>
+  <div class="welcome-hero">
+    <h1>Uw organisatie. Uw strategie.<br>Uw keuzes.</h1>
+    <p class="subtitle">AI verandert alles. Europa stelt nieuwe regels. Grote techbedrijven bepalen steeds meer. Maar úw digitale toekomst bepaalt u zelf. Hier bouwt u — stap voor stap — uw eigen strategie.</p>
+    <button class="btn btn-primary" onclick="go('screen-intro')" style="padding:14px 32px;font-size:16px">Begin uw verkenning →</button>
+    <div style="margin-top:10px"><button class="btn btn-ghost" onclick="go('screen-app')">Ik heb al een account</button></div>
+    <div class="promise-cards">
+      <div class="promise-card"><div class="p-icon">🤖</div><h3>AI op uw voorwaarden</h3><p>Ontdek wat AI kan betekenen — zonder afhankelijk te worden.</p></div>
+      <div class="promise-card"><div class="p-icon">🇪🇺</div><h3>Europese spelregels</h3><p>AI Act, NIS2, DORA — weet waar u aan toe bent.</p></div>
+      <div class="promise-card"><div class="p-icon">🧭</div><h3>Uw eigen koers</h3><p>Geen verkooppraatje. Een strategie die bij ú past.</p></div>
     </div>
-    <div class="card">
-      <div class="card-icon">🛡️</div>
-      <h3>Waarom "Worst Nightmare"?</h3>
-      <p>De naam is bewust provocerend. Het dwingt het MT om na te denken: als dit platform van een concurrent was, hoe zouden wij dan reageren? De naam maakt de dreiging tastbaar — en de oplossing concreet.</p>
-      <p>Het is geen vervanging van e-office. Het is de digitale voorhoede die de fysieke consultancy versterkt.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔄</div>
-      <h3>Het Flywheel-effect</h3>
-      <p>Meer gebruikers → meer data → beter advies → meer vertrouwen → meer gebruikers. Elke ondernemer die het platform gebruikt, maakt het platform slimmer voor de volgende.</p>
-      <p>Precies het compound effect uit het Stapelmodel, nu op Europese schaal.</p>
+    <div class="trust-row"><div class="trust-item">🔒 Data blijft van u</div><div class="trust-item">🇪🇺 Opgeslagen in Europa</div><div class="trust-item">⏱ 15 minuten</div><div class="trust-item">🏛️ Onafhankelijk advies</div></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="screen" id="screen-intro">
+  <div class="topbar"><div class="topbar-brand" onclick="go('screen-welcome')"><div class="mark">N</div> Navigator</div><div class="topbar-right"><div class="privacy-badge">🔒 Uw data blijft van u</div></div></div>
+  <div style="padding-top:80px">
+    <div class="intro-container">
+      <div style="text-align:center;margin-bottom:32px"><div style="font-size:44px;margin-bottom:14px">👋</div><h2 style="font-size:24px;margin-bottom:10px">Fijn dat u er bent</h2><p style="color:var(--text-sec)">Korte kennismaking zodat we afstemmen op uw situatie.</p></div>
+      <div class="card"><label>Hoe mogen we u noemen?</label><input class="intro-input" type="text" placeholder="Bijv. Jan, mevrouw De Vries …"></div>
+      <div class="card"><label>Sector</label><div class="chip-grid"><button class="chip" onclick="pickChip(this)">🏥 Zorg</button><button class="chip" onclick="pickChip(this)">🎓 Onderwijs</button><button class="chip" onclick="pickChip(this)">💰 Financieel</button><button class="chip" onclick="pickChip(this)">🏭 Industrie</button><button class="chip" onclick="pickChip(this)">🛒 Retail</button><button class="chip" onclick="pickChip(this)">⚖️ Overheid</button><button class="chip" onclick="pickChip(this)">🔧 Dienstverlening</button><button class="chip" onclick="pickChip(this)">📦 Anders</button></div></div>
+      <div class="card"><label>Aantal medewerkers</label><div class="chip-grid"><button class="chip" onclick="pickChip(this)">50–200</button><button class="chip" onclick="pickChip(this)">200–500</button><button class="chip" onclick="pickChip(this)">500–1.000</button><button class="chip" onclick="pickChip(this)">1.000–2.000</button><button class="chip" onclick="pickChip(this)">2.000+</button></div></div>
+      <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:var(--text-sec)"><strong style="color:var(--green)">🔒 Privacy</strong> — Alleen om vragen af te stemmen. <a href="#" style="color:var(--blue)">Beleid →</a></div>
+      <button class="btn btn-primary" onclick="go('screen-app');goStep('step-1')" style="width:100%;justify-content:center;margin-top:20px">Start de verkenning →</button>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
-
-<!-- WAAROM -->
-<section class="section" id="waarom">
-  <div class="section-num">02 — De Business Case</div>
-  <h2>Waarom dit nu moet</h2>
-
-  <div class="stats-row">
-    <div class="stat">
-      <div class="stat-num">3,3%</div>
-      <div class="stat-label">Copilot adoptie</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">90%</div>
-      <div class="stat-label">EU infra = niet-EU</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">€860B</div>
-      <div class="stat-label">Verloren productiviteit</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Nieuwe EU-wetten in 2026</div>
+<!-- APP -->
+<div class="screen" id="screen-app">
+  <div class="topbar">
+    <div class="topbar-brand"><div class="mark">N</div> Navigator</div>
+    <div class="topbar-right">
+      <button class="topbar-btn" onclick="openM('m-pres')">📊 Presentatie</button>
+      <div class="privacy-badge">🔒 Versleuteld</div>
     </div>
   </div>
 
-  <div class="comparison">
-    <div class="comp-col">
-      <h3>Traditioneel consultancy-model</h3>
-      <div class="comp-item"><strong>Bereik:</strong> 100-200 klanten per jaar met 55 FTE</div>
-      <div class="comp-item"><strong>Schaal:</strong> Lineair — meer klanten = meer mensen</div>
-      <div class="comp-item"><strong>Kennis:</strong> In hoofden, verloren bij vertrek</div>
-      <div class="comp-item"><strong>Revenue:</strong> Uurgebonden, seizoensgebonden</div>
-      <div class="comp-item"><strong>Markt:</strong> Alleen Nederland</div>
-      <div class="comp-item"><strong>Kwaliteit:</strong> Afhankelijk van wie er komt</div>
-      <div class="comp-item"><strong>Toegang:</strong> €150-200/uur, niet voor elke MKB'er</div>
+  <div class="app-layout">
+    <div class="sidebar">
+      <div class="sidebar-progress"><div class="prog-label">Verkenning</div><div class="prog-pct" id="prog-pct">0%</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div></div>
+      <div class="sidebar-label">6 lagen</div>
+      <div class="sidebar-item active" data-step="step-1" onclick="goStep('step-1')"><div class="s-dot"></div>1. Platform</div>
+      <div class="sidebar-item" data-step="step-2" onclick="goStep('step-2')"><div class="s-dot"></div>2. Bescherming</div>
+      <div class="sidebar-item" data-step="step-3" onclick="goStep('step-3')"><div class="s-dot"></div>3. Informatie</div>
+      <div class="sidebar-item" data-step="step-4" onclick="goStep('step-4')"><div class="s-dot"></div>4. Intelligentie</div>
+      <div class="sidebar-item" data-step="step-5" onclick="goStep('step-5')"><div class="s-dot"></div>5. Mens</div>
+      <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Richting</div>
+      <div class="sidebar-label">Extra</div>
+      <div class="sidebar-item" data-step="step-results" onclick="goStep('step-results')"><div class="s-dot"></div>📊 Resultaten</div>
+      <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
     </div>
-    <div class="comp-col nightmare">
-      <h3>The Worst Nightmare</h3>
-      <div class="comp-item"><strong>Bereik:</strong> 10.000+ MKB-bedrijven, geen plafond</div>
-      <div class="comp-item"><strong>Schaal:</strong> Exponentieel — AI wordt beter bij gebruik</div>
-      <div class="comp-item"><strong>Kennis:</strong> In het systeem, groeit continu</div>
-      <div class="comp-item"><strong>Revenue:</strong> Recurring SaaS, voorspelbaar</div>
-      <div class="comp-item"><strong>Markt:</strong> 27 EU-landen, lokale taal</div>
-      <div class="comp-item"><strong>Kwaliteit:</strong> Consistent, verbetert continu</div>
-      <div class="comp-item"><strong>Toegang:</strong> €99-499/maand, democratisch</div>
-    </div>
+
+    <div class="main-area">
+
+<!-- STEP 1 --><div class="step active" id="step-1">
+<div class="step-badge">Laag 1 van 6 · Platform</div><h2>Werkt uw digitale werkplek?</h2>
+<p class="step-desc">We beginnen bij het fundament. Zonder werkende, gestandaardiseerde werkplek is alles erboven instabiel.</p>
+<div class="context-box"><div class="c-icon">💡</div><div class="c-body"><strong>Waarom dit belangrijk is:</strong> 67% van MKB-organisaties heeft onvoldoende inzicht in hun IT-omgeving.<div class="c-source">Bron: OECD SME Digital Gap Report 2025 · Microsoft Work Trend Index 2025</div></div></div>
+<div class="q-group"><div class="q-label">Hoe zou u uw digitale werkplek omschrijven?</div><div class="q-help">Laptops, telefoons, software voor dagelijks werk.</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goede basis</strong><span class="sub">Standaard laptops, M365, duidelijke afspraken</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Lappendeken</strong><span class="sub">Verschillende systemen, niet gestandaardiseerd</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Weten we niet precies</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We hebben hulp nodig</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Gebruikt u Microsoft 365?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, uitgebreid</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, beperkt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee, iets anders</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Weet ik niet</strong></div></div></div></div>
+<div class="q-label" style="margin-top:24px">Optioneel: deel een document</div>
+<div class="upload-zone" onclick="this.querySelector('input').click()"><div class="uz-icon">📎</div><div class="uz-text">IT-overzicht, contract of screenshot</div><input type="file" style="display:none" multiple onchange="showUpload(this)"></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="go('screen-intro')">← Terug</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-1');goStep('step-2')">Volgende: Bescherming →</button></div></div>
+</div>
+
+<!-- STEP 2 --><div class="step" id="step-2">
+<div class="step-badge">Laag 2 van 6 · Bescherming</div><h2>Is uw organisatie beschermd?</h2>
+<p class="step-desc">Security en compliance worden steeds belangrijker met nieuwe Europese wetgeving.</p>
+<div class="context-box"><div class="c-icon">⚠️</div><div class="c-body"><strong>Actueel:</strong> In 2026 worden AI Act, NIS2, DORA en Data Act van kracht. Veel MKB-organisaties zijn onvoldoende voorbereid.<div class="c-source">Bron: Europese Commissie · Autoriteit Persoonsgegevens · DNB 2026</div></div></div>
+<div class="q-group"><div class="q-label">Hoe gaat u om met informatiebeveiliging?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed beleid, voeren we uit</strong><span class="sub">MFA, audits, training</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Redelijk, kan beter</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Vertrouwen op IT-leverancier</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Blinde vlek</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Kent u de Europese regelgeving?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, goed op de hoogte</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins — AVG wel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niet echt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nooit van gehoord</strong></div></div></div></div>
+<div class="q-label" style="margin-top:24px">Optioneel: deel een document</div>
+<div class="upload-zone" onclick="this.querySelector('input').click()"><div class="uz-icon">📎</div><div class="uz-text">Security-rapport, audit of beleidsdocument</div><input type="file" style="display:none" multiple onchange="showUpload(this)"></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-1')">← Platform</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-2');goStep('step-3')">Volgende: Informatie →</button></div></div>
+</div>
+
+<!-- STEP 3 --><div class="step" id="step-3">
+<div class="step-badge">Laag 3 van 6 · Informatie</div><h2>Hoe goed is uw informatie op orde?</h2>
+<p class="step-desc">AI werkt alleen als de onderliggende informatie betrouwbaar en vindbaar is.</p>
+<div class="context-box"><div class="c-icon">📊</div><div class="c-body"><strong>Cruciaal:</strong> Organisaties met gestructureerde data halen 3x meer waarde uit AI. "Garbage in, garbage out" geldt sterker dan ooit.<div class="c-source">Bron: McKinsey Global AI Survey 2025 · Gartner Data Quality Guide</div></div></div>
+<div class="q-group"><div class="q-label">Hoe is informatie georganiseerd?</div><div class="q-help">Documenten, mappen, SharePoint, gedeelde schijven.</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed gestructureerd</strong><span class="sub">Mappenstructuur, naamconventies, metadata</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Per afdeling verschilt het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Veel dubbel en verouderd</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Iedereen doet eigen ding</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Heeft u inzicht in wie waar bij kan?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, rechten goed ingericht</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Deels</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Iedereen kan overal bij</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Geen idee</strong></div></div></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-2')">← Bescherming</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-3');goStep('step-4')">Volgende: Intelligentie →</button></div></div>
+</div>
+
+<!-- STEP 4 --><div class="step" id="step-4">
+<div class="step-badge">Laag 4 van 6 · Intelligentie</div><h2>Hoe zet u AI in?</h2>
+<p class="step-desc">De laag waar het om draait — maar alleen zinvol als de onderliggende lagen op orde zijn.</p>
+<div class="context-box"><div class="c-icon">🤖</div><div class="c-body"><strong>Realiteit:</strong> Slechts 3,3% van M365-gebruikers zet Copilot productief in. Het probleem is zelden de technologie — het is het fundament.<div class="c-source">Bron: Directions on Microsoft 2025 · M365 Copilot Adoption Report</div></div></div>
+<div class="q-group"><div class="q-label">Wordt er AI gebruikt in uw organisatie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel met beleid</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, maar ad hoc</strong><span class="sub">Individueel, geen beleid</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We verkennen het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Kent u de AI-mogelijkheden in uw software?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, benutten we actief</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We weten het maar gebruiken nauwelijks</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Zitten er AI-functies in?</strong></div></div></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-3')">← Informatie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-4');goStep('step-5')">Volgende: Mens →</button></div></div>
+</div>
+
+<!-- STEP 5 --><div class="step" id="step-5">
+<div class="step-badge">Laag 5 van 6 · Mens</div><h2>Zijn uw mensen klaar?</h2>
+<p class="step-desc">Technologie werkt alleen als mensen het omarmen.</p>
+<div class="context-box"><div class="c-icon">👥</div><div class="c-body"><strong>Wettelijk verplicht:</strong> Sinds feb 2025 moeten alle medewerkers die met AI werken een basisniveau "AI-geletterdheid" hebben.<div class="c-source">Bron: EU AI Act, Artikel 4 · Autoriteit Persoonsgegevens 2025</div></div></div>
+<div class="q-group"><div class="q-label">Hoe digitaal vaardig zijn uw medewerkers?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Hoog niveau</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Wisselend per team</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Beperkt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Groot probleem</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Is er een trainingsprogramma?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Soms, ad hoc</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-4')">← Intelligentie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-5');goStep('step-6')">Volgende: Richting →</button></div></div>
+</div>
+
+<!-- STEP 6 --><div class="step" id="step-6">
+<div class="step-badge">Laag 6 van 6 · Richting</div><h2>Heeft u een digitale koers?</h2>
+<p class="step-desc">Strategie en governance. Wie stuurt? Waar wilt u over 2 jaar staan?</p>
+<div class="context-box"><div class="c-icon">🧭</div><div class="c-body"><strong>Het verschil:</strong> Organisaties met expliciete digitale strategie realiseren 2,5x meer waarde uit tech-investeringen.<div class="c-source">Bron: Deloitte Digital Maturity Index 2025 · MIT CISR</div></div></div>
+<div class="q-group"><div class="q-label">Heeft u een digitale strategie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, helder en actueel</strong><span class="sub">Vastgesteld, met budget en roadmap</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins, niet formeel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Moet, maar nog niet aan toegekomen</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
+<div class="q-group"><div class="q-label">Wie is verantwoordelijk?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>CIO of CDO</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Directie gezamenlijk</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>IT-manager (naast andere taken)</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niemand specifiek</strong></div></div></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-5')">← Mens</button><div class="step-nav-right"><button class="btn btn-primary" onclick="completeStep('step-6');goStep('step-results')">Bekijk eindresultaten →</button></div></div>
+</div>
+
+<!-- RESULTS --><div class="step" id="step-results">
+<div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Resultaten</div><h2>Uw AI-Readiness Score</h2>
+<p class="step-desc">Op basis van uw antwoorden.</p>
+<div class="card" style="margin-bottom:20px"><div class="score-hero"><div class="score-ring"><div class="s-num">5.4</div><div class="s-label">van 10</div></div><h3 style="font-size:18px;margin-bottom:6px">Gemiddeld voor uw sector</h3><p style="font-size:14px;color:var(--text-sec)">Vergelijkbaar met 62% in uw sector.</p></div>
+<div style="margin-top:20px">
+<div class="layer-row"><div class="layer-name">1. Platform</div><div class="layer-bar"><div class="layer-bar-fill" style="width:60%;background:var(--blue)"></div></div><div class="layer-val">6.0</div></div>
+<div class="layer-row"><div class="layer-name">2. Bescherming</div><div class="layer-bar"><div class="layer-bar-fill" style="width:48%;background:var(--accent)"></div></div><div class="layer-val">4.8</div></div>
+<div class="layer-row"><div class="layer-name">3. Informatie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:42%;background:var(--accent)"></div></div><div class="layer-val">4.2</div></div>
+<div class="layer-row"><div class="layer-name">4. Intelligentie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:35%;background:var(--accent)"></div></div><div class="layer-val">3.5</div></div>
+<div class="layer-row"><div class="layer-name">5. Mens</div><div class="layer-bar"><div class="layer-bar-fill" style="width:55%;background:var(--blue)"></div></div><div class="layer-val">5.5</div></div>
+<div class="layer-row"><div class="layer-name">6. Richting</div><div class="layer-bar"><div class="layer-bar-fill" style="width:38%;background:var(--accent)"></div></div><div class="layer-val">3.8</div></div>
+</div></div>
+<h3 style="font-size:17px;margin-bottom:12px">Wat opvalt</h3>
+<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text"><h4>Regelgeving verdient aandacht</h4><p>Uw sector valt onder nieuwe Europese regelgeving. Geen paniek, maar actie nodig.</p><div class="finding-source">EU AI Act Art. 6 · NIS2 2022/2555</div></div></div>
+<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text"><h4>AI zonder kader</h4><p>Medewerkers gebruiken waarschijnlijk al AI-tools zonder governance.</p><div class="finding-source">Microsoft: 78% is 'shadow AI'</div></div></div>
+<div class="finding good"><div class="finding-icon">✅</div><div class="finding-text"><h4>Goede werkplek-basis</h4><p>Uw digitale werkplek is een goed vertrekpunt.</p></div></div>
+<div class="finding info"><div class="finding-icon">💡</div><div class="finding-text"><h4>Advies: begin bij governance</h4><p>Hoogste impact: eerst governance en datastructuur, dan pas AI-tools.</p></div></div>
+
+<!-- ===== EXPANDABLE INSIGHT CARDS ===== -->
+<div class="insight-cards">
+
+<!-- STRATEGISCHE MATRIX -->
+<div class="insight-card open" id="ic-matrix">
+<div class="insight-header" onclick="toggleCard('ic-matrix')">
+  <div class="insight-icon" style="background:linear-gradient(135deg,var(--blue-bg),var(--purple-bg));color:var(--blue)">🗺️</div>
+  <div class="insight-title"><h4>Uw Strategische Roadmap</h4><p>Alle lagen × kwartalen in één overzicht — met status</p></div>
+  <div class="insight-chevron">▼</div>
+</div>
+<div class="insight-body"><div class="insight-content">
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Iedere rij is een laag, iedere kolom een kwartaal. U ziet in één blik wat er is gedaan, wat nu loopt en wat er aankomt.</p>
+
+  <div class="matrix-wrap">
+  <table class="matrix">
+    <thead><tr>
+      <th></th>
+      <th style="opacity:.6">Q4 2025<span class="q-sub">Afgerond</span></th>
+      <th class="q-current">Q1 2026<span class="q-sub">Nu</span></th>
+      <th>Q2 2026<span class="q-sub">Apr–Jun</span></th>
+      <th>Q3 2026<span class="q-sub">Jul–Sep</span></th>
+      <th>Q4 2026<span class="q-sub">Okt–Dec</span></th>
+    </tr></thead>
+    <tbody>
+
+    <!-- 1. PLATFORM -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:var(--blue)"></div>1. Platform</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>M365 licentie-inventarisatie</strong></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>Werkplek-standaardisatie</strong><div class="mx-sub">Eén standaard laptop + M365 config</div></div>
+        <div class="mx-item active"><strong>Cloud PC pilot</strong><div class="mx-sub">10 gebruikers testgroep</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Cloud PC uitrol</strong><div class="mx-sub">Alle medewerkers</div></div>
+        <div class="mx-item planned"><strong>Intune device management</strong></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>AI-Ready werkplek</strong><div class="mx-sub">Copilot-klare configuratie</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Evaluatie & optimalisatie</strong></div>
+      </div></td>
+    </tr>
+
+    <!-- 2. BESCHERMING -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:var(--accent)"></div>2. Bescherming</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>MFA uitgerold</strong></div>
+        <div class="mx-item done"><strong>AVG-register bijgewerkt</strong></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>NIS2 gap-analyse</strong><div class="mx-sub">Status: essentieel / belangrijk?</div></div>
+        <div class="mx-item deadline"><strong>NIS2 nationale wet</strong><div class="mx-sub">Deadline: okt 2025</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Information protection labels</strong></div>
+        <div class="mx-item planned"><strong>Incident-respons protocol</strong><div class="mx-sub">24-uurs meldplicht NIS2</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item deadline"><strong>AI Act volledig actief</strong><div class="mx-sub">Deadline: 2 aug 2026</div></div>
+        <div class="mx-item planned"><strong>AI-register opstellen</strong></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Security audit</strong><div class="mx-sub">Externe toetsing</div></div>
+      </div></td>
+    </tr>
+
+    <!-- 3. INFORMATIE -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:var(--warm)"></div>3. Informatie</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>SharePoint inventarisatie</strong></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>Rechtenstructuur opzetten</strong><div class="mx-sub">Wie mag waar bij?</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Data opschoning</strong><div class="mx-sub">Verouderde docs archiveren</div></div>
+        <div class="mx-item planned"><strong>Metadata & labels</strong><div class="mx-sub">Sensitivity + retention labels</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Copilot data-readiness test</strong><div class="mx-sub">Geeft Copilot goede antwoorden?</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Kennismanagement inrichten</strong><div class="mx-sub">Viva Topics of alternatief</div></div>
+      </div></td>
+    </tr>
+
+    <!-- 4. INTELLIGENTIE -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:var(--purple)"></div>4. Intelligentie</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>AI-tools inventarisatie</strong><div class="mx-sub">Shadow AI in kaart</div></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>AI-beleid opstellen</strong><div class="mx-sub">Welke tools, welke regels?</div></div>
+        <div class="mx-item deadline"><strong>AI-geletterdheid</strong><div class="mx-sub">Nu al verplicht (Art. 4)</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Copilot pilot — 20 users</strong><div class="mx-sub">Na data-readiness check</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Copilot evaluatie & uitrol</strong><div class="mx-sub">ROI-meting na pilot</div></div>
+        <div class="mx-item planned"><strong>Custom agents verkennen</strong><div class="mx-sub">Copilot Studio / Power Platform</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>AI-orkestratie strategie</strong><div class="mx-sub">Welke processen automatiseren?</div></div>
+      </div></td>
+    </tr>
+
+    <!-- 5. MENS -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:var(--green)"></div>5. Mens</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>Digitale vaardigheden-scan</strong></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>AI-geletterdheid management</strong><div class="mx-sub">MT + teamleiders eerst</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>AI-geletterdheid alle medewerkers</strong><div class="mx-sub">E-learning + workshops</div></div>
+        <div class="mx-item planned"><strong>Champions-netwerk opzetten</strong><div class="mx-sub">1 champion per afdeling</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Copilot-training</strong><div class="mx-sub">Praktijkgericht per rol</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Adoptie-meting</strong><div class="mx-sub">Gebruik, tevredenheid, impact</div></div>
+      </div></td>
+    </tr>
+
+    <!-- 6. RICHTING -->
+    <tr>
+      <td><div class="layer-label"><div class="layer-dot" style="background:#555"></div>6. Richting</div></td>
+      <td style="opacity:.8"><div class="mx-cell">
+        <div class="mx-item done"><strong>Navigator assessment</strong><div class="mx-sub">Deze verkenning</div></div>
+      </div></td>
+      <td class="q-current-col"><div class="mx-cell">
+        <div class="mx-item active"><strong>MT-presentatie & besluit</strong><div class="mx-sub">Prioriteiten vaststellen</div></div>
+        <div class="mx-item active"><strong>Budget allocatie 2026</strong></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Digitale strategie 1.0</strong><div class="mx-sub">Vastgesteld door bestuur</div></div>
+        <div class="mx-item planned"><strong>Soevereiniteits-evaluatie</strong><div class="mx-sub">Leverancier-afhankelijkheid</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Kwartaalreview</strong><div class="mx-sub">Voortgang vs. roadmap</div></div>
+      </div></td>
+      <td><div class="mx-cell">
+        <div class="mx-item planned"><strong>Strategie 2027 voorbereiden</strong><div class="mx-sub">Op basis van geleerde lessen</div></div>
+      </div></td>
+    </tr>
+
+    </tbody>
+  </table>
   </div>
 
-  <div class="quote-block" style="margin-top:40px;">
-    <p>"De ondernemer kan in alle rust leren wat AI-ontwikkelingen voor zijn organisatie betekenen, zodat hij beter voorbereid is wanneer hij wél de hulp inschakelt van fysieke consultants."</p>
-    <cite>— De brug tussen platform en consultancy</cite>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ARCHITECTUUR -->
-<section class="section" id="architectuur">
-  <div class="section-num">03 — Het 6-Lagen Assessment</div>
-  <h2>Het Stapelmodel als digitale assessment</h2>
-
-  <p>De kern van het platform is het bewezen 6-lagen Stapelmodel, vertaald naar een interactief assessment dat elke MKB-ondernemer zelfstandig kan doorlopen. Elk laag beantwoordt één kernvraag en levert een concrete score met aanbevelingen.</p>
-
-  <div class="layer-stack">
-    <div class="layer">
-      <div class="layer-num">1</div>
-      <div class="layer-name">Platform <small>Werkt het? — Werkplek, licenties, basis-infra</small></div>
-      <div class="layer-ai">AI: Automatische scan via M365 Graph API</div>
-    </div>
-    <div class="layer">
-      <div class="layer-num">2</div>
-      <div class="layer-name">Bescherming <small>Is het veilig? — Compliance, governance, security</small></div>
-      <div class="layer-ai">AI: Regelgeving-check per sector + land</div>
-    </div>
-    <div class="layer">
-      <div class="layer-num">3</div>
-      <div class="layer-name">Informatie <small>Klopt de data? — Datastructuur, kwaliteit, toegang</small></div>
-      <div class="layer-ai">AI: SharePoint/OneDrive scan + classificatie</div>
-    </div>
-    <div class="layer">
-      <div class="layer-num">4</div>
-      <div class="layer-name">Intelligentie <small>Wordt het slimmer? — AI-readiness, agent-potentieel</small></div>
-      <div class="layer-ai">AI: Copilot adoption + agent opportunity mapping</div>
-    </div>
-    <div class="layer">
-      <div class="layer-num">5</div>
-      <div class="layer-name">Mens <small>Gebruiken ze het? — Adoptie, vaardigheden, cultuur</small></div>
-      <div class="layer-ai">AI: Digital maturity survey + skills gap analyse</div>
-    </div>
-    <div class="layer">
-      <div class="layer-num">6</div>
-      <div class="layer-name">Richting <small>Waar gaan we naartoe? — Strategie, roadmap, KPI's</small></div>
-      <div class="layer-ai">AI: Gepersonaliseerde roadmap generator</div>
-    </div>
+  <div class="mx-legend">
+    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--green-bg);border:1px solid var(--green-border)"></div> Afgerond</div>
+    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--blue-bg);border:1px solid var(--blue-border)"></div> Actief</div>
+    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--bg);border:1px solid var(--border)"></div> Gepland</div>
+    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--accent-bg);border:1px solid var(--accent)"></div> Deadline</div>
   </div>
 
-  <p style="margin-top:30px;">Het assessment levert per laag een score (1-10), een prioriteitenlijst en een concreet advies. De gecombineerde resultaten vormen een AI-Readiness Score die vergelijkbaar is met organisaties in dezelfde sector en omvang.</p>
-</section>
-
-<div class="divider"></div>
-
-<!-- PLATFORM FEATURES -->
-<section class="section" id="platform">
-  <div class="section-num">04 — Platform Features</div>
-  <h2>Wat het platform doet</h2>
-
-  <div class="flow">
-    <div class="flow-step">🔍 Assessment</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">📊 Score & Analyse</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">🗺️ Roadmap</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">📚 Leermodules</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">🤖 AI Adviseur</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">🔗 e-office Connect</div>
-  </div>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🔍</div>
-      <h3>AI-Readiness Assessment</h3>
-      <p>Interactief 6-lagen assessment. Combinatie van vragenlijsten, Microsoft 365 tenant scan (met toestemming), en AI-analyse. Resultaat: een score per laag, benchmark versus sector, en prioriteitenlijst.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🗺️</div>
-      <h3>Gepersonaliseerde Roadmap</h3>
-      <p>Op basis van assessment-resultaten genereert AI een concrete roadmap: welke stappen, in welke volgorde, met welke investering. Aangepast aan sector, omvang, land en regelgeving.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <h3>AI Strategisch Adviseur</h3>
-      <p>24/7 beschikbare AI-adviseur (Claude) die vragen beantwoordt over AI-strategie, compliance, Microsoft-keuzes, Europese alternatieven. Getraind op e-office's 35 jaar expertise. In lokale taal.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📚</div>
-      <h3>Kennismodules</h3>
-      <p>Interactieve leermodules over AI Act, NIS2, DORA, Cloud Act, digitale soevereiniteit, Copilot-implementatie, agent-governance. Per sector en per land. Altijd actueel.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📊</div>
-      <h3>Sector Benchmarking</h3>
-      <p>Vergelijk je AI-readiness met vergelijkbare organisaties in je sector. Anoniem, privacy-first. Hoe verder je bent, hoe beter je benchmark — dat motiveert.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔗</div>
-      <h3>e-office Connect</h3>
-      <p>De brug naar fysieke consultancy. Als het assessment aantoont dat een ondernemer professionele hulp nodig heeft, wordt een directe verbinding gelegd met e-office consultants. De lead generation machine.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📋</div>
-      <h3>Compliance Navigator</h3>
-      <p>Per land, per sector: welke regelgeving geldt, wat de deadlines zijn, en wat de ondernemer concreet moet doen. AI Act, NIS2, DORA, AVG, Cloud Act — allemaal vertaald naar begrijpelijke acties.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔐</div>
-      <h3>Microsoft 365 Integration</h3>
-      <p>Met toestemming van de ondernemer leest het platform de M365-tenant uit (via Graph API): licenties, configuratie, Copilot-adoptie, security score. Dit levert het meest precieze assessment — zonder handwerk.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📈</div>
-      <h3>Voortgangstracker</h3>
-      <p>Na het assessment: maandelijkse voortgangsrapportage. Het platform monitort (met toestemming) of de aanbevelingen zijn geïmplementeerd en wat het effect is. Continu verbeteren.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- REVENUE -->
-<section class="section" id="revenue">
-  <div class="section-num">05 — Revenue Model</div>
-  <h2>Drie lagen, recurring omzet</h2>
-
-  <p>Het pricing-model volgt de Stapelmodel-logica: begin laag, groei omhoog. Elk niveau biedt meer waarde en vergroot de kans op conversie naar fysieke e-office diensten.</p>
-
-  <div class="revenue-grid">
-    <div class="revenue-card">
-      <div class="tier-name">Explorer</div>
-      <div class="price">€0</div>
-      <div class="price-period">gratis instap</div>
-      <ul>
-        <li>Basis assessment (6 lagen)</li>
-        <li>AI-Readiness Score</li>
-        <li>Één gratis AI-adviesgesprek</li>
-        <li>Compliance-kalender (read-only)</li>
-        <li>Lead generation voor e-office</li>
-      </ul>
-    </div>
-    <div class="revenue-card" style="border-color: rgba(255,61,0,0.3);">
-      <div class="tier-name">Navigator</div>
-      <div class="price">€199</div>
-      <div class="price-period">per maand</div>
-      <ul>
-        <li>Volledig assessment + benchmark</li>
-        <li>Gepersonaliseerde roadmap</li>
-        <li>AI-adviseur (onbeperkt)</li>
-        <li>Kennismodules (alle sectoren)</li>
-        <li>M365 tenant integratie</li>
-        <li>Maandelijkse voortgangsrapportage</li>
-        <li>Compliance Navigator</li>
-      </ul>
-    </div>
-    <div class="revenue-card">
-      <div class="tier-name">Enterprise</div>
-      <div class="price">€499</div>
-      <div class="price-period">per maand</div>
-      <ul>
-        <li>Alles van Navigator</li>
-        <li>Multi-tenant beheer</li>
-        <li>Custom branding (white-label optie)</li>
-        <li>API-toegang voor eigen systemen</li>
-        <li>Prioriteit bij e-office Connect</li>
-        <li>Kwartaalreview met AI + consultant</li>
-        <li>Sectorspecifieke deepdive-modules</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="stats-row" style="margin-top:50px;">
-    <div class="stat">
-      <div class="stat-num">€0</div>
-      <div class="stat-label">Instap-drempel</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">€2,4K</div>
-      <div class="stat-label">ARR per Navigator</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">1000</div>
-      <div class="stat-label">= €2,4M ARR</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">30%</div>
-      <div class="stat-label">Conversie naar e-office</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- EUROPA -->
-<section class="section" id="europa">
-  <div class="section-num">06 — Europese Schaalbaarheid</div>
-  <h2>27 landen, 24 talen, 1 platform</h2>
-
-  <p>Elke EU-lidstaat heeft eigen nuances in regelgeving, taal en bedrijfscultuur. Het platform wordt per land aangepast — niet als vertaling maar als lokalisatie. De AI-adviseur spreekt de lokale taal, kent de lokale regelgeving, en begrijpt de lokale markt.</p>
-
-  <div class="eu-grid">
-    <div class="eu-item">
-      <div class="eu-flag">🇳🇱</div>
-      <div class="eu-name">Nederland</div>
-      <div class="eu-focus">Lancering — Q2 2026</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇧🇪</div>
-      <div class="eu-name">België</div>
-      <div class="eu-focus">NL + FR — Q3 2026</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇩🇪</div>
-      <div class="eu-name">Duitsland</div>
-      <div class="eu-focus">Größter Markt — Q4 2026</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇫🇷</div>
-      <div class="eu-name">Frankrijk</div>
-      <div class="eu-focus">Souvereniteit-focus — 2027</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇦🇹</div>
-      <div class="eu-name">Oostenrijk</div>
-      <div class="eu-focus">Via DE — Q4 2026</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇮🇹</div>
-      <div class="eu-name">Italië</div>
-      <div class="eu-focus">2027</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇪🇸</div>
-      <div class="eu-name">Spanje</div>
-      <div class="eu-focus">2027</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇸🇪</div>
-      <div class="eu-name">Zweden</div>
-      <div class="eu-focus">Nordics — 2027</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇵🇱</div>
-      <div class="eu-name">Polen</div>
-      <div class="eu-focus">CEE hub — 2027</div>
-    </div>
-    <div class="eu-item">
-      <div class="eu-flag">🇵🇹</div>
-      <div class="eu-name">Portugal</div>
-      <div class="eu-focus">2027</div>
-    </div>
-  </div>
-
-  <p style="margin-top:30px;">De lokalisatie gaat verder dan taal. Per land wordt aangepast: welke regelgeving geldt (DORA alleen voor financiële sector, NIS2 reikwijdte verschilt per implementatie), welke sectoren dominant zijn, welke Microsoft-alternatieven relevant zijn (Nextcloud in DE, La Suite in FR), en welke subsidies beschikbaar zijn voor digitale transformatie.</p>
-</section>
-
-<div class="divider"></div>
-
-<!-- TECH STACK -->
-<section class="section" id="tech">
-  <div class="section-num">07 — Technologie</div>
-  <h2>De tech stack: gebouwd met AI, voor AI</h2>
-
-  <p>Het platform wordt volledig gebouwd met Claude Code — zelf het levende bewijs dat AI software-ontwikkeling fundamenteel verandert. De stack is modern, schaalbaar en betaalbaar.</p>
-
-  <div class="tech-grid">
-    <div class="tech-item">
-      <div class="tech-name">Next.js 15</div>
-      <div class="tech-role">Frontend + SSR</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">React 19</div>
-      <div class="tech-role">UI Components</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Supabase</div>
-      <div class="tech-role">Database + Auth + Storage</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Vercel</div>
-      <div class="tech-role">Hosting + Edge Functions</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Anthropic API</div>
-      <div class="tech-role">AI Adviseur (Claude)</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Microsoft Graph</div>
-      <div class="tech-role">M365 Tenant Scan</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Stripe</div>
-      <div class="tech-role">Betalingen + Subscriptions</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">GitHub</div>
-      <div class="tech-role">Version Control + CI/CD</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Claude Code</div>
-      <div class="tech-role">Development Partner</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Resend / Postmark</div>
-      <div class="tech-role">Transactional Email</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">Tailwind CSS</div>
-      <div class="tech-role">Design System</div>
-    </div>
-    <div class="tech-item">
-      <div class="tech-name">i18next</div>
-      <div class="tech-role">Internationalisatie</div>
-    </div>
-  </div>
-
-  <div class="quote-block" style="margin-top:40px;">
-    <p>"Het hele platform wordt gebouwd met Claude Code. Eén persoon met AI bouwt wat normaal een team van 8 developers kost. Dat is precies het punt dat we willen maken."</p>
-    <cite>— Het medium is de boodschap</cite>
-  </div>
-
-  <h3 style="margin-top:40px; margin-bottom:20px;">Architectuur Overview</h3>
-
-  <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
-    <div class="card">
-      <h3>Frontend</h3>
-      <p><strong>Next.js App Router</strong> met server components voor snelheid. Tailwind voor design system. Framer Motion voor animaties. Recharts voor data-visualisatie. i18next voor meertaligheid. Responsive design — mobile-first.</p>
-    </div>
-    <div class="card">
-      <h3>Backend</h3>
-      <p><strong>Supabase</strong> voor PostgreSQL database, Row Level Security, Auth (social login + email), Edge Functions. Anthropic API voor AI-gesprekken en assessments. Microsoft Graph API voor tenant scans. Stripe voor subscriptions.</p>
-    </div>
-    <div class="card">
-      <h3>AI Layer</h3>
-      <p><strong>Claude Sonnet 4.5</strong> als basis-AI voor advisering. Systeem-prompts per land/sector/taal met embedded kennis uit e-office's 35 jaar expertise. RAG-systeem voor actuele regelgeving. Conversation memory per gebruiker.</p>
-    </div>
-    <div class="card">
-      <h3>Data & Privacy</h3>
-      <p><strong>EU-hosted</strong> via Supabase EU-regio. Geen data naar VS. AVG-compliant by design. Opt-in voor M365 integratie. Anonimisering voor benchmarking. Data retention policies per land. Recht op vergetelheid geïmplementeerd.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
+</div></div>
+</div>
 
 <!-- ROADMAP -->
-<section class="section" id="roadmap">
-  <div class="section-num">08 — Roadmap</div>
-  <h2>Van concept naar lancering</h2>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-label">Fase 1 — Week 1-4 (Maart 2026)</div>
-      <div class="timeline-title">MVP: Basis Assessment + AI Adviseur</div>
-      <div class="timeline-content">
-        <strong>Scope:</strong> Landing page, registratie, basis 6-lagen assessment (vragenlijst), AI-Readiness Score berekening, AI-adviseur chat (Claude), resultaten-dashboard met radar chart, basis Stripe integratie (gratis + Navigator tier).<br><br>
-        <strong>Doel:</strong> Werkend product dat intern getest kan worden door e-office team. Eerste 10 beta-testers (bestaande klanten).<br><br>
-        <strong>Techniek:</strong> Next.js + Supabase + Anthropic API + Stripe. Deploy op Vercel. GitHub repo. Claude Code voor 90% van de development.
-      </div>
+<div class="insight-card" id="ic-roadmap">
+<div class="insight-header" onclick="toggleCard('ic-roadmap')">
+  <div class="insight-icon" style="background:var(--blue-bg);color:var(--blue)">📋</div>
+  <div class="insight-title"><h4>Uw Roadmap</h4><p>Tijdlijn met deadlines en wanneer wat te doen</p></div>
+  <div class="insight-chevron">▼</div>
+</div>
+<div class="insight-body"><div class="insight-content">
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Op basis van uw sector en antwoorden. Harde deadlines in het rood — die kunt u niet verschuiven.</p>
+  <div class="roadmap-tl">
+    <div class="tl-item urgent">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Nu — al van kracht</div>
+      <div class="tl-title">AI-geletterdheid verplicht</div>
+      <div class="tl-desc">Alle medewerkers die met AI-systemen werken moeten een basisniveau AI-kennis hebben. Dit geldt nu al.</div>
+      <div class="tl-source">EU AI Act, Artikel 4 — sinds 2 februari 2025</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-label">Fase 2 — Week 5-10 (April-Mei 2026)</div>
-      <div class="timeline-title">Microsoft 365 Integration + Roadmap Generator</div>
-      <div class="timeline-content">
-        <strong>Scope:</strong> Microsoft Graph API integratie (opt-in tenant scan), automatische assessment op basis van tenant data, gepersonaliseerde roadmap generator, compliance navigator (NL), sector-benchmarking, kennismodules (eerste 10).<br><br>
-        <strong>Doel:</strong> Beta-launch Nederland. 50-100 gebruikers. Eerste betaalde Navigator-accounts.<br><br>
-        <strong>Techniek:</strong> OAuth2 voor M365 consent. Graph API voor licenties, security score, Copilot data. PDF export voor roadmaps.
-      </div>
+    <div class="tl-item urgent">
+      <div class="tl-dot"></div>
+      <div class="tl-date">17 oktober 2025</div>
+      <div class="tl-title">NIS2 omgezet in nationale wet</div>
+      <div class="tl-desc">Strengere eisen voor informatiebeveiliging. Incidentmelding binnen 24 uur. Bestuurders persoonlijk aansprakelijk.</div>
+      <div class="tl-source">NIS2 Richtlijn 2022/2555 — Nederlandse implementatiewet</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-label">Fase 3 — Week 11-20 (Juni-Augustus 2026)</div>
-      <div class="timeline-title">Europese Uitrol + e-office Connect</div>
-      <div class="timeline-content">
-        <strong>Scope:</strong> Meertaligheid (NL, EN, DE, FR), België en Duitsland-versies met lokale regelgeving, e-office Connect (lead routing naar consultants), Enterprise tier live, voortgangstracker, maandelijkse rapportage.<br><br>
-        <strong>Doel:</strong> 500+ gebruikers. €10K+ MRR. Eerste klant-conversies naar e-office consultancy. Team-inspiratie: presentatie resultaten aan MT.<br><br>
-        <strong>Techniek:</strong> i18next voor talen. Per-land content management. Lokale Stripe configuraties.
-      </div>
+    <div class="tl-item soon">
+      <div class="tl-dot"></div>
+      <div class="tl-date">17 januari 2026</div>
+      <div class="tl-title">DORA van kracht (financiële sector)</div>
+      <div class="tl-desc">Digitale operationele weerbaarheid voor financiële instellingen en hun ICT-leveranciers.</div>
+      <div class="tl-source">Verordening (EU) 2022/2554 — DORA</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-label">Fase 4 — Q4 2026 en verder</div>
-      <div class="timeline-title">Schaal + Innovatie</div>
-      <div class="timeline-content">
-        <strong>Scope:</strong> Alle EU-talen, white-label optie voor partners, API voor externe systemen, AI-agent marketplace (klanten kunnen agents afnemen), community features, advanced analytics, automated compliance monitoring.<br><br>
-        <strong>Doel:</strong> 2000+ gebruikers. €50K+ MRR. Platform als kernonderdeel van e-office propositie. Europees merk.<br><br>
-        <strong>Techniek:</strong> Microservices waar nodig. Dedicated AI-agents per domein. RAG met actuele regelgeving per land.
-      </div>
+    <div class="tl-item soon">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2 augustus 2026</div>
+      <div class="tl-title">AI Act volledig van kracht</div>
+      <div class="tl-desc">Hoog-risico AI-systemen moeten voldoen aan documentatie-, transparantie- en toezichteisen. In de zorg zijn bijna alle AI-toepassingen hoog-risico.</div>
+      <div class="tl-source">EU AI Act, Verordening 2024/1689</div>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- STRATEGISCHE WAARDE -->
-<section class="section">
-  <div class="section-num">09 — Strategische Waarde voor e-office</div>
-  <h2>Hoe het platform e-office versterkt</h2>
-
-  <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
-    <div class="card">
-      <div class="card-icon">🎓</div>
-      <h3>Leermachine voor het team</h3>
-      <p>Elke consultant krijgt toegang tot het platform en ziet real-time wat klanten vragen, waar ze vastlopen, en welke kennis het meest gevraagd is. Het platform wordt het interne kennissysteem van e-office — gebouwd door klanten te bedienen.</p>
+    <div class="tl-item planned">
+      <div class="tl-dot"></div>
+      <div class="tl-date">September 2025</div>
+      <div class="tl-title">Data Act van toepassing</div>
+      <div class="tl-desc">Nieuwe regels over toegang tot en delen van data. Raakt uw cloudcontracten en leveranciersbeheer.</div>
+      <div class="tl-source">Verordening (EU) 2023/2854 — Data Act</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🧲</div>
-      <h3>Lead generation op schaal</h3>
-      <p>Elke gratis assessment is een qualified lead. De ondernemer heeft zelf zijn problemen in kaart gebracht, begrijpt de terminologie, en weet wat hij nodig heeft. Dat is de beste klant die een consultant kan krijgen — voorbereid, gemotiveerd, geïnformeerd.</p>
+    <div class="tl-item planned">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Q1 2026</div>
+      <div class="tl-title">Aanbevolen: governance-framework opstellen</div>
+      <div class="tl-desc">Leg vast welke AI-tools worden gebruikt, wie verantwoordelijk is en hoe u controleert. Dit vormt de basis voor compliance.</div>
     </div>
-    <div class="card">
-      <div class="card-icon">📊</div>
-      <h3>Data-driven strategie</h3>
-      <p>Duizenden assessments leveren een uniek databeeld: welke sectoren het meest AI-ready zijn, waar de grootste gaps zitten, welke diensten het meest gevraagd worden. Dit stuurt de productportfolio, de recruitmentstrategie, en de investeringsbeslissingen.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🏗️</div>
-      <h3>IP-opbouw</h3>
-      <p>Het platform zelf is intellectual property. Assessment-frameworks, sector-templates, AI-configuraties, compliance-databases — allemaal herbruikbaar. Dit is het IP dat het Stapelmodel mogelijk maakt zonder lineair meer mensen.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h3>Proof of concept voor HAT</h3>
-      <p>Het platform IS een Human-Agent Team in actie: AI doet 90% van het werk, de mens (e-office consultant) komt alleen bij complexe vragen. Het is het levende bewijs van het model dat we aan klanten verkopen.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌍</div>
-      <h3>Europese positionering</h3>
-      <p>Een platform dat EU-regelgeving navigeert in 27 landen positioneert e-office als Europese speler — niet meer als regionale Microsoft-partner. Dit opent deuren voor partnerships, subsidies en publiciteit die als consultancy-firma onbereikbaar zijn.</p>
+    <div class="tl-item planned">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Q2 2026</div>
+      <div class="tl-title">Aanbevolen: data-omgeving op orde</div>
+      <div class="tl-desc">Schoon uw SharePoint op, stel rechten in en structureer documenten. Noodzakelijk vóórdat AI-tools zinvol worden.</div>
     </div>
   </div>
-</section>
-
-<div class="divider"></div>
+</div></div>
+</div>
 
 <!-- RISICO'S -->
-<section class="section">
-  <div class="section-num">10 — Risico's en Mitigatie</div>
-  <h2>Ogen open, voeten op de grond</h2>
-
-  <div class="card-grid">
-    <div class="card">
-      <h3>Risico: Kannibalisatie</h3>
-      <p><strong>Angst:</strong> "Het platform vervangt onze consultants."<br><br><strong>Realiteit:</strong> Het platform vervangt de eerste 80% van een traject — het oriëntatiegesprek, de inventarisatie, de basis-analyse. De laatste 20% — organisatiepolitiek navigeren, vertrouwen opbouwen, de directeur overtuigen — dat blijft mensenwerk. Het platform maakt die 20% waardevoller, niet overbodig.</p>
+<div class="insight-card" id="ic-risks">
+<div class="insight-header" onclick="toggleCard('ic-risks')">
+  <div class="insight-icon" style="background:var(--accent-bg);color:var(--accent)">⚠️</div>
+  <div class="insight-title"><h4>Uw Risico's</h4><p>Gestructureerd overzicht per laag met urgentie</p></div>
+  <div class="insight-chevron">▼</div>
+</div>
+<div class="insight-body"><div class="insight-content">
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Risico's op basis van uw antwoorden, gerangschikt op urgentie. Niet om u bang te maken — wel om prioriteiten te stellen.</p>
+  <div class="risk-grid">
+    <div class="risk-row">
+      <div class="risk-level high">Hoog</div>
+      <div class="risk-info"><h5>Shadow AI zonder governance</h5><p>Medewerkers gebruiken AI-tools zonder beleid. Risico op datalekken, onjuiste output en non-compliance met de AI Act.</p><div class="risk-layer">Laag 4 · Intelligentie + Laag 2 · Bescherming</div></div>
     </div>
-    <div class="card">
-      <h3>Risico: Technische complexiteit</h3>
-      <p><strong>Angst:</strong> "We zijn geen software-bedrijf."<br><br><strong>Realiteit:</strong> Met Claude Code en de huidige stack (Next.js, Supabase, Vercel) kan 1-2 personen bouwen wat vroeger een team van 8 kostte. De AI Navigator (ai-navigator-ten.vercel.app) bewijst dat dit al werkt.</p>
+    <div class="risk-row">
+      <div class="risk-level high">Hoog</div>
+      <div class="risk-info"><h5>AI Act non-compliance</h5><p>Zonder AI-register en geletterdheidsbeleid loopt u nu al risico. Boetes tot €35 miljoen of 7% omzet.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 5 · Mens</div></div>
     </div>
-    <div class="card">
-      <h3>Risico: Kwaliteit AI-advies</h3>
-      <p><strong>Angst:</strong> "AI geeft verkeerd advies."<br><br><strong>Realiteit:</strong> Het platform geeft geen definitief advies — het geeft een assessment en een routekaart. Bij complexe vragen escaleert het naar e-office Connect. De AI is getraind op e-office-expertise en wordt continu verbeterd door feedback.</p>
+    <div class="risk-row">
+      <div class="risk-level high">Hoog</div>
+      <div class="risk-info"><h5>NIS2 bestuurlijke aansprakelijkheid</h5><p>Bestuurders zijn persoonlijk aansprakelijk voor informatiebeveiliging. Onvoldoende maatregelen = persoonlijke boete.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 6 · Richting</div></div>
     </div>
-    <div class="card">
-      <h3>Risico: MT-weerstand</h3>
-      <p><strong>Angst:</strong> "We hebben nu geen tijd/budget/focus hiervoor."<br><br><strong>Realiteit:</strong> De investering is minimaal (€5-10K voor MVP, hoofdzakelijk API-kosten). Het ontwikkeltempo is weken, niet maanden. En het alternatief — wachten tot een concurrent dit bouwt — is het echte risico.</p>
+    <div class="risk-row">
+      <div class="risk-level medium">Midden</div>
+      <div class="risk-info"><h5>Data-kwaliteit blokkeert AI-waarde</h5><p>Uw informatie is onvoldoende gestructureerd. AI-tools als Copilot zullen slechte resultaten geven.</p><div class="risk-layer">Laag 3 · Informatie</div></div>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- INVESTERING -->
-<section class="section">
-  <div class="section-num">11 — Investering</div>
-  <h2>Wat het kost, wat het oplevert</h2>
-
-  <div class="comparison">
-    <div class="comp-col">
-      <h3>MVP Investering (Fase 1-2)</h3>
-      <div class="comp-item"><strong>Anthropic API:</strong> ~€500/maand (Claude Sonnet)</div>
-      <div class="comp-item"><strong>Supabase Pro:</strong> €25/maand</div>
-      <div class="comp-item"><strong>Vercel Pro:</strong> €20/maand</div>
-      <div class="comp-item"><strong>Domain + DNS:</strong> €50/jaar</div>
-      <div class="comp-item"><strong>Stripe fees:</strong> 1.4% + €0.25 per transactie</div>
-      <div class="comp-item"><strong>Development:</strong> Roland + Claude Code (intern)</div>
-      <div class="comp-item"><strong>Totaal maandkosten:</strong> ~€600/maand</div>
-      <div class="comp-item"><strong>Break-even:</strong> 3 Navigator-accounts</div>
+    <div class="risk-row">
+      <div class="risk-level medium">Midden</div>
+      <div class="risk-info"><h5>Vendor lock-in risico</h5><p>Hoge afhankelijkheid van één leverancier (Microsoft) voor werkplek, data en AI. Beperkt uw keuzevrijheid.</p><div class="risk-layer">Laag 1 · Platform + Laag 4 · Intelligentie</div></div>
     </div>
-    <div class="comp-col nightmare">
-      <h3>Potentieel na 12 maanden</h3>
-      <div class="comp-item"><strong>1000 Explorers:</strong> €0 (leads)</div>
-      <div class="comp-item"><strong>200 Navigators:</strong> €480K ARR</div>
-      <div class="comp-item"><strong>20 Enterprise:</strong> €120K ARR</div>
-      <div class="comp-item"><strong>Totaal platform ARR:</strong> €600K</div>
-      <div class="comp-item"><strong>Conversie naar consultancy:</strong> 30% → 66 trajecten</div>
-      <div class="comp-item"><strong>Gemiddeld traject:</strong> €15K → €990K extra</div>
-      <div class="comp-item"><strong>Totale impact:</strong> ~€1,6M</div>
-      <div class="comp-item"><strong>ROI:</strong> 200x+ op MVP-investering</div>
+    <div class="risk-row">
+      <div class="risk-level low">Laag</div>
+      <div class="risk-info"><h5>Digitale vaardigheidsgap</h5><p>Wisselende vaardigheden maken adoptie van nieuwe tools lastig. Vertraagt uw digitale strategie.</p><div class="risk-layer">Laag 5 · Mens</div></div>
     </div>
   </div>
-</section>
+</div></div>
+</div>
 
-<div class="divider"></div>
+<!-- VOLGENDE STAP -->
+<div class="insight-card" id="ic-actions">
+<div class="insight-header" onclick="toggleCard('ic-actions')">
+  <div class="insight-icon" style="background:var(--green-bg);color:var(--green)">🧭</div>
+  <div class="insight-title"><h4>Uw Volgende Stap</h4><p>Wat u morgen, deze maand en dit kwartaal kunt doen</p></div>
+  <div class="insight-chevron">▼</div>
+</div>
+<div class="insight-body"><div class="insight-content">
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Concrete acties, geprioriteerd van urgent naar belangrijk. Vink af wat u doet.</p>
 
-<!-- AFSLUITING -->
-<section class="section" style="text-align:center; padding-bottom:60px;">
-  <div class="section-num">12 — De Keuze</div>
-  <h2>Bouwen of gebouwd worden?</h2>
-  
-  <p style="max-width:700px; margin:20px auto; font-size:18px;">De technologie bestaat. De kennis bestaat. Het marktvenster staat open. De enige vraag is: doet e-office dit zelf, of wacht e-office tot iemand anders het doet — en wordt e-office het slachtoffer van iemand anders' nachtmerrie?</p>
-
-  <div class="quote-block" style="max-width:700px; margin:40px auto; text-align:left;">
-    <p>"De nachtmerrie is niet dat dit platform faalt. De nachtmerrie is dat we het niet bouwen — en dat iemand anders het wél doet."</p>
-    <cite>— The Worst Nightmare thesis</cite>
+  <div class="action-group">
+    <div class="action-period"><span class="action-period-label now">Deze week</span><div class="action-period-line"></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Inventariseer AI-gebruik</strong><span class="sub">Vraag elke afdeling: welke AI-tools worden er gebruikt? Maak een lijst.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Bespreek AI Act in MT</strong><span class="sub">AI-geletterdheid is al verplicht. Zorg dat het bestuur dit weet.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Deel deze presentatie</strong><span class="sub">Genereer de MT-presentatie en plan een gesprek met uw team.</span></div></div>
   </div>
 
-  <p style="font-size:14px; color:var(--text-muted); margin-top:40px;">
-    Volgende stap: MVP development met Claude Code → GitHub → Vercel<br>
-    Doelstelling: werkend prototype binnen 4 weken
-  </p>
-</section>
+  <div class="action-group">
+    <div class="action-period"><span class="action-period-label month">Deze maand</span><div class="action-period-line"></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Start een AI Act compliance-check</strong><span class="sub">Gebruik de online dienst of schakel een partner in voor een quick scan.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Controleer NIS2-status</strong><span class="sub">Val uw organisatie onder NIS2? Check of u "essentieel" of "belangrijk" bent.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Plan AI-geletterdheids­training</strong><span class="sub">Kies een programma en start met management en AI-gebruikers.</span></div></div>
+  </div>
 
-<footer class="footer">
-  <p>THE WORST NIGHTMARE — Platform Blueprint v1.0 — Februari 2026 — e-office Strategic Initiative — Vertrouwelijk</p>
-</footer>
+  <div class="action-group">
+    <div class="action-period"><span class="action-period-label quarter">Dit kwartaal</span><div class="action-period-line"></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Stel een AI-governance framework op</strong><span class="sub">Wie beslist over AI-tools? Welke regels gelden? Leg het vast.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Structureer uw data-omgeving</strong><span class="sub">SharePoint-rechten, mappenstructuur, verouderde documenten opschonen.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Formuleer een digitale strategie</strong><span class="sub">Maak keuzes: waar investeert u wel/niet in? Met welk doel? Leg het vast.</span></div></div>
+    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Evalueer leveranciersafhankelijkheid</strong><span class="sub">Breng in kaart hoe afhankelijk u bent en welke alternatieven er zijn.</span></div></div>
+  </div>
+</div></div>
+</div>
 
+<!-- SOEVEREINITEIT -->
+<div class="insight-card" id="ic-sovereignty">
+<div class="insight-header" onclick="toggleCard('ic-sovereignty')">
+  <div class="insight-icon" style="background:var(--purple-bg);color:var(--purple)">🇪🇺</div>
+  <div class="insight-title"><h4>Uw Digitale Soevereiniteit</h4><p>Hoe afhankelijk bent u — en wat zijn de alternatieven?</p></div>
+  <div class="insight-chevron">▼</div>
+</div>
+<div class="insight-body"><div class="insight-content">
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Digitale soevereiniteit gaat over keuzevrijheid: kunt u zelf beslissen over uw data, tools en leveranciers? Dit is geen ideologisch verhaal — het is risicobeheer.</p>
+
+  <div class="sov-section">
+    <div class="sov-label">☁️ Cloud & Werkplek</div>
+    <div class="sov-meter"><div class="sov-fill" style="width:78%;background:var(--accent)"></div></div>
+    <div class="sov-desc"><strong>78% afhankelijk</strong> — Uw werkplek draait volledig op Microsoft 365. Dit werkt goed, maar betekent dat Microsoft bepaalt wat u krijgt, wat het kost en waar uw data staat.</div>
+    <div class="sov-alt-grid">
+      <div class="sov-alt"><h5>Alternatief: Nextcloud</h5><p>Europees open-source platform voor bestanden en samenwerking. Zelf te hosten.</p></div>
+      <div class="sov-alt"><h5>Alternatief: Open-Xchange</h5><p>Europese e-mail en productiviteit. Gebruikt door overheidsorganisaties in DE en FR.</p></div>
+    </div>
+    <div class="sov-source">Bron: European Cloud Alliance · Gaia-X Initiative 2025</div>
+  </div>
+
+  <div class="sov-section">
+    <div class="sov-label">🤖 AI & Intelligentie</div>
+    <div class="sov-meter"><div class="sov-fill" style="width:85%;background:var(--accent)"></div></div>
+    <div class="sov-desc"><strong>85% afhankelijk</strong> — Als u Copilot gebruikt, verwerkt Microsoft al uw organisatiedata in een Amerikaans AI-model. De Data Act en AI Act stellen hier nieuwe eisen aan.</div>
+    <div class="sov-alt-grid">
+      <div class="sov-alt"><h5>Alternatief: Mistral (FR)</h5><p>Europees AI-model. Kan on-premise draaien. Voldoet aan EU data-vereisten.</p></div>
+      <div class="sov-alt"><h5>Alternatief: Aleph Alpha (DE)</h5><p>Duits AI-bedrijf. "Sovereign AI" voor overheid en zorg. BSI-gecertificeerd.</p></div>
+    </div>
+    <div class="sov-source">Bron: EU AI Office · BSI Certification · Mistral.ai</div>
+  </div>
+
+  <div class="sov-section">
+    <div class="sov-label">📊 Data & Opslag</div>
+    <div class="sov-meter"><div class="sov-fill" style="width:65%;background:var(--warm)"></div></div>
+    <div class="sov-desc"><strong>65% afhankelijk</strong> — Uw data staat bij Microsoft in EU-datacenters, maar valt onder Amerikaans recht (CLOUD Act). Bij conflict kan de VS toegang eisen.</div>
+    <div class="sov-alt-grid">
+      <div class="sov-alt"><h5>Hybride aanpak</h5><p>Gevoelige data lokaal of bij Europese provider. Operationele data in M365.</p></div>
+      <div class="sov-alt"><h5>EU Data Boundary</h5><p>Microsoft biedt sinds 2024 een EU Data Boundary. Controleer of dit voldoet aan uw sector-eisen.</p></div>
+    </div>
+    <div class="sov-source">Bron: US CLOUD Act · Microsoft EU Data Boundary · EDPB Recommendations</div>
+  </div>
+
+  <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius-sm);padding:14px 18px;margin-top:12px">
+    <div style="font-size:14px;font-weight:600;margin-bottom:6px">💡 Geen alles-of-niets keuze</div>
+    <div style="font-size:13px;color:var(--text-sec);line-height:1.6">Digitale soevereiniteit betekent niet dat u Microsoft moet verlaten. Het betekent dat u <strong>bewust kiest</strong>, dat u weet waar uw data is, en dat u een plan B heeft. De sterkste positie is een hybride aanpak: gebruik waar Microsoft uitblinkt, bescherm waar het gevoelig is.</div>
+  </div>
+</div></div>
+</div>
+
+</div><!-- /insight-cards -->
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
+<button class="btn btn-primary" onclick="openM('m-pres')">📊 Genereer presentatie</button>
+<button class="btn btn-outline" onclick="toggleSupport()">💬 Hulp nodig?</button>
+<button class="btn btn-ghost" onclick="goStep('step-1')">← Terug</button>
+</div>
+</div>
+
+    </div>
+  </div>
+
+  <!-- ============================
+       SUPPORT FAB + PANEL
+       ============================ -->
+  <button class="support-fab" id="support-fab" onclick="toggleSupport()" title="Support">💬</button>
+  <div class="support-overlay" id="support-overlay" onclick="toggleSupport()"></div>
+
+  <div class="support-panel" id="support-panel">
+    <div class="sp-header">
+      <h3>Hoe kunnen we helpen?</h3>
+      <p>Kies wat het beste bij u past</p>
+    </div>
+
+    <div class="sp-tabs">
+      <button class="sp-tab active" onclick="spTab(this,'sp-tab-ask')"><span class="tab-icon">💬</span>Vraag stellen</button>
+      <button class="sp-tab" onclick="spTab(this,'sp-tab-services')"><span class="tab-icon">⚡</span>Online diensten</button>
+      <button class="sp-tab" onclick="spTab(this,'sp-tab-partners')"><span class="tab-icon">🤝</span>Partners</button>
+    </div>
+
+    <!-- TAB: VRAAG STELLEN -->
+    <div class="sp-body" id="sp-tab-ask">
+      <div class="sp-context" id="sp-context-label">📍 U bent bij: Laag 1 · Platform</div>
+      <div class="sp-chat-area" id="sp-chat-area">
+        <div class="sp-chat-msg ai">
+          <div class="sp-chat-av">N</div>
+          <div class="sp-chat-bubble">Hallo! Stel elke vraag over AI, regelgeving, uw resultaten of de huidige stap. Ik antwoord in begrijpelijke taal.<div class="sp-chat-source">35 jaar expertise</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ONLINE DIENSTEN -->
+    <div class="sp-body" id="sp-tab-services" style="display:none">
+      <div class="sp-context" id="sp-services-context">📍 Relevant voor: Laag 1 · Platform</div>
+
+      <div class="service-card" onclick="alert('Demo: M365 scan starten')">
+        <div class="service-icon" style="background:var(--blue-bg);color:var(--blue)">🔍</div>
+        <div class="service-info">
+          <h4>Microsoft 365 Quick Scan</h4>
+          <p>Automatische analyse van uw M365-omgeving. Geeft inzicht in licenties, gebruikspatronen en security-instellingen.</p>
+          <div class="service-meta"><span class="service-tag free">Gratis</span><span class="service-tag time">⏱ 5 minuten</span></div>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="alert('Demo: Compliance check starten')">
+        <div class="service-icon" style="background:var(--accent-bg);color:var(--accent)">⚖️</div>
+        <div class="service-info">
+          <h4>AI Act Compliance Check</h4>
+          <p>Snelle scan of uw organisatie onder de AI Act valt. Ontdek welke verplichtingen op u van toepassing zijn.</p>
+          <div class="service-meta"><span class="service-tag free">Gratis</span><span class="service-tag time">⏱ 3 minuten</span></div>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="alert('Demo: Data readiness starten')">
+        <div class="service-icon" style="background:var(--green-bg);color:var(--green)">📊</div>
+        <div class="service-info">
+          <h4>Data Readiness Assessment</h4>
+          <p>Diepgaande analyse van uw SharePoint en OneDrive structuur. Is uw data klaar voor AI?</p>
+          <div class="service-meta"><span class="service-tag paid">€ 49/eenmalig</span><span class="service-tag time">⏱ 15 minuten</span></div>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="alert('Demo: Shadow AI scan starten')">
+        <div class="service-icon" style="background:var(--purple-bg);color:var(--purple)">👁️</div>
+        <div class="service-info">
+          <h4>Shadow AI Inventarisatie</h4>
+          <p>Ontdek welke AI-tools uw medewerkers al gebruiken — vaak meer dan u denkt. Inclusief risicobeoordeling.</p>
+          <div class="service-meta"><span class="service-tag paid">€ 99/eenmalig</span><span class="service-tag time">⏱ 20 minuten</span></div>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="alert('Demo: Training starten')">
+        <div class="service-icon" style="background:var(--warm-bg);color:var(--warm)">🎓</div>
+        <div class="service-info">
+          <h4>AI-Geletterdheid Training</h4>
+          <p>Online training die voldoet aan de AI Act eis voor AI-geletterdheid. Voor alle medewerkers.</p>
+          <div class="service-meta"><span class="service-tag paid">€ 15/persoon/mnd</span><span class="service-tag time">⏱ 2 uur</span></div>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openM('m-pres')">
+        <div class="service-icon" style="background:var(--blue-bg);color:var(--blue)">📊</div>
+        <div class="service-info">
+          <h4>MT Presentatie Generator</h4>
+          <p>Genereer een professionele presentatie met uw scores en aanbevelingen voor uw management team.</p>
+          <div class="service-meta"><span class="service-tag free">Gratis</span><span class="service-tag time">⏱ 10 sec</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PARTNERS -->
+    <div class="sp-body" id="sp-tab-partners" style="display:none">
+      <div class="sp-context" id="sp-partners-context">📍 Partners voor: Laag 1 · Platform</div>
+
+      <div class="partner-card-sp">
+        <div class="pc-sp-top">
+          <div class="pc-sp-logo" style="background:var(--blue-bg);color:var(--blue)">🖥️</div>
+          <div><div class="pc-sp-name">e-office</div><div class="pc-sp-loc">📍 Naarden, NL</div></div>
+          <div class="pc-sp-verified">✓ Gecertificeerd</div>
+        </div>
+        <div class="pc-sp-tags"><span class="pc-sp-tag">M365</span><span class="pc-sp-tag">Cloud PC</span><span class="pc-sp-tag">AI Governance</span><span class="pc-sp-tag">Zorg</span></div>
+        <div class="pc-sp-desc">35 jaar ervaring. AI-Ready Platform aanpak. Specialist in M365 voor zorg, onderwijs en finance.</div>
+        <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.8 (124) · Vanaf €95/u</div><div class="pc-sp-cta">Contact →</div></div>
+      </div>
+
+      <div class="partner-card-sp">
+        <div class="pc-sp-top">
+          <div class="pc-sp-logo" style="background:var(--accent-bg);color:var(--accent)">☁️</div>
+          <div><div class="pc-sp-name">CloudWise Solutions</div><div class="pc-sp-loc">📍 Antwerpen, BE</div></div>
+        </div>
+        <div class="pc-sp-tags"><span class="pc-sp-tag">Azure</span><span class="pc-sp-tag">Migratie</span><span class="pc-sp-tag">Benelux</span></div>
+        <div class="pc-sp-desc">Cloud-first partner voor Benelux MKB. Specialisatie in migraties naar M365 en Azure.</div>
+        <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.6 (87) · Vanaf €105/u</div><div class="pc-sp-cta">Contact →</div></div>
+      </div>
+
+      <div class="partner-card-sp">
+        <div class="pc-sp-top">
+          <div class="pc-sp-logo" style="background:var(--warm-bg);color:var(--warm)">⚖️</div>
+          <div><div class="pc-sp-name">ComplianceFirst</div><div class="pc-sp-loc">📍 Amsterdam, NL</div></div>
+        </div>
+        <div class="pc-sp-tags"><span class="pc-sp-tag">NIS2</span><span class="pc-sp-tag">DORA</span><span class="pc-sp-tag">ISO 27001</span></div>
+        <div class="pc-sp-desc">Juridisch-technisch bureau voor compliance. NIS2 en DORA trajecten.</div>
+        <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.7 (52) · Vanaf €135/u</div><div class="pc-sp-cta">Contact →</div></div>
+      </div>
+
+      <div class="partner-card-sp">
+        <div class="pc-sp-top">
+          <div class="pc-sp-logo" style="background:var(--green-bg);color:var(--green)">🛡️</div>
+          <div><div class="pc-sp-name">Digital Workspace GmbH</div><div class="pc-sp-loc">📍 Düsseldorf, DE</div></div>
+        </div>
+        <div class="pc-sp-tags"><span class="pc-sp-tag">Modern Workplace</span><span class="pc-sp-tag">Security</span><span class="pc-sp-tag">Industrie</span></div>
+        <div class="pc-sp-desc">Deutsche Microsoft-Partner. Schwerpunkt: sichere digitale Arbeitsplätze für Industrie und Finance.</div>
+        <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.5 (63) · Vanaf €115/u</div><div class="pc-sp-cta">Contact →</div></div>
+      </div>
+
+      <div class="mp-join">🤝 <span>Bent u consultant? <a href="#">Word partner op Navigator →</a></span></div>
+    </div>
+
+    <!-- CHAT INPUT (always visible at bottom of panel) -->
+    <div class="sp-input-bar" id="sp-input-bar">
+      <input class="sp-input" type="text" id="sp-input" placeholder="Stel uw vraag…" onkeydown="if(event.key==='Enter')spSend()">
+      <button class="btn btn-primary btn-sm" onclick="spSend()">→</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL: PRESENTATIE -->
+<div class="modal-overlay" id="m-pres">
+<div class="modal modal-md">
+<div class="modal-head"><h3>📊 Presentatie genereren</h3><button class="modal-x" onclick="closeM('m-pres')">✕</button></div>
+<div class="modal-body" id="pres-body">
+<p style="font-size:14px;color:var(--text-sec);margin-bottom:14px">Presentatie voor uw management team op basis van uw resultaten.</p>
+<div class="pres-dark"><div style="font-size:11px;opacity:.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Voorbeeld</div><h3 style="font-size:22px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Resultaten en aanbevelingen</p></div>
+<div style="margin-top:16px"><div style="font-size:14px;font-weight:600;margin-bottom:8px">Opnemen:</div>
+<label style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;cursor:pointer"><input type="checkbox" checked> Scores per laag</label>
+<label style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;cursor:pointer"><input type="checkbox" checked> Top 3 aanbevelingen</label>
+<label style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;cursor:pointer"><input type="checkbox" checked> Relevante regelgeving</label>
+<label style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;cursor:pointer"><input type="checkbox"> Sectorvergelijking</label>
+<label style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;cursor:pointer"><input type="checkbox"> Deadline-tijdlijn</label>
+</div>
+<div style="display:flex;gap:12px;margin-top:18px"><button class="btn btn-primary" style="flex:1;justify-content:center" onclick="genPres()">📊 PDF</button><button class="btn btn-outline" onclick="genPres()">📑 PowerPoint</button></div>
+</div></div></div>
+
+<script>
+let currentStep = 'step-1';
+const completedSteps = new Set();
+const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Richting','step-results':'Resultaten'};
+
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+
+function goStep(id){
+  currentStep=id;
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  document.querySelector(`.sidebar-item[data-step="${id}"]`)?.classList.add('active');
+  // Update support panel context
+  const name = stepNames[id]||id;
+  document.querySelectorAll('.sp-context').forEach(el => el.innerHTML = '📍 '+name);
+  window.scrollTo(0,56);
+  updateProgress();
+}
+
+function completeStep(id){completedSteps.add(id);document.querySelector(`.sidebar-item[data-step="${id}"]`)?.classList.add('completed');updateProgress()}
+function updateProgress(){const p=Math.round(completedSteps.size/6*100);document.getElementById('prog-pct').textContent=p+'%';document.getElementById('prog-bar').style.width=p+'%'}
+
+function pick(el){el.closest('.option-list').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected')}
+function pickChip(el){el.closest('.chip-grid').querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
+function showUpload(input){for(const f of input.files){const d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px;font-size:13px;margin-top:6px';d.innerHTML=`📄 <span style="flex:1">${f.name}</span> <span style="color:var(--green);font-size:12px">✓</span>`;input.closest('.upload-zone').insertAdjacentElement('afterend',d)}}
+
+// Support panel
+let supportOpen = false;
+function toggleSupport(){
+  supportOpen=!supportOpen;
+  document.getElementById('support-fab').classList.toggle('open',supportOpen);
+  document.getElementById('support-panel').classList.toggle('open',supportOpen);
+  document.getElementById('support-overlay').classList.toggle('open',supportOpen);
+  if(supportOpen) document.getElementById('sp-input').focus();
+}
+
+// Support tabs
+function spTab(btn,tabId){
+  document.querySelectorAll('.sp-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['sp-tab-ask','sp-tab-services','sp-tab-partners'].forEach(id=>{
+    document.getElementById(id).style.display = id===tabId ? 'block' : 'none';
+  });
+  // Show/hide input bar based on tab
+  document.getElementById('sp-input-bar').style.display = tabId==='sp-tab-ask' ? 'flex' : 'none';
+}
+
+// Support chat
+function spSend(){
+  const input=document.getElementById('sp-input');
+  const text=input.value.trim();
+  if(!text) return;
+  const area=document.getElementById('sp-chat-area');
+  area.innerHTML+=`<div class="sp-chat-msg user"><div class="sp-chat-av">U</div><div class="sp-chat-bubble">${text}</div></div>`;
+  input.value='';
+  setTimeout(()=>{
+    const t=text.toLowerCase();
+    let r;
+    if(t.includes('ai act'))r=`De AI Act is de Europese verordening voor AI. In de zorg zijn AI-systemen "hoog risico". Deadline: <strong>2 aug 2026</strong>. AI-geletterdheid is al verplicht sinds feb 2025.<div class="sp-chat-source">EU AI Act 2024/1689</div>`;
+    else if(t.includes('copilot')||t.includes('microsoft'))r=`Copilot adoptie is laag (~3,3%). Het fundament — data, rechten, governance — moet eerst op orde. Uw Platform-score suggereert een redelijk startpunt.<div class="sp-chat-source">Directions on Microsoft 2025</div>`;
+    else if(t.includes('nis2')||t.includes('security'))r=`NIS2 vereist incidentmelding binnen 24 uur, risicobeheer en bestuurlijke aansprakelijkheid. Boetes tot €10M. Tip: start met een gap-analyse.<div class="sp-chat-source">NIS2 Richtlijn 2022/2555</div>`;
+    else if(t.includes('kosten')||t.includes('prijs'))r=`De verkenning zelf is gratis. Online diensten variëren van gratis (M365 scan) tot €99 (Shadow AI inventarisatie). Voor intensievere trajecten met een partner liggen tarieven tussen €95-135/uur.`;
+    else r=`Goede vraag. Op basis van uw huidige positie in ${stepNames[currentStep]||'de verkenning'}: het belangrijkste is om stap voor stap te werken en niet alles tegelijk te willen veranderen. Wilt u hier dieper op ingaan?`;
+    area.innerHTML+=`<div class="sp-chat-msg ai" style="animation:fadeIn .3s ease"><div class="sp-chat-av">N</div><div class="sp-chat-bubble">${r}</div></div>`;
+    area.scrollTop=area.scrollHeight;
+  },600);
+}
+
+// Expandable insight cards
+function toggleCard(id){document.getElementById(id).classList.toggle('open')}
+
+// Modals
+function openM(id){document.getElementById(id).classList.add('open')}
+function closeM(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})});
+
+function genPres(){
+  const body=document.getElementById('pres-body');
+  body.innerHTML=`<div style="text-align:center;padding:50px 20px"><div style="font-size:44px;margin-bottom:14px;animation:pulse 1.5s ease infinite">📊</div><h3 style="font-size:17px;margin-bottom:6px">Wordt gegenereerd…</h3><p style="font-size:14px;color:var(--text-sec)">~10 seconden</p></div>`;
+  setTimeout(()=>{body.innerHTML=`<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides met scores, aanbevelingen en bronnen.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · ${new Date().toLocaleDateString('nl-NL')}</p></div><div style="display:flex;gap:12px;justify-content:center;margin-top:14px"><button class="btn btn-primary">📥 PDF</button><button class="btn btn-outline">📑 PPTX</button></div></div>`},2500)}
+</script>
 </body>
 </html>
