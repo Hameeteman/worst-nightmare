@@ -1357,7 +1357,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 
 <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius);padding:18px;display:flex;align-items:flex-start;gap:14px">
 <span style="font-size:28px;flex-shrink:0">💬</span>
-<div><div style="font-size:15px;font-weight:600;margin-bottom:4px">Vragen? Neem contact op</div><div style="font-size:13px;color:var(--text-sec);line-height:1.6">We staan open voor vragen, feedback en samenwerkingen. Bel ons, mail ons of gebruik de Support-knop rechtsonder.<br><strong>e-office</strong> · Duwboot 20, 3991 CD Houten · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c55525a537c5911535a5a555f59125f5351">[email&#160;protected]</a> · +31 88 0018 300</div></div>
+<div><div style="font-size:15px;font-weight:600;margin-bottom:4px">Vragen? Neem contact op</div><div style="font-size:13px;color:var(--text-sec);line-height:1.6">We staan open voor vragen, feedback en samenwerkingen. Bel ons, mail ons of gebruik de Support-knop rechtsonder.<br><strong>e-office</strong> · Duwboot 20, 3991 CD Houten · <a href="mailto:info@e-office.com">info@e-office.com</a> · +31 88 0018 300</div></div>
 </div>
 </div>
 
@@ -1576,7 +1576,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <div style="display:flex;gap:12px;margin-top:18px"><button class="btn btn-primary" style="flex:1;justify-content:center" onclick="genPres()">📊 PDF</button><button class="btn btn-outline" onclick="genPres()">📑 PowerPoint</button></div>
 </div></div></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
 const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Richting','step-results':'Resultaten','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
@@ -1666,4 +1666,9 @@ function genPres(){
   body.innerHTML='<div style="text-align:center;padding:50px 20px"><div style="font-size:44px;margin-bottom:14px;animation:pulse 1.5s ease infinite">📊</div><h3 style="font-size:17px;margin-bottom:6px">Wordt gegenereerd…</h3><p style="font-size:14px;color:var(--text-sec)">~10 seconden</p></div>';
   setTimeout(function(){
     var d=new Date().toLocaleDateString('nl-NL');
-    body.innerHTML='<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides met scores, aanbevelingen en bronnen.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · '+d+'</p><p style="font-size:11px;opacity:.4;margin-top:8px">Navigator · Onafhankelijk · Vertrouwelijk</p></div><div style="display:flex;gap:10
+    body.innerHTML='<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides gegenereerd.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · '+d+'</p></div><div style="display:flex;gap:10px;justify-content:center;margin-top:16px"><button class="btn btn-primary btn-sm">Download PDF</button><button class="btn btn-outline btn-sm">E-mail naar MT</button></div></div>';
+  },2000);
+}
+</script>
+</body>
+</html>
