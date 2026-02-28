@@ -403,6 +403,26 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 .about-card h4{font-size:14px;font-weight:600;margin-bottom:6px;font-family:'DM Sans',sans-serif}
 .about-card p{font-size:13px;color:var(--text-sec);line-height:1.55}
 
+/* News articles */
+.news-article{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:12px;transition:all .15s}
+.news-article:hover{border-color:var(--blue-border);box-shadow:var(--shadow)}
+.news-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.news-date{font-size:11px;color:var(--text-muted)}
+.news-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.5px}
+.news-tag.ai{background:var(--purple-bg);color:var(--purple)}
+.news-tag.reg{background:var(--accent-bg);color:var(--accent)}
+.news-tag.sov{background:var(--blue-bg);color:var(--blue)}
+.news-tag.sec{background:var(--green-bg);color:var(--green)}
+.news-title{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.35}
+.news-summary{font-size:13px;color:var(--text-sec);line-height:1.55;margin-bottom:12px}
+.news-ref{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.news-layer{font-size:11px;padding:4px 10px;border-radius:4px;font-weight:600;display:flex;align-items:center;gap:4px;cursor:pointer}
+.news-layer:hover{filter:brightness(.95)}
+.news-action{font-size:11px;padding:4px 10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text-sec);display:flex;align-items:center;gap:4px}
+.news-action.warn{background:#fff8e1;border-color:#ffd54f;color:#e65100}
+.news-filter{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.news-filter-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text-sec);cursor:pointer;font-weight:500;transition:all .12s}
+.news-filter-btn:hover,.news-filter-btn.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue);font-weight:600}
 .source-list{display:flex;flex-direction:column;gap:8px}
 .source-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm)}
 .source-badge{flex-shrink:0;font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;min-width:50px;text-align:center}
@@ -515,6 +535,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </div>
     <div class="trust-row"><div class="trust-item">🔒 Data blijft van u</div><div class="trust-item">🇪🇺 Opgeslagen in Europa</div><div class="trust-item">⏱ 15 minuten</div><div class="trust-item">🏛️ Onafhankelijk advies</div></div>
     <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:center;gap:24px;flex-wrap:wrap">
+      <a href="#" onclick="go('screen-app');goStep('step-news');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📰 Nieuws</a>
       <a href="#" onclick="go('screen-app');goStep('step-about');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🏛️ Over Navigator</a>
       <a href="#" onclick="go('screen-app');goStep('step-sources');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📚 Bronnen & methodiek</a>
       <a href="#" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🔒 Privacybeleid</a>
@@ -563,6 +584,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
       <div class="sidebar-item" data-step="step-integrations" onclick="goStep('step-integrations')"><div class="s-dot"></div>🔗 Integraties</div>
       <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
       <div class="sidebar-label">Info</div>
+      <div class="sidebar-item" data-step="step-news" onclick="goStep('step-news')"><div class="s-dot"></div>📰 Nieuws</div>
       <div class="sidebar-item" data-step="step-about" onclick="goStep('step-about')"><div class="s-dot"></div>🏛️ Over Navigator</div>
       <div class="sidebar-item" data-step="step-sources" onclick="goStep('step-sources')"><div class="s-dot"></div>📚 Bronnen</div>
     </div>
@@ -1122,6 +1144,163 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 
 </div>
 
+<!-- ===== NIEUWS ===== -->
+<div class="step" id="step-news">
+<div class="step-badge" style="background:var(--blue-bg);color:var(--blue)">📰 Nieuws</div>
+<h2>Wat betekent dit voor uw organisatie?</h2>
+<p class="step-desc">Actuele ontwikkelingen rondom AI, regelgeving en digitale soevereiniteit — vertaald naar uw lagen en roadmap.</p>
+
+<div class="news-filter">
+<button class="news-filter-btn active" onclick="filterNews('all',this)">Alles</button>
+<button class="news-filter-btn" onclick="filterNews('reg',this)">⚖️ Regelgeving</button>
+<button class="news-filter-btn" onclick="filterNews('ai',this)">🤖 AI & Adoptie</button>
+<button class="news-filter-btn" onclick="filterNews('sov',this)">🇪🇺 Soevereiniteit</button>
+<button class="news-filter-btn" onclick="filterNews('sec',this)">🔒 Security</button>
+</div>
+
+<!-- ARTICLE 1: AI Act deadline -->
+<div class="news-article" data-cat="reg">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag reg">Regelgeving</span>
+<span class="news-tag ai">AI</span>
+</div>
+<div class="news-title">AI Act: 2 augustus 2026 — deadline voor hoog-risico systemen</div>
+<div class="news-summary">Vanaf augustus 2026 gelden de volledige verplichtingen voor hoog-risico AI-systemen in de EU. Organisaties die AI inzetten voor personeelsselectie, creditscoring, klantbeoordeling of zorg moeten een AI-register bijhouden, menselijk toezicht inrichten en risico-assessments uitvoeren. MKB-bedrijven vallen hier sneller onder dan verwacht — ook als "gebruiker" (deployer) van tools als Copilot in HR-processen. De Autoriteit Persoonsgegevens houdt toezicht. Boetes tot 3% van de wereldwijde omzet.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--accent-bg);color:var(--accent)" onclick="goStep('step-2')">Laag 2 · Bescherming</div>
+<div class="news-action">◉ AI Act volledig actief — Q3 2026</div>
+<div class="news-action">○ AI-register opstellen — Q3 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 2: AI-geletterdheid al verplicht -->
+<div class="news-article" data-cat="reg">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag reg">Regelgeving</span>
+</div>
+<div class="news-title">AI-geletterdheid is al verplicht sinds 2 februari 2025</div>
+<div class="news-summary">Wat veel MKB-ondernemers niet weten: artikel 4 van de AI Act verplicht organisaties die AI gebruiken om te zorgen dat medewerkers over voldoende AI-kennis beschikken. Dit geldt al sinds februari 2025 — niet pas bij de grote deadline van 2026. Er hoeft geen examen te worden afgelegd, maar er moet aantoonbaar beleid zijn: wie is getraind, wat mag wel en niet, en wie houdt toezicht? Een logboek of interne richtlijn is vaak al voldoende.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--purple-bg);color:var(--purple)" onclick="goStep('step-4')">Laag 4 · Intelligentie</div>
+<div class="news-action">⚡ AI-geletterdheid — Nu al verplicht</div>
+<div class="news-action">◉ AI-beleid opstellen — Q1 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 3: Copilot adoptie stagneert -->
+<div class="news-article" data-cat="ai">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag ai">AI & Adoptie</span>
+</div>
+<div class="news-title">Copilot-adoptie stagneert: na enthousiaste start zakt gebruik weg</div>
+<div class="news-summary">Onderzoek bevestigt een patroon dat e-office ook bij klanten ziet: medewerkers proberen Copilot enthousiast uit in de eerste twee weken, maar na een maand daalt het gebruik significant. De oorzaak is niet technisch maar organisatorisch — zonder duidelijke scenario's per rol, doorlopende coaching en champions-netwerk wordt Copilot een dure gadget. Organisaties met gestructureerde adoptie zien 6% hogere omzetimpact en 20% kostenreductie vergeleken met ongestructureerde uitrol.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--green-bg);color:var(--green)" onclick="goStep('step-5')">Laag 5 · Mens</div>
+<div class="news-action">○ AI-geletterdheid alle medewerkers — Q2 2026</div>
+<div class="news-action">○ Champions-netwerk opzetten — Q2 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 4: Microsoft soevereiniteit Franse Senaat -->
+<div class="news-article" data-cat="sov">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag sov">Soevereiniteit</span>
+</div>
+<div class="news-title">Microsoft erkent in Franse Senaat: datasoevereiniteit niet volledig te garanderen</div>
+<div class="news-summary">Microsoft heeft voor de Franse Senaat verklaard dat het de volledige datasoevereiniteit van Europese klanten niet kan garanderen als de Amerikaanse overheid via de CLOUD Act toegang eist. Het bedrijf zegt "ongegronde verzoeken te weerstaan", maar erkent dat de juridische realiteit niet veranderd is. Ondertussen opent Microsoft drie Sovereignty Studios in Brussel, München en Amsterdam, en investeert het miljarden in Europese datacenters — een signaal van urgentie, niet van oplossing.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 6 · Richting</div>
+<div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 5: e-Evidence -->
+<div class="news-article" data-cat="sov">
+<div class="news-meta">
+<span class="news-date">jan 2026</span>
+<span class="news-tag sov">Soevereiniteit</span>
+<span class="news-tag reg">Regelgeving</span>
+</div>
+<div class="news-title">e-Evidence: ook Europese opsporingsdiensten kunnen straks data opvragen</div>
+<div class="news-summary">De CLOUD Act krijgt een Europese tegenhanger. Met de komst van de e-Evidence verordening kunnen Europese opsporingsdiensten rechtstreeks data opvragen bij dienstverleners — zonder dat de organisatie als eigenaar van die data hiervan op de hoogte is. Dit verandert het soevereiniteitsdebat fundamenteel: het gaat niet meer alleen om bescherming tegen trans-Atlantische toegang, maar ook om de structuur van de Europese dataketen zelf.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--accent-bg);color:var(--accent)" onclick="goStep('step-2')">Laag 2 · Bescherming</div>
+<div class="news-action warn">⚠️ Geen actie in roadmap — overweeg toevoeging</div>
+</div>
+</div>
+
+<!-- ARTICLE 6: NIS2 ketenaansprakelijkheid -->
+<div class="news-article" data-cat="sec">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag sec">Security</span>
+<span class="news-tag reg">Regelgeving</span>
+</div>
+<div class="news-title">NIS2 / Cyberbeveiligingswet: ketenaansprakelijkheid raakt ook MKB als toeleverancier</div>
+<div class="news-summary">De NIS2-richtlijn wordt in Nederland omgezet in de Cyberbeveiligingswet. Hoewel veel MKB-bedrijven denken niet direct onder NIS2 te vallen, verandert de ketenaansprakelijkheid dat beeld. Grote opdrachtgevers in zorg, finance en onderwijs eisen aantoonbare beveiligingsmaatregelen van hun leveranciers. Patchmanagement, back-ups, toegangsbeheer, logging en een incident-respons protocol met 24-uurs meldplicht worden de norm — ook als u geen "essentiële entiteit" bent.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--accent-bg);color:var(--accent)" onclick="goStep('step-2')">Laag 2 · Bescherming</div>
+<div class="news-action">◉ NIS2 gap-analyse — Q1 2026</div>
+<div class="news-action">○ Incident-respons protocol — Q2 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 7: M365 prijsverhoging -->
+<div class="news-article" data-cat="ai">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag ai">AI & Adoptie</span>
+</div>
+<div class="news-title">Microsoft verhoogt M365-prijzen per 1 juli 2026</div>
+<div class="news-summary">Microsoft verhoogt wereldwijd de prijzen van meerdere Microsoft 365-abonnementen per 1 juli 2026. De prijsstijging volgt na meer dan 1.000 nieuwe functies, waaronder Copilot-features en beveiligingsopties. Voor MKB-organisaties met 200+ werkplekken kan dit tienduizenden euro's per jaar extra kosten. Dit maakt het des te belangrijker om uw licentie-architectuur te optimaliseren en te meten of u waarde haalt uit wat u betaalt — voordat de nieuwe prijzen ingaan.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--blue-bg);color:var(--blue)" onclick="goStep('step-1')">Laag 1 · Platform</div>
+<div class="news-action warn">⚠️ Geen actie in roadmap — licentie-review aanbevolen</div>
+</div>
+</div>
+
+<!-- ARTICLE 8: Europese cloud groeit -->
+<div class="news-article" data-cat="sov">
+<div class="news-meta">
+<span class="news-date">jan 2026</span>
+<span class="news-tag sov">Soevereiniteit</span>
+</div>
+<div class="news-title">Europese soevereine cloud groeit 20% per jaar — alternatieven nemen toe</div>
+<div class="news-summary">De Europese cloudmarkt zal naar verwachting in 2028 €110 miljard waard zijn. Gemeenten starten met Nextcloud, landen als Frankrijk (Bleu) en Duitsland (Delos) bouwen nationale clouds, en het Dutch Cloud Community pleit voor een keurmerk Digitale Soevereiniteit. Het regeerakkoord stelt: "Digitale autonomie wordt het leidende principe." Dit betekent niet dat u morgen van Microsoft af moet, maar wel dat u hybride scenario's moet doordenken — welke data en processen wilt u écht zelf in handen houden?</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 6 · Richting</div>
+<div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
+<div class="news-action">○ Digitale strategie 1.0 — Q2 2026</div>
+</div>
+</div>
+
+<!-- ARTICLE 9: Data-kwaliteit blokkeert AI -->
+<div class="news-article" data-cat="ai">
+<div class="news-meta">
+<span class="news-date">feb 2026</span>
+<span class="news-tag ai">AI & Adoptie</span>
+</div>
+<div class="news-title">Zonder data op orde geen AI-waarde: het fundament dat MKB overslaat</div>
+<div class="news-summary">De adoptiestagnatie van Copilot heeft vaak een diepere oorzaak: de data is niet op orde. Als jaarverslagen van tien jaar oud naast actuele documenten staan, als rechten niet kloppen en metadata ontbreekt, geeft Copilot onbetrouwbare antwoorden. Bij e-office zien we dit bij klanten als patroon: organisaties willen starten met AI maar slaan de informatie-laag over. De oplossing begint bij opschoning, rechtenstructuur en labels — pas dan wordt Copilot waardevol.</div>
+<div class="news-ref">
+<div class="news-layer" style="background:var(--warm-bg);color:var(--warm)" onclick="goStep('step-3')">Laag 3 · Informatie</div>
+<div class="news-action">◉ Rechtenstructuur opzetten — Q1 2026</div>
+<div class="news-action">○ Data opschoning — Q2 2026</div>
+</div>
+</div>
+
+<div style="background:var(--bg);border-radius:var(--radius);padding:16px;margin-top:8px">
+<div style="font-size:13px;color:var(--text-sec);line-height:1.6"><strong>Hoe leest u de verwijzingen?</strong><br>
+Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in uw roadmap-matrix. Klik op de laag om direct naar uw score te gaan.<br>
+<span style="display:inline-flex;align-items:center;gap:4px;margin-top:6px"><span style="font-size:11px;padding:2px 8px;background:#fff8e1;border:1px solid #ffd54f;border-radius:4px;color:#e65100">⚠️</span> = dit onderwerp is relevant maar er staat nog geen actie in uw roadmap — bespreek dit met uw MT.</span>
+</div>
+</div>
+</div>
+
 <!-- ===== OVER NAVIGATOR ===== -->
 <div class="step" id="step-about">
 <div class="step-badge" style="background:var(--warm-bg);color:var(--warm)">🏛️ Over Navigator</div>
@@ -1131,8 +1310,29 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div class="about-grid">
 <div class="about-card"><div class="a-icon">🏢</div><h4>Onafhankelijk platform</h4><p>Navigator is ontwikkeld als onafhankelijk assessment-platform. We verkopen geen licenties en zijn niet gebonden aan één leverancier. Ons advies is gebaseerd op uw situatie, niet op onze marge.</p></div>
 <div class="about-card"><div class="a-icon">🇪🇺</div><h4>Europees perspectief</h4><p>Ontworpen vanuit Europese waarden: privacy, soevereiniteit en transparantie. Alle data wordt verwerkt in EU-datacenters. Conform AVG, AI Act en het Europese kader voor betrouwbare AI.</p></div>
-<div class="about-card"><div class="a-icon">🏛️</div><h4>35 jaar expertise</h4><p>Gebouwd op de ervaring van e-office, sinds 1989 actief in digitale werkplekken. Honderden MKB-organisaties begeleid in zorg, onderwijs en finance. Nu gefocust op de AI-transitie.</p></div>
+<div class="about-card"><div class="a-icon">🏛️</div><h4>Sinds 1991</h4><p>Gebouwd op de ervaring van e-office, sinds 1991 actief in digitale werkplekken. Honderden MKB-organisaties begeleid in zorg, onderwijs en finance. Nu gefocust op de AI-transitie.</p></div>
 <div class="about-card"><div class="a-icon">🔍</div><h4>Open methodiek</h4><p>Ons 6-lagenmodel is gebaseerd op internationale frameworks (NIST, ISO 27001, EU AI Act risico-classificatie) en aangepast voor de MKB-praktijk. De methodiek is gedocumenteerd en toetsbaar.</p></div>
+</div>
+
+<!-- Put People First -->
+<div class="card" style="margin-bottom:20px;border-left:3px solid var(--blue)">
+<h3 style="font-size:16px;margin-bottom:8px">💙 Put people first</h3>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.65;margin-bottom:10px">Wij geloven in de kracht van mensen. Technologie staat niet centraal — mensen wel. Navigator is gebouwd vanuit dezelfde overtuiging: de mens bepaalt de koers, de technologie ondersteunt. AI versterkt mensen, vervangt ze niet. Daarom begint elke assessment bij uw organisatie en uw mensen, niet bij de techniek.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<span style="font-size:12px;padding:4px 10px;background:var(--blue-bg);color:var(--blue);border-radius:4px;font-weight:600">Engage employees</span>
+<span style="font-size:12px;padding:4px 10px;background:var(--green-bg);color:var(--green);border-radius:4px;font-weight:600">Energize teams</span>
+<span style="font-size:12px;padding:4px 10px;background:var(--purple-bg);color:var(--purple);border-radius:4px;font-weight:600">Elevate organisations</span>
+</div>
+</div>
+
+<!-- Microsoft Partner Badges -->
+<h3 style="font-size:17px;margin-bottom:12px">Microsoft-partnerstatus</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px">
+<div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🏅</div><div style="font-size:12px;font-weight:700">Solution Partner</div><div style="font-size:11px;color:var(--text-sec)">Modern Work, Data & AI, Digital & App Innovation</div></div>
+<div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">⚡</div><div style="font-size:12px;font-weight:700">FastTrack Ready</div><div style="font-size:11px;color:var(--text-sec)">Microsoft FastTrack Ready Partner</div></div>
+<div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🤖</div><div style="font-size:12px;font-weight:700">Copilot Jumpstart</div><div style="font-size:11px;color:var(--text-sec)">Prioritized Tier Jumpstart Partner</div></div>
+<div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">☁️</div><div style="font-size:12px;font-weight:700">Cloud PC & Viva</div><div style="font-size:11px;color:var(--text-sec)">Prioritized Tier Jumpstart Partner</div></div>
+<div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🌍</div><div style="font-size:12px;font-weight:700">Social Impact</div><div style="font-size:11px;color:var(--text-sec)">Strategisch partner Tech for Social Impact</div></div>
 </div>
 
 <h3 style="font-size:17px;margin-bottom:12px">Hoe we met uw data omgaan</h3>
@@ -1157,7 +1357,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 
 <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius);padding:18px;display:flex;align-items:flex-start;gap:14px">
 <span style="font-size:28px;flex-shrink:0">💬</span>
-<div><div style="font-size:15px;font-weight:600;margin-bottom:4px">Vragen? Neem contact op</div><div style="font-size:13px;color:var(--text-sec);line-height:1.6">We staan open voor vragen, feedback en samenwerkingen. Bel ons, mail ons of gebruik de Support-knop rechtsonder.<br><strong>e-office</strong> · Naarden, Nederland · info@e-office.com · +31 (0)35 625 0000</div></div>
+<div><div style="font-size:15px;font-weight:600;margin-bottom:4px">Vragen? Neem contact op</div><div style="font-size:13px;color:var(--text-sec);line-height:1.6">We staan open voor vragen, feedback en samenwerkingen. Bel ons, mail ons of gebruik de Support-knop rechtsonder.<br><strong>e-office</strong> · Duwboot 20, 3991 CD Houten · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c55525a537c5911535a5a555f59125f5351">[email&#160;protected]</a> · +31 88 0018 300</div></div>
 </div>
 </div>
 
@@ -1309,7 +1509,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
       <div class="partner-card-sp">
         <div class="pc-sp-top">
           <div class="pc-sp-logo" style="background:var(--blue-bg);color:var(--blue)">🖥️</div>
-          <div><div class="pc-sp-name">e-office</div><div class="pc-sp-loc">📍 Naarden, NL</div></div>
+          <div><div class="pc-sp-name">e-office</div><div class="pc-sp-loc">📍 Houten, NL</div></div>
           <div class="pc-sp-verified">✓ Gecertificeerd</div>
         </div>
         <div class="pc-sp-tags"><span class="pc-sp-tag">M365</span><span class="pc-sp-tag">Cloud PC</span><span class="pc-sp-tag">AI Governance</span><span class="pc-sp-tag">Zorg</span></div>
@@ -1376,7 +1576,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div style="display:flex;gap:12px;margin-top:18px"><button class="btn btn-primary" style="flex:1;justify-content:center" onclick="genPres()">📊 PDF</button><button class="btn btn-outline" onclick="genPres()">📑 PowerPoint</button></div>
 </div></div></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
 const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Richting','step-results':'Resultaten','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
@@ -1447,6 +1647,14 @@ function spSend(){
 
 // Expandable insight cards
 function toggleCard(id){document.getElementById(id).classList.toggle('open')}
+function filterNews(cat,btn){
+  document.querySelectorAll('.news-filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('.news-article').forEach(function(a){
+    if(cat==='all'){a.style.display='block'}
+    else{a.style.display=a.getAttribute('data-cat')===cat?'block':'none'}
+  });
+}
 
 // Modals
 function openM(id){document.getElementById(id).classList.add('open')}
@@ -1454,13 +1662,8 @@ function closeM(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})});
 
 function genPres(){
-  const body=document.getElementById('pres-body');
+  var body=document.getElementById('pres-body');
   body.innerHTML='<div style="text-align:center;padding:50px 20px"><div style="font-size:44px;margin-bottom:14px;animation:pulse 1.5s ease infinite">📊</div><h3 style="font-size:17px;margin-bottom:6px">Wordt gegenereerd…</h3><p style="font-size:14px;color:var(--text-sec)">~10 seconden</p></div>';
   setTimeout(function(){
     var d=new Date().toLocaleDateString('nl-NL');
-    body.innerHTML='<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides met scores, aanbevelingen en bronnen.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · '+d+'</p><p style="font-size:11px;opacity:.4;margin-top:8px">Navigator · Onafhankelijk · Vertrouwelijk</p></div><div style="display:flex;gap:10px;justify-content:center;margin-top:16px"><button class="btn btn-primary btn-sm">⬇ Download PDF</button><button class="btn btn-outline btn-sm">📧 E-mail naar MT</button></div></div>';
-  },2000);
-}
-</script>
-</body>
-</html>
+    body.innerHTML='<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides met scores, aanbevelingen en bronnen.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · '+d+'</p><p style="font-size:11px;opacity:.4;margin-top:8px">Navigator · Onafhankelijk · Vertrouwelijk</p></div><div style="display:flex;gap:10
