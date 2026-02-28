@@ -516,6 +516,29 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 .sov-alt p{font-size:12px;color:var(--text-sec);line-height:1.45}
 .sov-alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .sov-source{font-size:10px;color:var(--text-muted);font-style:italic;margin-top:6px}
+
+/* ===== ROLE FILTER ===== */
+.role-bar{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0}
+.role-bar-label{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-right:4px;white-space:nowrap}
+.role-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s ease;color:var(--text-sec);font-family:'DM Sans',sans-serif}
+.role-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.role-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:600}
+.role-btn .role-icon{font-size:14px}
+.role-summary{display:none;margin:-4px 0 16px;padding:14px 18px;background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius);font-size:13px;line-height:1.6;animation:fadeIn .3s ease}
+body.role-active .role-summary{display:block}
+.role-summary strong{color:var(--blue)}
+.role-summary .role-focus{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:11px;margin:2px}
+body.role-active [data-roles]{transition:opacity .3s ease}
+body.role-active [data-roles].role-dimmed{opacity:.15;filter:grayscale(.5)}
+body.role-active [data-roles].role-highlight{opacity:1;position:relative}
+body.role-active [data-roles].role-highlight::before{content:attr(data-role-label);position:absolute;top:6px;right:6px;font-size:9px;padding:2px 7px;border-radius:8px;background:var(--blue);color:#fff;font-weight:600;z-index:2;letter-spacing:.3px}
+body.role-active .mx-item.role-highlight::before,body.role-active .action-item.role-highlight::before,body.role-active tr.role-highlight::before{display:none}
+body.role-active .news-article.role-highlight,body.role-active .risk-row.role-highlight{border-left:3px solid var(--blue);padding-left:14px}
+body.role-active tr.role-highlight{background:var(--blue-bg)}
+body.role-active tr.role-dimmed{opacity:.2}
+.sidebar-role-indicator{padding:6px 12px;margin:4px 8px;border-radius:var(--radius-sm);background:var(--blue-bg);border:1px solid var(--blue-border);font-size:11px;color:var(--blue);text-align:center;font-weight:600;display:none}
+body.role-active .sidebar-role-indicator{display:block}
+@media(max-width:800px){.role-bar{padding:6px 10px;gap:4px}.role-btn{padding:5px 8px;font-size:11px}.role-bar-label{display:none}}
 </style>
 </head>
 <body>
@@ -569,9 +592,20 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </div>
   </div>
 
+
+  <div class="role-bar" id="role-bar">
+    <div class="role-bar-label">Perspectief</div>
+    <button class="role-btn active" onclick="setRole('all',this)"><span class="role-icon">👁️</span> Alle rollen</button>
+    <button class="role-btn" onclick="setRole('dga',this)"><span class="role-icon">👤</span> DGA / Bestuurder</button>
+    <button class="role-btn" onclick="setRole('cfo',this)"><span class="role-icon">💰</span> CFO / Financieel</button>
+    <button class="role-btn" onclick="setRole('coo',this)"><span class="role-icon">⚙️</span> COO / Operationeel</button>
+    <button class="role-btn" onclick="setRole('ciso',this)"><span class="role-icon">🛡️</span> CISO / Security</button>
+    <button class="role-btn" onclick="setRole('cco',this)"><span class="role-icon">📈</span> CCO / Sales &amp; Marketing</button>
+  </div>
   <div class="app-layout">
     <div class="sidebar">
       <div class="sidebar-progress"><div class="prog-label">Verkenning</div><div class="prog-pct" id="prog-pct">0%</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div></div>
+      <div class="sidebar-role-indicator" id="sidebar-role-ind"></div>
       <div class="sidebar-label">6 lagen</div>
       <div class="sidebar-item active" data-step="step-1" onclick="goStep('step-1')"><div class="s-dot"></div>1. Platform</div>
       <div class="sidebar-item" data-step="step-2" onclick="goStep('step-2')"><div class="s-dot"></div>2. Bescherming</div>
@@ -652,6 +686,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <!-- RESULTS --><div class="step" id="step-results">
 <div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Resultaten</div><h2>Uw AI-Readiness Score</h2>
 <p class="step-desc">Op basis van uw antwoorden.</p>
+<div class="role-summary" id="rs-results"></div>
 <div class="card" style="margin-bottom:20px"><div class="score-hero"><div class="score-ring"><div class="s-num">5.4</div><div class="s-label">van 10</div></div><h3 style="font-size:18px;margin-bottom:6px">Gemiddeld voor uw sector</h3><p style="font-size:14px;color:var(--text-sec)">Vergelijkbaar met 62% in uw sector.</p></div>
 <div style="margin-top:20px">
 <div class="layer-row"><div class="layer-name">1. Platform</div><div class="layer-bar"><div class="layer-bar-fill" style="width:60%;background:var(--blue)"></div></div><div class="layer-val">6.0</div></div>
@@ -662,16 +697,16 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div class="layer-row"><div class="layer-name">6. Richting</div><div class="layer-bar"><div class="layer-bar-fill" style="width:38%;background:var(--accent)"></div></div><div class="layer-val">3.8</div></div>
 </div></div>
 <h3 style="font-size:17px;margin-bottom:12px">Wat opvalt</h3>
-<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text"><h4>Regelgeving verdient aandacht</h4><p>Uw sector valt onder nieuwe Europese regelgeving. Geen paniek, maar actie nodig.</p><div class="finding-source">EU AI Act Art. 6 · NIS2 2022/2555</div></div></div>
-<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text"><h4>AI zonder kader</h4><p>Medewerkers gebruiken waarschijnlijk al AI-tools zonder governance.</p><div class="finding-source">Microsoft: 78% is 'shadow AI'</div></div></div>
-<div class="finding good"><div class="finding-icon">✅</div><div class="finding-text"><h4>Goede werkplek-basis</h4><p>Uw digitale werkplek is een goed vertrekpunt.</p></div></div>
-<div class="finding info"><div class="finding-icon">💡</div><div class="finding-text"><h4>Advies: begin bij governance</h4><p>Hoogste impact: eerst governance en datastructuur, dan pas AI-tools.</p></div></div>
+<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text" data-roles="ciso,dga,cfo"><h4>Regelgeving verdient aandacht</h4><p>Uw sector valt onder nieuwe Europese regelgeving. Geen paniek, maar actie nodig.</p><div class="finding-source">EU AI Act Art. 6 · NIS2 2022/2555</div></div></div>
+<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text" data-roles="ciso,dga"><h4>AI zonder kader</h4><p>Medewerkers gebruiken waarschijnlijk al AI-tools zonder governance.</p><div class="finding-source">Microsoft: 78% is 'shadow AI'</div></div></div>
+<div class="finding good"><div class="finding-icon">✅</div><div class="finding-text" data-roles="coo"><h4>Goede werkplek-basis</h4><p>Uw digitale werkplek is een goed vertrekpunt.</p></div></div>
+<div class="finding info"><div class="finding-icon">💡</div><div class="finding-text" data-roles="dga,ciso"><h4>Advies: begin bij governance</h4><p>Hoogste impact: eerst governance en datastructuur, dan pas AI-tools.</p></div></div>
 
 <!-- ===== EXPANDABLE INSIGHT CARDS ===== -->
 <div class="insight-cards">
 
 <!-- STRATEGISCHE MATRIX -->
-<div class="insight-card open" id="ic-matrix">
+<div class="insight-card open" data-roles="dga,cfo,coo,ciso,cco" id="ic-matrix">
 <div class="insight-header" onclick="toggleCard('ic-matrix')">
   <div class="insight-icon" style="background:linear-gradient(135deg,var(--blue-bg),var(--purple-bg));color:var(--blue)">🗺️</div>
   <div class="insight-title"><h4>Uw Strategische Roadmap</h4><p>Alle lagen × kwartalen in één overzicht — met status</p></div>
@@ -693,7 +728,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     <tbody>
 
     <!-- 1. PLATFORM -->
-    <tr>
+    <tr data-roles="coo,cfo">
       <td><div class="layer-label"><div class="layer-dot" style="background:var(--blue)"></div>1. Platform</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>M365 licentie-inventarisatie</strong></div>
@@ -715,7 +750,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </tr>
 
     <!-- 2. BESCHERMING -->
-    <tr>
+    <tr data-roles="ciso,dga,cfo">
       <td><div class="layer-label"><div class="layer-dot" style="background:var(--accent)"></div>2. Bescherming</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>MFA uitgerold</strong></div>
@@ -739,7 +774,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </tr>
 
     <!-- 3. INFORMATIE -->
-    <tr>
+    <tr data-roles="coo,ciso">
       <td><div class="layer-label"><div class="layer-dot" style="background:var(--warm)"></div>3. Informatie</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>SharePoint inventarisatie</strong></div>
@@ -760,7 +795,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </tr>
 
     <!-- 4. INTELLIGENTIE -->
-    <tr>
+    <tr data-roles="ciso,coo,cco">
       <td><div class="layer-label"><div class="layer-dot" style="background:var(--purple)"></div>4. Intelligentie</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>AI-tools inventarisatie</strong><div class="mx-sub">Shadow AI in kaart</div></div>
@@ -782,7 +817,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </tr>
 
     <!-- 5. MENS -->
-    <tr>
+    <tr data-roles="coo,cco">
       <td><div class="layer-label"><div class="layer-dot" style="background:var(--green)"></div>5. Mens</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>Digitale vaardigheden-scan</strong></div>
@@ -803,7 +838,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     </tr>
 
     <!-- 6. RICHTING -->
-    <tr>
+    <tr data-roles="dga,cfo">
       <td><div class="layer-label"><div class="layer-dot" style="background:#555"></div>6. Richting</div></td>
       <td style="opacity:.8"><div class="mx-cell">
         <div class="mx-item done"><strong>Navigator assessment</strong><div class="mx-sub">Deze verkenning</div></div>
@@ -839,7 +874,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ROADMAP -->
-<div class="insight-card" id="ic-roadmap">
+<div class="insight-card" data-roles="dga,ciso,cfo" id="ic-roadmap">
 <div class="insight-header" onclick="toggleCard('ic-roadmap')">
   <div class="insight-icon" style="background:var(--blue-bg);color:var(--blue)">📋</div>
   <div class="insight-title"><h4>Uw Roadmap</h4><p>Tijdlijn met deadlines en wanneer wat te doen</p></div>
@@ -900,7 +935,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- RISICO'S -->
-<div class="insight-card" id="ic-risks">
+<div class="insight-card" data-roles="dga,ciso,cfo" id="ic-risks">
 <div class="insight-header" onclick="toggleCard('ic-risks')">
   <div class="insight-icon" style="background:var(--accent-bg);color:var(--accent)">⚠️</div>
   <div class="insight-title"><h4>Uw Risico's</h4><p>Gestructureerd overzicht per laag met urgentie</p></div>
@@ -909,27 +944,27 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div class="insight-body"><div class="insight-content">
   <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Risico's op basis van uw antwoorden, gerangschikt op urgentie. Niet om u bang te maken — wel om prioriteiten te stellen.</p>
   <div class="risk-grid">
-    <div class="risk-row">
+    <div class="risk-row" data-roles="ciso,dga,coo">
       <div class="risk-level high">Hoog</div>
       <div class="risk-info"><h5>Shadow AI zonder governance</h5><p>Medewerkers gebruiken AI-tools zonder beleid. Risico op datalekken, onjuiste output en non-compliance met de AI Act.</p><div class="risk-layer">Laag 4 · Intelligentie + Laag 2 · Bescherming</div></div>
     </div>
-    <div class="risk-row">
+    <div class="risk-row" data-roles="ciso,dga,cfo">
       <div class="risk-level high">Hoog</div>
       <div class="risk-info"><h5>AI Act non-compliance</h5><p>Zonder AI-register en geletterdheidsbeleid loopt u nu al risico. Boetes tot €35 miljoen of 7% omzet.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 5 · Mens</div></div>
     </div>
-    <div class="risk-row">
+    <div class="risk-row" data-roles="ciso,dga,cfo">
       <div class="risk-level high">Hoog</div>
       <div class="risk-info"><h5>NIS2 bestuurlijke aansprakelijkheid</h5><p>Bestuurders zijn persoonlijk aansprakelijk voor informatiebeveiliging. Onvoldoende maatregelen = persoonlijke boete.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 6 · Richting</div></div>
     </div>
-    <div class="risk-row">
+    <div class="risk-row" data-roles="coo,cco">
       <div class="risk-level medium">Midden</div>
       <div class="risk-info"><h5>Data-kwaliteit blokkeert AI-waarde</h5><p>Uw informatie is onvoldoende gestructureerd. AI-tools als Copilot zullen slechte resultaten geven.</p><div class="risk-layer">Laag 3 · Informatie</div></div>
     </div>
-    <div class="risk-row">
+    <div class="risk-row" data-roles="dga,cfo,ciso">
       <div class="risk-level medium">Midden</div>
       <div class="risk-info"><h5>Vendor lock-in risico</h5><p>Hoge afhankelijkheid van één leverancier (Microsoft) voor werkplek, data en AI. Beperkt uw keuzevrijheid.</p><div class="risk-layer">Laag 1 · Platform + Laag 4 · Intelligentie</div></div>
     </div>
-    <div class="risk-row">
+    <div class="risk-row" data-roles="coo,cco">
       <div class="risk-level low">Laag</div>
       <div class="risk-info"><h5>Digitale vaardigheidsgap</h5><p>Wisselende vaardigheden maken adoptie van nieuwe tools lastig. Vertraagt uw digitale strategie.</p><div class="risk-layer">Laag 5 · Mens</div></div>
     </div>
@@ -938,7 +973,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- VOLGENDE STAP -->
-<div class="insight-card" id="ic-actions">
+<div class="insight-card" data-roles="dga,coo,cco" id="ic-actions">
 <div class="insight-header" onclick="toggleCard('ic-actions')">
   <div class="insight-icon" style="background:var(--green-bg);color:var(--green)">🧭</div>
   <div class="insight-title"><h4>Uw Volgende Stap</h4><p>Wat u morgen, deze maand en dit kwartaal kunt doen</p></div>
@@ -949,30 +984,30 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 
   <div class="action-group">
     <div class="action-period"><span class="action-period-label now">Deze week</span><div class="action-period-line"></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Inventariseer AI-gebruik</strong><span class="sub">Vraag elke afdeling: welke AI-tools worden er gebruikt? Maak een lijst.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Bespreek AI Act in MT</strong><span class="sub">AI-geletterdheid is al verplicht. Zorg dat het bestuur dit weet.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Deel deze presentatie</strong><span class="sub">Genereer de MT-presentatie en plan een gesprek met uw team.</span></div></div>
+    <div class="action-item" data-roles="ciso,coo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Inventariseer AI-gebruik</strong><span class="sub">Vraag elke afdeling: welke AI-tools worden er gebruikt? Maak een lijst.</span></div></div>
+    <div class="action-item" data-roles="dga,ciso"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Bespreek AI Act in MT</strong><span class="sub">AI-geletterdheid is al verplicht. Zorg dat het bestuur dit weet.</span></div></div>
+    <div class="action-item" data-roles="dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Deel deze presentatie</strong><span class="sub">Genereer de MT-presentatie en plan een gesprek met uw team.</span></div></div>
   </div>
 
   <div class="action-group">
     <div class="action-period"><span class="action-period-label month">Deze maand</span><div class="action-period-line"></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Start een AI Act compliance-check</strong><span class="sub">Gebruik de online dienst of schakel een partner in voor een quick scan.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Controleer NIS2-status</strong><span class="sub">Val uw organisatie onder NIS2? Check of u "essentieel" of "belangrijk" bent.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Plan AI-geletterdheids­training</strong><span class="sub">Kies een programma en start met management en AI-gebruikers.</span></div></div>
+    <div class="action-item" data-roles="ciso,cfo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Start een AI Act compliance-check</strong><span class="sub">Gebruik de online dienst of schakel een partner in voor een quick scan.</span></div></div>
+    <div class="action-item" data-roles="ciso,dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Controleer NIS2-status</strong><span class="sub">Val uw organisatie onder NIS2? Check of u "essentieel" of "belangrijk" bent.</span></div></div>
+    <div class="action-item" data-roles="coo,cco"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Plan AI-geletterdheids­training</strong><span class="sub">Kies een programma en start met management en AI-gebruikers.</span></div></div>
   </div>
 
   <div class="action-group">
     <div class="action-period"><span class="action-period-label quarter">Dit kwartaal</span><div class="action-period-line"></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Stel een AI-governance framework op</strong><span class="sub">Wie beslist over AI-tools? Welke regels gelden? Leg het vast.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Structureer uw data-omgeving</strong><span class="sub">SharePoint-rechten, mappenstructuur, verouderde documenten opschonen.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Formuleer een digitale strategie</strong><span class="sub">Maak keuzes: waar investeert u wel/niet in? Met welk doel? Leg het vast.</span></div></div>
-    <div class="action-item"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Evalueer leveranciersafhankelijkheid</strong><span class="sub">Breng in kaart hoe afhankelijk u bent en welke alternatieven er zijn.</span></div></div>
+    <div class="action-item" data-roles="ciso,dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Stel een AI-governance framework op</strong><span class="sub">Wie beslist over AI-tools? Welke regels gelden? Leg het vast.</span></div></div>
+    <div class="action-item" data-roles="coo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Structureer uw data-omgeving</strong><span class="sub">SharePoint-rechten, mappenstructuur, verouderde documenten opschonen.</span></div></div>
+    <div class="action-item" data-roles="dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Formuleer een digitale strategie</strong><span class="sub">Maak keuzes: waar investeert u wel/niet in? Met welk doel? Leg het vast.</span></div></div>
+    <div class="action-item" data-roles="dga,cfo,ciso"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Evalueer leveranciersafhankelijkheid</strong><span class="sub">Breng in kaart hoe afhankelijk u bent en welke alternatieven er zijn.</span></div></div>
   </div>
 </div></div>
 </div>
 
 <!-- SOEVEREINITEIT -->
-<div class="insight-card" id="ic-sovereignty">
+<div class="insight-card" data-roles="dga,ciso" id="ic-sovereignty">
 <div class="insight-header" onclick="toggleCard('ic-sovereignty')">
   <div class="insight-icon" style="background:var(--purple-bg);color:var(--purple)">🇪🇺</div>
   <div class="insight-title"><h4>Uw Digitale Soevereiniteit</h4><p>Hoe afhankelijk bent u — en wat zijn de alternatieven?</p></div>
@@ -981,7 +1016,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div class="insight-body"><div class="insight-content">
   <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Digitale soevereiniteit gaat over keuzevrijheid: kunt u zelf beslissen over uw data, tools en leveranciers? Dit is geen ideologisch verhaal — het is risicobeheer.</p>
 
-  <div class="sov-section">
+  <div class="sov-section" data-roles="dga,cfo,coo">
     <div class="sov-label">☁️ Cloud & Werkplek</div>
     <div class="sov-meter"><div class="sov-fill" style="width:78%;background:var(--accent)"></div></div>
     <div class="sov-desc"><strong>78% afhankelijk</strong> — Uw werkplek draait volledig op Microsoft 365. Dit werkt goed, maar betekent dat Microsoft bepaalt wat u krijgt, wat het kost en waar uw data staat.</div>
@@ -992,7 +1027,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     <div class="sov-source">Bron: European Cloud Alliance · Gaia-X Initiative 2025</div>
   </div>
 
-  <div class="sov-section">
+  <div class="sov-section" data-roles="dga,ciso,cco">
     <div class="sov-label">🤖 AI & Intelligentie</div>
     <div class="sov-meter"><div class="sov-fill" style="width:85%;background:var(--accent)"></div></div>
     <div class="sov-desc"><strong>85% afhankelijk</strong> — Als u Copilot gebruikt, verwerkt Microsoft al uw organisatiedata in een Amerikaans AI-model. De Data Act en AI Act stellen hier nieuwe eisen aan.</div>
@@ -1003,7 +1038,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
     <div class="sov-source">Bron: EU AI Office · BSI Certification · Mistral.ai</div>
   </div>
 
-  <div class="sov-section">
+  <div class="sov-section" data-roles="ciso,dga">
     <div class="sov-label">📊 Data & Opslag</div>
     <div class="sov-meter"><div class="sov-fill" style="width:65%;background:var(--warm)"></div></div>
     <div class="sov-desc"><strong>65% afhankelijk</strong> — Uw data staat bij Microsoft in EU-datacenters, maar valt onder Amerikaans recht (CLOUD Act). Bij conflict kan de VS toegang eisen.</div>
@@ -1148,6 +1183,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 <div class="step" id="step-news">
 <div class="step-badge" style="background:var(--blue-bg);color:var(--blue)">📰 Nieuws</div>
 <h2>Wat betekent dit voor uw organisatie?</h2>
+<div class="role-summary" id="rs-news"></div>
 <p class="step-desc">Actuele ontwikkelingen rondom AI, regelgeving en digitale soevereiniteit — vertaald naar uw lagen en roadmap.</p>
 
 <div class="news-filter">
@@ -1159,7 +1195,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 1: AI Act deadline -->
-<div class="news-article" data-cat="reg">
+<div class="news-article" data-cat="reg" data-roles="ciso,dga,cfo">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag reg">Regelgeving</span>
@@ -1175,7 +1211,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 2: AI-geletterdheid al verplicht -->
-<div class="news-article" data-cat="reg">
+<div class="news-article" data-cat="reg" data-roles="dga,coo,cco">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag reg">Regelgeving</span>
@@ -1190,7 +1226,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 3: Copilot adoptie stagneert -->
-<div class="news-article" data-cat="ai">
+<div class="news-article" data-cat="ai" data-roles="coo,cco">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag ai">AI & Adoptie</span>
@@ -1205,7 +1241,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 4: Microsoft soevereiniteit Franse Senaat -->
-<div class="news-article" data-cat="sov">
+<div class="news-article" data-cat="sov" data-roles="dga,ciso">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag sov">Soevereiniteit</span>
@@ -1219,7 +1255,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 5: e-Evidence -->
-<div class="news-article" data-cat="sov">
+<div class="news-article" data-cat="sov" data-roles="ciso,dga">
 <div class="news-meta">
 <span class="news-date">jan 2026</span>
 <span class="news-tag sov">Soevereiniteit</span>
@@ -1234,7 +1270,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 6: NIS2 ketenaansprakelijkheid -->
-<div class="news-article" data-cat="sec">
+<div class="news-article" data-cat="sec" data-roles="ciso,dga,cfo">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag sec">Security</span>
@@ -1250,7 +1286,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 7: M365 prijsverhoging -->
-<div class="news-article" data-cat="ai">
+<div class="news-article" data-cat="ai" data-roles="cfo,coo">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag ai">AI & Adoptie</span>
@@ -1264,7 +1300,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 8: Europese cloud groeit -->
-<div class="news-article" data-cat="sov">
+<div class="news-article" data-cat="sov" data-roles="dga,ciso">
 <div class="news-meta">
 <span class="news-date">jan 2026</span>
 <span class="news-tag sov">Soevereiniteit</span>
@@ -1279,7 +1315,7 @@ h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:
 </div>
 
 <!-- ARTICLE 9: Data-kwaliteit blokkeert AI -->
-<div class="news-article" data-cat="ai">
+<div class="news-article" data-cat="ai" data-roles="coo,cco">
 <div class="news-meta">
 <span class="news-date">feb 2026</span>
 <span class="news-tag ai">AI & Adoptie</span>
@@ -1669,6 +1705,56 @@ function genPres(){
     body.innerHTML='<div style="text-align:center;padding:30px 20px"><div style="font-size:44px;margin-bottom:12px">✅</div><h3 style="font-size:17px;margin-bottom:6px">Klaar!</h3><p style="font-size:14px;color:var(--text-sec);margin-bottom:18px">5 slides gegenereerd.</p><div class="pres-dark"><h3 style="font-size:20px">AI-Readiness Scan</h3><p style="font-size:13px;opacity:.6">Score: 5.4/10 · '+d+'</p></div><div style="display:flex;gap:10px;justify-content:center;margin-top:16px"><button class="btn btn-primary btn-sm">Download PDF</button><button class="btn btn-outline btn-sm">E-mail naar MT</button></div></div>';
   },2000);
 }
+
+/* ===== ROLE FILTER ===== */
+var activeRole='all';
+var roleNames={all:'Alle rollen',dga:'DGA / Bestuurder',cfo:'CFO / Financieel',coo:'COO / Operationeel',ciso:'CISO / Security',cco:'CCO / Sales & Marketing'};
+var roleDescriptions={
+  dga:'<strong>Uw perspectief: strategische besturing.</strong> U ziet de items die relevant zijn voor bestuurlijke besluitvorming, aansprakelijkheid en langetermijnstrategie. Focus: <span class="role-focus">Risico & compliance</span> <span class="role-focus">Digitale strategie</span> <span class="role-focus">Soevereiniteit</span> <span class="role-focus">Budget</span>',
+  cfo:'<strong>Uw perspectief: financieel risico en rendement.</strong> U ziet de items met financiele impact: boetes, licentiekosten, investeringen en ROI. Focus: <span class="role-focus">Compliance-boetes</span> <span class="role-focus">Licentiekosten</span> <span class="role-focus">AI-rendement</span> <span class="role-focus">Budget 2026</span>',
+  coo:'<strong>Uw perspectief: operationele uitvoering.</strong> U ziet de items voor implementatie, adoptie en dagelijkse operatie. Focus: <span class="role-focus">Werkplek & platform</span> <span class="role-focus">Data-kwaliteit</span> <span class="role-focus">Adoptie & training</span> <span class="role-focus">Uitrol</span>',
+  ciso:'<strong>Uw perspectief: beveiliging en compliance.</strong> U ziet de items rondom informatiebeveiliging, regelgeving en governance. Focus: <span class="role-focus">NIS2 / AI Act</span> <span class="role-focus">Shadow AI</span> <span class="role-focus">Toegangsbeheer</span> <span class="role-focus">Soevereiniteit</span>',
+  cco:'<strong>Uw perspectief: klantwaarde en groei.</strong> U ziet de items die raken aan productiviteit, marktpositie en klantgerichte innovatie. Focus: <span class="role-focus">Copilot-adoptie</span> <span class="role-focus">Vaardigheden</span> <span class="role-focus">AI-productiviteit</span> <span class="role-focus">Marktpositie</span>'
+};
+
+function setRole(role,btn){
+  activeRole=role;
+  document.querySelectorAll('.role-btn').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  if(role==='all'){document.body.classList.remove('role-active')}
+  else{document.body.classList.add('role-active')}
+  var ind=document.getElementById('sidebar-role-ind');
+  if(ind){
+    if(role==='all'){ind.style.display='none'}
+    else{ind.style.display='block';ind.textContent=roleNames[role]||role}
+  }
+  var rsList=['rs-results','rs-news'];
+  for(var i=0;i<rsList.length;i++){
+    var el=document.getElementById(rsList[i]);
+    if(el){
+      if(role==='all'){el.style.display='none'}
+      else{el.style.display='block';el.innerHTML=roleDescriptions[role]||''}
+    }
+  }
+  var items=document.querySelectorAll('[data-roles]');
+  for(var j=0;j<items.length;j++){
+    var el=items[j];
+    var roles=el.getAttribute('data-roles');
+    if(role==='all'){
+      el.classList.remove('role-dimmed','role-highlight');
+      el.removeAttribute('data-role-label');
+    } else if(roles && roles.indexOf(role)!==-1){
+      el.classList.remove('role-dimmed');
+      el.classList.add('role-highlight');
+      el.setAttribute('data-role-label',roleNames[role]||role);
+    } else {
+      el.classList.remove('role-highlight');
+      el.classList.add('role-dimmed');
+      el.removeAttribute('data-role-label');
+    }
+  }
+}
+
 </script>
 </body>
 </html>
