@@ -14,6 +14,7 @@
   --green:#2d7a5a;--green-bg:#edf8f2;--green-border:#c4edda;
   --accent:#c75a28;--accent-bg:#fef0ea;
   --purple:#6c5ce7;--purple-bg:#f0edff;--purple-border:#d5cffc;
+  --card:#fff;--red:#dc3545;--red-bg:#fce4e6;
   --border:#e8e6e2;
   --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow:0 2px 8px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.08);--shadow-xl:0 16px 48px rgba(0,0,0,.12);
   --radius:12px;--radius-sm:8px;--radius-lg:16px;
@@ -794,7 +795,7 @@ body.role-active .sidebar-role-indicator{display:block}
 .act-sl{font-size:10px;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
 .act-timeline{position:relative;padding-left:20px}
 .act-timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border)}
-.act-date{font-size:11px;font-weight:700;color:var(--text-muted);margin:20px 0 8px -20px;text-transform:uppercase;letter-spacing:.5px;background:var(--bg);display:inline-block;padding:3px 10px;border-radius:4px}
+.act-date{font-size:11px;font-weight:700;color:var(--text-muted);margin:20px 0 8px 0;text-transform:uppercase;letter-spacing:.5px;background:var(--bg);display:block;padding:3px 10px;border-radius:4px;width:fit-content}
 .act-entry{position:relative;display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
 .act-entry:last-child{border-bottom:none}
 .act-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;position:relative;z-index:1}
@@ -900,6 +901,17 @@ body.role-active .sidebar-role-indicator{display:block}
 .bill-fq{font-size:12px;color:var(--text-sec);line-height:1.6;padding:8px 0;border-bottom:1px solid var(--border)}
 .bill-fq:last-child{border-bottom:none}
 .bill-fq strong{color:var(--text);display:block;margin-bottom:2px}
+/* Smooth scrollbars */
+.role-bar,.sidebar,.sp-body{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.role-bar::-webkit-scrollbar{height:4px}.sidebar::-webkit-scrollbar{width:4px}.sp-body::-webkit-scrollbar{width:4px}
+.role-bar::-webkit-scrollbar-thumb,.sidebar::-webkit-scrollbar-thumb,.sp-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* Focus accessibility */
+.opt:focus-visible,.chip:focus-visible,.btn:focus-visible,.sidebar-item:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+/* Geo badges */
+.geo-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;vertical-align:middle}
+.geo-eu{background:#e8eaf6;color:#283593}.geo-nl{background:#fff3e0;color:#e65100}.geo-int{background:#e0f2f1;color:#00695c}
+/* Mobile touch targets */
+@media(max-width:800px){.opt{padding:16px 18px}.chip{padding:10px 16px}.dlc-hdr{padding:16px}.th-ch-hdr{padding:14px 16px}}
 </style>
 </head>
 <body>
@@ -914,7 +926,7 @@ body.role-active .sidebar-role-indicator{display:block}
     <div style="margin-top:10px"><button class="btn btn-ghost" onclick="go('screen-intro')">Start kickstart-assessment</button></div>
     <div class="promise-cards">
       <div class="promise-card"><div class="p-icon">📊</div><h3>Levend overzicht</h3><p>Score per laag, gevoed door projecten, systemen en handmatige input.</p></div>
-      <div class="promise-card"><div class="p-icon">🔍</div><h3>Transparante bronnen</h3><p>Bij elke datapunt ziet u wanneer, door wie en vanuit welk systeem.</p></div>
+      <div class="promise-card"><div class="p-icon">🔍</div><h3>Transparante bronnen</h3><p>Bij elk datapunt ziet u wanneer, door wie en vanuit welk systeem.</p></div>
       <div class="promise-card"><div class="p-icon">🧭</div><h3>7-lagen model</h3><p>Van werkplek tot strategie — compleet beeld van uw organizational health.</p></div>
     </div>
     <div class="trust-row"><div class="trust-item">🔒 Data blijft van u</div><div class="trust-item">🇪🇺 Opgeslagen in Europa</div><div class="trust-item">⏱ 15 minuten</div><div class="trust-item">🏛️ Onafhankelijk advies</div></div>
@@ -922,8 +934,8 @@ body.role-active .sidebar-role-indicator{display:block}
       <a href="#" onclick="go('screen-app');goStep('step-news');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📰 Nieuws</a>
       <a href="#" onclick="go('screen-app');goStep('step-about');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🏛️ Over</a>
       <a href="#" onclick="go('screen-app');goStep('step-sources');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📚 Bronnen & methodiek</a>
-      <a href="#" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🔒 Privacybeleid</a>
-      <a href="#" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📧 Contact</a>
+      <a href="#" onclick="alert('Privacybeleid wordt binnenkort gepubliceerd');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🔒 Privacybeleid</a>
+      <a href="#" onclick="alert('Neem contact op via info@e-office.com');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📧 Contact</a>
     </div>
   </div>
 </div>
@@ -937,7 +949,44 @@ body.role-active .sidebar-role-indicator{display:block}
       <div class="card"><label>Hoe mogen we u noemen?</label><input class="intro-input" type="text" placeholder="Bijv. Jan, mevrouw De Vries …"></div>
       <div class="card"><label>Sector</label><div class="chip-grid"><button class="chip" onclick="pickChip(this)">🏥 Zorg</button><button class="chip" onclick="pickChip(this)">🎓 Onderwijs</button><button class="chip" onclick="pickChip(this)">💰 Financieel</button><button class="chip" onclick="pickChip(this)">🏭 Industrie</button><button class="chip" onclick="pickChip(this)">🛒 Retail</button><button class="chip" onclick="pickChip(this)">⚖️ Overheid</button><button class="chip" onclick="pickChip(this)">🔧 Dienstverlening</button><button class="chip" onclick="pickChip(this)">📦 Anders</button></div></div>
       <div class="card"><label>Aantal medewerkers</label><div class="chip-grid"><button class="chip" onclick="pickChip(this)">50–200</button><button class="chip" onclick="pickChip(this)">200–500</button><button class="chip" onclick="pickChip(this)">500–1.000</button><button class="chip" onclick="pickChip(this)">1.000–2.000</button><button class="chip" onclick="pickChip(this)">2.000+</button></div></div>
-      <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:var(--text-sec)"><strong style="color:var(--green)">🔒 Privacy</strong> — Alleen om vragen af te stemmen. <a href="#" style="color:var(--blue)">Beleid →</a></div>
+      <div class="card"><label>🌍 In welk land is uw organisatie gevestigd?</label><select id="sel-country" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;background:#fff;color:var(--text);cursor:pointer" onchange="updateLang(this.value)">
+<option value="nl">🇳🇱 Nederland</option>
+<option value="be">🇧🇪 België</option>
+<option value="de">🇩🇪 Duitsland</option>
+<option value="fr">🇫🇷 Frankrijk</option>
+<option value="es">🇪🇸 Spanje</option>
+<option value="it">🇮🇹 Italië</option>
+<option value="pt">🇵🇹 Portugal</option>
+<option value="at">🇦🇹 Oostenrijk</option>
+<option value="ch">🇨🇭 Zwitserland</option>
+<option value="ie">🇮🇪 Ierland</option>
+<option value="dk">🇩🇰 Denemarken</option>
+<option value="se">🇸🇪 Zweden</option>
+<option value="no">🇳🇴 Noorwegen</option>
+<option value="fi">🇫🇮 Finland</option>
+<option value="pl">🇵🇱 Polen</option>
+<option value="cz">🇨🇿 Tsjechië</option>
+<option value="lu">🇱🇺 Luxemburg</option>
+<option value="gb">🇬🇧 Verenigd Koninkrijk</option>
+</select>
+<div style="margin-top:10px"><label>🗣️ Voorkeurstaal</label><select id="sel-lang" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;background:#fff;color:var(--text);cursor:pointer">
+<option value="nl">🇳🇱 Nederlands</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+<option value="es">🇪🇸 Español</option>
+<option value="it">🇮🇹 Italiano</option>
+<option value="pt">🇵🇹 Português</option>
+<option value="da">🇩🇰 Dansk</option>
+<option value="sv">🇸🇪 Svenska</option>
+<option value="no">🇳🇴 Norsk</option>
+<option value="fi">🇫🇮 Suomi</option>
+<option value="pl">🇵🇱 Polski</option>
+<option value="cs">🇨🇿 Čeština</option>
+</select></div>
+<div style="margin-top:10px;padding:10px 14px;background:var(--blue-bg);border-radius:var(--radius-sm);font-size:12px;color:var(--text-sec);line-height:1.5"><strong style="color:var(--blue)">ℹ️ Waarom is dit belangrijk?</strong><br>Regelgeving verschilt per land. Naast EU-brede wetgeving (AI Act, NIS2) krijgt u de nationale implementatie en het lokale nieuws voor uw regio.</div>
+</div>
+      <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:var(--text-sec)"><strong style="color:var(--green)">🔒 Privacy</strong> — Alleen om vragen af te stemmen. <a href="#" onclick="alert('Privacybeleid wordt binnenkort gepubliceerd');return false" style="color:var(--blue)">Beleid →</a></div>
       <button class="btn btn-primary" onclick="go('screen-app');goStep('step-1')" style="width:100%;justify-content:center;margin-top:20px">Start de verkenning →</button>
     </div>
   </div>
@@ -1008,7 +1057,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- STEP 2 --><div class="step" id="step-2">
 <div class="step-badge">Laag 2 van 7 · Bescherming</div><h2>Is uw organisatie beschermd?</h2>
 <p class="step-desc">Security en compliance worden steeds belangrijker met nieuwe Europese wetgeving.</p>
-<div class="context-box"><div class="c-icon">⚠️</div><div class="c-body"><strong>Actueel:</strong> In 2026 worden AI Act, NIS2, DORA en Data Act van kracht. Veel MKB-organisaties zijn onvoldoende voorbereid.<div class="c-source">Bron: Europese Commissie · Autoriteit Persoonsgegevens · DNB 2026</div></div></div>
+<div class="context-box"><div class="c-icon">⚠️</div><div class="c-body"><strong>Actueel:</strong> In 2026 worden <span class="geo-badge geo-eu" style="font-size:10px;padding:1px 6px">🇪🇺</span> AI Act, <span class="geo-badge geo-eu" style="font-size:10px;padding:1px 6px">🇪🇺</span> NIS2, <span class="geo-badge geo-eu" style="font-size:10px;padding:1px 6px">🇪🇺</span> DORA en <span class="geo-badge geo-eu" style="font-size:10px;padding:1px 6px">🇪🇺</span> Data Act van kracht. Veel MKB-organisaties zijn onvoldoende voorbereid.<div class="c-source">Bron: Europese Commissie · Autoriteit Persoonsgegevens · DNB 2026</div></div></div>
 <div class="q-group"><div class="q-label">Hoe gaat u om met informatiebeveiliging?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed beleid, voeren we uit</strong><span class="sub">MFA, audits, training</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Redelijk, kan beter</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Vertrouwen op IT-leverancier</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Blinde vlek</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Kent u de Europese regelgeving?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, goed op de hoogte</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins — AVG wel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niet echt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nooit van gehoord</strong></div></div></div></div>
 <div class="q-label" style="margin-top:24px">Optioneel: deel een document</div>
@@ -1160,22 +1209,22 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- L2: BESCHERMING -->
-<div class="dlc" id="dl2"><div class="dlc-hdr" onclick="dtog(2)"><div class="dlc-dot" style="background:var(--accent)"></div><div class="dlc-info"><div class="dlc-name">🛡️ 2. Bescherming</div><div class="dlc-sub">Beveiliging, compliance, NIS2</div><div class="dlc-src">Bijgewerkt 25 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">5.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+8%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.5"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(2,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(2,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(2,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(2,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl2h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>NIS2 gap-analyse</strong> — Deadline nadert</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Info protection labels</strong> — Voorwaarde AI</div></div></div></div><div class="dlc-pan" id="dl2p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ MFA</div><div class="dlc-pp dlc-ppd">✅ AVG</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ NIS2</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Labels</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-register</div></div></div></div><div class="dlc-pan" id="dl2b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 52k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 12.5k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">24%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl2l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">25 feb</div><div class="dlc-lew">NIS2 gap-analyse gestart, eerste resultaten verwacht 15 mrt</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> M. Bakker</div></div><div class="dlc-le"><div class="dlc-led">18 feb</div><div class="dlc-lew">MFA-status: 100% uitgerold op alle accounts</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Entra ID</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Bescherming score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl2"><div class="dlc-hdr" onclick="dtog(2)"><div class="dlc-dot" style="background:var(--accent)"></div><div class="dlc-info"><div class="dlc-name">🛡️ 2. Bescherming</div><div class="dlc-sub">Beveiliging, compliance, NIS2</div><div class="dlc-src">Bijgewerkt 25 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">5.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+8%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.5"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(2,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(2,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(2,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(2,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl2h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>NIS2 gap-analyse</strong> — Deadline nadert</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Info protection labels</strong> — Voorwaarde AI</div></div></div></div><div class="dlc-pan" id="dl2p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ MFA</div><div class="dlc-pp dlc-ppd">✅ AVG</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ NIS2</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Labels</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-register</div></div></div></div><div class="dlc-pan" id="dl2b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 52k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 12.5k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">24%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl2l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">25 feb</div><div class="dlc-lew">NIS2 gap-analyse gestart, eerste resultaten verwacht 15 mrt</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> M. Bakker</div></div><div class="dlc-le"><div class="dlc-led">18 feb</div><div class="dlc-lew">MFA-status: 100% uitgerold op alle accounts</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Entra ID</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Bescherming score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <!-- L3: INFORMATIE -->
-<div class="dlc" id="dl3"><div class="dlc-hdr" onclick="dtog(3)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">📁 3. Informatie</div><div class="dlc-sub">Data-kwaliteit, rechten</div><div class="dlc-src">Bijgewerkt 20 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--red)">4.2</div><div class="dlc-meta"><span class="dlc-trend tr-down">↓-3%</span><span class="dlc-st st-alert">Kritiek</span></div><div class="dlc-spark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.5"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(3,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(3,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(3,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(3,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl3h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert AI</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Rechtenstructuur</strong> — Basis Copilot</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Data opschoning</strong> — Verouderde docs</div></div></div></div><div class="dlc-pan" id="dl3p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ SP scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Rechten</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Opschoning</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Data-ready</div></div></div></div><div class="dlc-pan" id="dl3b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 55k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 8.2k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl3l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">SharePoint: 12.400 docs, 38% ouder dan 3 jaar</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> SharePoint Admin</div></div><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">Sensitivity labels: 0% gelabeld (vereist voor Copilot)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Purview</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Informatie score 4.2</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl3"><div class="dlc-hdr" onclick="dtog(3)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">📁 3. Informatie</div><div class="dlc-sub">Data-kwaliteit, rechten</div><div class="dlc-src">Bijgewerkt 20 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--red)">4.2</div><div class="dlc-meta"><span class="dlc-trend tr-down">↓-3%</span><span class="dlc-st st-alert">Kritiek</span></div><div class="dlc-spark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.5"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(3,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(3,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(3,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(3,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl3h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert AI</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Rechtenstructuur</strong> — Basis Copilot</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Data opschoning</strong> — Verouderde docs</div></div></div></div><div class="dlc-pan" id="dl3p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ SP scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Rechten</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Opschoning</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Data-ready</div></div></div></div><div class="dlc-pan" id="dl3b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 55k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 8.2k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl3l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">SharePoint: 12.400 docs, 38% ouder dan 3 jaar</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> SharePoint Admin</div></div><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">Sensitivity labels: 0% gelabeld (vereist voor Copilot)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Purview</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Informatie score 4.2</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <!-- L4: INTELLIGENTIE -->
-<div class="dlc" id="dl4"><div class="dlc-hdr" onclick="dtog(4)"><div class="dlc-dot" style="background:var(--purple)"></div><div class="dlc-info"><div class="dlc-name">🧠 4. Intelligentie</div><div class="dlc-sub">AI-beleid, Copilot, agents</div><div class="dlc-src">Bijgewerkt 27 feb · <span class="src-hand">Handmatig</span> <span class="src-ext">Extern</span></div></div><div class="dlc-score" style="color:var(--purple)">3.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+22%</span><span class="dlc-st st-good">Snelle groei</span></div><div class="dlc-spark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.5"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(4,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(4,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(4,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(4,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl4h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-beleid</strong> — Governance eerst</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid</strong> — Wettelijk verplicht</div></div></div></div><div class="dlc-pan" id="dl4p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ AI-scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ AI-beleid</div><div class="dlc-pp dlc-ppw">⚠ Geletterdheid</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Copilot pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Uitrol+Agents</div></div></div></div><div class="dlc-pan" id="dl4b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 93k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 7.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">8%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl4l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-beleidsdocument v1.0 afgerond</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> J. de Groot</div></div><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-geletterdheidstoets: 14/55 voltooid (25%)</div><div class="dlc-lem"><span class="src-ext">Extern</span> LMS</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Intelligentie score 2.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl4"><div class="dlc-hdr" onclick="dtog(4)"><div class="dlc-dot" style="background:var(--purple)"></div><div class="dlc-info"><div class="dlc-name">🧠 4. Intelligentie</div><div class="dlc-sub">AI-beleid, Copilot, agents</div><div class="dlc-src">Bijgewerkt 27 feb · <span class="src-hand">Handmatig</span> <span class="src-ext">Extern</span></div></div><div class="dlc-score" style="color:var(--purple)">3.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+22%</span><span class="dlc-st st-good">Snelle groei</span></div><div class="dlc-spark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.5"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(4,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(4,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(4,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(4,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl4h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-beleid</strong> — Governance eerst</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid</strong> — Wettelijk verplicht</div></div></div></div><div class="dlc-pan" id="dl4p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ AI-scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ AI-beleid</div><div class="dlc-pp dlc-ppw">⚠ Geletterdheid</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Copilot pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Uitrol+Agents</div></div></div></div><div class="dlc-pan" id="dl4b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 93k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 7.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">8%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl4l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-beleidsdocument v1.0 afgerond</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> J. de Groot</div></div><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-geletterdheidstoets: 14/55 voltooid (25%)</div><div class="dlc-lem"><span class="src-ext">Extern</span> LMS</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Intelligentie score 2.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <!-- L5: MENS -->
-<div class="dlc" id="dl5"><div class="dlc-hdr" onclick="dtog(5)"><div class="dlc-dot" style="background:var(--green)"></div><div class="dlc-info"><div class="dlc-name">👥 5. Mens</div><div class="dlc-sub">Training, adoptie, champions</div><div class="dlc-src">Bijgewerkt 26 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--green)">5.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+15%</span><span class="dlc-st st-great">Goed op weg</span></div><div class="dlc-spark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.5"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(5,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(5,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(5,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(5,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl5h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid uitbreiden</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Champions-netwerk</strong></div></div></div></div><div class="dlc-pan" id="dl5p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT training</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Allen trainen</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Adoptie</div></div></div></div><div class="dlc-pan" id="dl5b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 48k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 5.3k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl5l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Teams-adoptie gestegen van 72% naar 78%</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Usage reports</div></div><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Copilot: 340 prompts afgelopen week (+15%)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Copilot dashboard</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Mens score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl5"><div class="dlc-hdr" onclick="dtog(5)"><div class="dlc-dot" style="background:var(--green)"></div><div class="dlc-info"><div class="dlc-name">👥 5. Mens</div><div class="dlc-sub">Training, adoptie, champions</div><div class="dlc-src">Bijgewerkt 26 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--green)">5.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+15%</span><span class="dlc-st st-great">Goed op weg</span></div><div class="dlc-spark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.5"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(5,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(5,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(5,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(5,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl5h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid uitbreiden</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Champions-netwerk</strong></div></div></div></div><div class="dlc-pan" id="dl5p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT training</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Allen trainen</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Adoptie</div></div></div></div><div class="dlc-pan" id="dl5b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 48k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 5.3k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl5l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Teams-adoptie gestegen van 72% naar 78%</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Usage reports</div></div><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Copilot: 340 prompts afgelopen week (+15%)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Copilot dashboard</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Mens score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <!-- L6: ORGANISATIE -->
-<div class="dlc" id="dl6"><div class="dlc-hdr" onclick="dtog(6)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">🏢 6. Organisatie</div><div class="dlc-sub">Governance, processen</div><div class="dlc-src">Bijgewerkt 22 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">3.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+5%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.5"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(6,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(6,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(6,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(6,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl6h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert transformatie</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-governance rollen</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI Act eisen</strong> — Deadline aug 2026</div></div></div></div><div class="dlc-pan" id="dl6p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Structuur</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Governance</div><div class="dlc-pp dlc-ppw">⚠ AI Act</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Procesontwerp</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Evaluatie</div></div></div></div><div class="dlc-pan" id="dl6b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 42k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 6.8k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">16%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl6l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">22 feb</div><div class="dlc-lew">Governance-raamwerk v0.2: rollen gedefinieerd</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Organisatie score 3.0</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl6"><div class="dlc-hdr" onclick="dtog(6)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">🏢 6. Organisatie</div><div class="dlc-sub">Governance, processen</div><div class="dlc-src">Bijgewerkt 22 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">3.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+5%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.5"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(6,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(6,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(6,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(6,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl6h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert transformatie</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-governance rollen</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI Act eisen</strong> — Deadline aug 2026</div></div></div></div><div class="dlc-pan" id="dl6p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Structuur</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Governance</div><div class="dlc-pp dlc-ppw">⚠ AI Act</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Procesontwerp</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Evaluatie</div></div></div></div><div class="dlc-pan" id="dl6b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 42k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 6.8k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">16%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl6l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">22 feb</div><div class="dlc-lew">Governance-raamwerk v0.2: rollen gedefinieerd</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Organisatie score 3.0</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <!-- L7: RICHTING -->
-<div class="dlc" id="dl7"><div class="dlc-hdr" onclick="dtog(7)"><div class="dlc-dot" style="background:var(--text-muted)"></div><div class="dlc-info"><div class="dlc-name">🧭 7. Richting</div><div class="dlc-sub">Strategie, soevereiniteit</div><div class="dlc-src">Bijgewerkt 1 mrt · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score">3.8</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+10%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.5"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(7,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(7,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(7,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(7,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl7h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Digitale strategie 1.0</strong> — Bestuursbesluit</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Soevereiniteits-evaluatie</strong></div></div></div></div><div class="dlc-pan" id="dl7p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Assessment</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT-pres.</div><div class="dlc-pp dlc-ppa">▶ Budget</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Strategie 1.0</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Review</div></div></div></div><div class="dlc-pan" id="dl7b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 24k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 2.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl7l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">1 mrt</div><div class="dlc-lew">MT-presentatie status → "in voorbereiding"</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Richting score 3.4</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
+<div class="dlc" id="dl7"><div class="dlc-hdr" onclick="dtog(7)"><div class="dlc-dot" style="background:var(--text-muted)"></div><div class="dlc-info"><div class="dlc-name">🧭 7. Richting</div><div class="dlc-sub">Strategie, soevereiniteit</div><div class="dlc-src">Bijgewerkt 1 mrt · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score">3.8</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+10%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.5"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(7,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(7,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(7,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(7,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl7h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Digitale strategie 1.0</strong> — Bestuursbesluit</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Soevereiniteits-evaluatie</strong></div></div></div></div><div class="dlc-pan" id="dl7p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Assessment</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT-pres.</div><div class="dlc-pp dlc-ppa">▶ Budget</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Strategie 1.0</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Review</div></div></div></div><div class="dlc-pan" id="dl7b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 24k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 2.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div><div class="dlc-pan" id="dl7l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">1 mrt</div><div class="dlc-lew">MT-presentatie status → "in voorbereiding"</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Richting score 3.4</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div>
 
 <div class="step-nav" style="margin-top:24px">
 <button class="btn btn-ghost" onclick="goStep('step-7')">← Terug naar verkenning</button>
@@ -1637,7 +1686,7 @@ body.role-active .sidebar-role-indicator{display:block}
     <div class="th-ch-dot" style="background:var(--green)"></div>
     <div class="th-ch-name">#orghealth-adoptie</div>
     <div class="th-ch-layer">5. Mens</div>
-    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-unread" style="display:none">0</div>
     <div class="th-ch-chev">▼</div>
   </div>
   <div class="th-ch-body">
@@ -1662,7 +1711,7 @@ body.role-active .sidebar-role-indicator{display:block}
     <div class="th-ch-dot" style="background:#e67e22"></div>
     <div class="th-ch-name">#orghealth-governance</div>
     <div class="th-ch-layer">6. Organisatie</div>
-    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-unread" style="display:none">0</div>
     <div class="th-ch-chev">▼</div>
   </div>
   <div class="th-ch-body">
@@ -1687,7 +1736,7 @@ body.role-active .sidebar-role-indicator{display:block}
     <div class="th-ch-dot" style="background:var(--text-muted)"></div>
     <div class="th-ch-name">#orghealth-strategie</div>
     <div class="th-ch-layer">7. Richting</div>
-    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-unread" style="display:none">0</div>
     <div class="th-ch-chev">▼</div>
   </div>
   <div class="th-ch-body">
@@ -1758,6 +1807,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <h2>Wat betekent dit voor uw organisatie?</h2>
 <div class="role-summary" id="rs-news"></div>
 <p class="step-desc">Actuele ontwikkelingen rondom AI, regelgeving en digitale soevereiniteit — vertaald naar uw lagen en roadmap.</p>
+<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:12px;font-size:13px;color:var(--text-sec)"><span style="font-size:16px">🇳🇱</span> <strong style="color:var(--text)">Regio: Nederland</strong> — U ziet EU-regelgeving + nationale implementatie voor Nederland. <a href="#" onclick="goStep('step-1');alert('Wijzig uw land bij Instellingen of de intake.');return false" style="color:var(--blue)">Wijzig →</a></div>
 
 <div class="news-filter">
 <button class="news-filter-btn active" onclick="filterNews('all',this)">Alles</button>
@@ -1770,8 +1820,9 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 1: AI Act deadline -->
 <div class="news-article" data-cat="reg" data-roles="ciso,dga,cfo">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
-<span class="news-tag reg">Regelgeving</span>
+<span class="news-date">24 feb 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
+<span class="news-tag reg">⚖️ Regelgeving</span>
 <span class="news-tag ai">AI</span>
 </div>
 <div class="news-title">AI Act: 2 augustus 2026 — deadline voor hoog-risico systemen</div>
@@ -1786,8 +1837,9 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 2: AI-geletterdheid al verplicht -->
 <div class="news-article" data-cat="reg" data-roles="dga,coo,cco">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
-<span class="news-tag reg">Regelgeving</span>
+<span class="news-date">21 feb 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
+<span class="news-tag reg">⚖️ Regelgeving</span>
 </div>
 <div class="news-title">AI-geletterdheid is al verplicht sinds 2 februari 2025</div>
 <div class="news-summary">Wat veel MKB-ondernemers niet weten: artikel 4 van de AI Act verplicht organisaties die AI gebruiken om te zorgen dat medewerkers over voldoende AI-kennis beschikken. Dit geldt al sinds februari 2025 — niet pas bij de grote deadline van 2026. Er hoeft geen examen te worden afgelegd, maar er moet aantoonbaar beleid zijn: wie is getraind, wat mag wel en niet, en wie houdt toezicht? Een logboek of interne richtlijn is vaak al voldoende.</div>
@@ -1801,7 +1853,8 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 3: Copilot adoptie stagneert -->
 <div class="news-article" data-cat="ai" data-roles="coo,cco">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
+<span class="news-date">17 feb 2026</span>
+<span class="geo-badge geo-int">🌐 Internationaal</span>
 <span class="news-tag ai">AI & Adoptie</span>
 </div>
 <div class="news-title">Copilot-adoptie stagneert: na enthousiaste start zakt gebruik weg</div>
@@ -1816,13 +1869,14 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 4: Microsoft soevereiniteit Franse Senaat -->
 <div class="news-article" data-cat="sov" data-roles="dga,ciso">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
+<span class="news-date">12 feb 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
 <span class="news-tag sov">Soevereiniteit</span>
 </div>
 <div class="news-title">Microsoft erkent in Franse Senaat: datasoevereiniteit niet volledig te garanderen</div>
 <div class="news-summary">Microsoft heeft voor de Franse Senaat verklaard dat het de volledige datasoevereiniteit van Europese klanten niet kan garanderen als de Amerikaanse overheid via de CLOUD Act toegang eist. Het bedrijf zegt "ongegronde verzoeken te weerstaan", maar erkent dat de juridische realiteit niet veranderd is. Ondertussen opent Microsoft drie Sovereignty Studios in Brussel, München en Amsterdam, en investeert het miljarden in Europese datacenters — een signaal van urgentie, niet van oplossing.</div>
 <div class="news-ref">
-<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 7 · Richting</div>
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-7')">Laag 7 · Richting</div>
 <div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
 </div>
 </div>
@@ -1830,9 +1884,10 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 5: e-Evidence -->
 <div class="news-article" data-cat="sov" data-roles="ciso,dga">
 <div class="news-meta">
-<span class="news-date">jan 2026</span>
+<span class="news-date">8 feb 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
 <span class="news-tag sov">Soevereiniteit</span>
-<span class="news-tag reg">Regelgeving</span>
+<span class="news-tag reg">⚖️ Regelgeving</span>
 </div>
 <div class="news-title">e-Evidence: ook Europese opsporingsdiensten kunnen straks data opvragen</div>
 <div class="news-summary">De CLOUD Act krijgt een Europese tegenhanger. Met de komst van de e-Evidence verordening kunnen Europese opsporingsdiensten rechtstreeks data opvragen bij dienstverleners — zonder dat de organisatie als eigenaar van die data hiervan op de hoogte is. Dit verandert het soevereiniteitsdebat fundamenteel: het gaat niet meer alleen om bescherming tegen trans-Atlantische toegang, maar ook om de structuur van de Europese dataketen zelf.</div>
@@ -1845,9 +1900,11 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 6: NIS2 ketenaansprakelijkheid -->
 <div class="news-article" data-cat="sec" data-roles="ciso,dga,cfo">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
+<span class="news-date">4 feb 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
+<span class="geo-badge geo-nl">🇳🇱 NL</span>
 <span class="news-tag sec">Security</span>
-<span class="news-tag reg">Regelgeving</span>
+<span class="news-tag reg">⚖️ Regelgeving</span>
 </div>
 <div class="news-title">NIS2 / Cyberbeveiligingswet: ketenaansprakelijkheid raakt ook MKB als toeleverancier</div>
 <div class="news-summary">De NIS2-richtlijn wordt in Nederland omgezet in de Cyberbeveiligingswet. Hoewel veel MKB-bedrijven denken niet direct onder NIS2 te vallen, verandert de ketenaansprakelijkheid dat beeld. Grote opdrachtgevers in zorg, finance en onderwijs eisen aantoonbare beveiligingsmaatregelen van hun leveranciers. Patchmanagement, back-ups, toegangsbeheer, logging en een incident-respons protocol met 24-uurs meldplicht worden de norm — ook als u geen "essentiële entiteit" bent.</div>
@@ -1861,7 +1918,8 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 7: M365 prijsverhoging -->
 <div class="news-article" data-cat="ai" data-roles="cfo,coo">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
+<span class="news-date">30 jan 2026</span>
+<span class="geo-badge geo-int">🌐 Internationaal</span>
 <span class="news-tag ai">AI & Adoptie</span>
 </div>
 <div class="news-title">Microsoft verhoogt M365-prijzen per 1 juli 2026</div>
@@ -1875,13 +1933,14 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 8: Europese cloud groeit -->
 <div class="news-article" data-cat="sov" data-roles="dga,ciso">
 <div class="news-meta">
-<span class="news-date">jan 2026</span>
+<span class="news-date">23 jan 2026</span>
+<span class="geo-badge geo-eu">🇪🇺 EU</span>
 <span class="news-tag sov">Soevereiniteit</span>
 </div>
 <div class="news-title">Europese soevereine cloud groeit 20% per jaar — alternatieven nemen toe</div>
 <div class="news-summary">De Europese cloudmarkt zal naar verwachting in 2028 €110 miljard waard zijn. Gemeenten starten met Nextcloud, landen als Frankrijk (Bleu) en Duitsland (Delos) bouwen nationale clouds, en het Dutch Cloud Community pleit voor een keurmerk Digitale Soevereiniteit. Het regeerakkoord stelt: "Digitale autonomie wordt het leidende principe." Dit betekent niet dat u morgen van Microsoft af moet, maar wel dat u hybride scenario's moet doordenken — welke data en processen wilt u écht zelf in handen houden?</div>
 <div class="news-ref">
-<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-6')">Laag 7 · Richting</div>
+<div class="news-layer" style="background:var(--bg);color:#555" onclick="goStep('step-7')">Laag 7 · Richting</div>
 <div class="news-action">○ Soevereiniteits-evaluatie — Q2 2026</div>
 <div class="news-action">○ Digitale strategie 1.0 — Q2 2026</div>
 </div>
@@ -1890,7 +1949,8 @@ body.role-active .sidebar-role-indicator{display:block}
 <!-- ARTICLE 9: Data-kwaliteit blokkeert AI -->
 <div class="news-article" data-cat="ai" data-roles="coo,cco">
 <div class="news-meta">
-<span class="news-date">feb 2026</span>
+<span class="news-date">15 jan 2026</span>
+<span class="geo-badge geo-int">🌐 Internationaal</span>
 <span class="news-tag ai">AI & Adoptie</span>
 </div>
 <div class="news-title">Zonder data op orde geen AI-waarde: het fundament dat MKB overslaat</div>
@@ -1906,11 +1966,16 @@ body.role-active .sidebar-role-indicator{display:block}
 <div style="font-size:13px;color:var(--text-sec);line-height:1.6"><strong>Hoe leest u de verwijzingen?</strong><br>
 Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in uw roadmap-matrix. Klik op de laag om direct naar uw score te gaan.<br>
 <span style="display:inline-flex;align-items:center;gap:4px;margin-top:6px"><span style="font-size:11px;padding:2px 8px;background:#fff8e1;border:1px solid #ffd54f;border-radius:4px;color:#e65100">⚠️</span> = dit onderwerp is relevant maar er staat nog geen actie in uw roadmap — bespreek dit met uw MT.</span>
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)"><strong>Geografische dekking</strong><br>
+<span style="display:inline-flex;align-items:center;gap:6px;margin-top:4px"><span class="geo-badge geo-eu">🇪🇺 EU</span> Europese regelgeving — geldt in alle lidstaten</span><br>
+<span style="display:inline-flex;align-items:center;gap:6px;margin-top:4px"><span class="geo-badge geo-nl">🇳🇱 NL</span> Nationale implementatie — specifiek voor uw land</span><br>
+<span style="display:inline-flex;align-items:center;gap:6px;margin-top:4px"><span class="geo-badge geo-int">🌐 Internationaal</span> Wereldwijd relevant — vertaald naar uw context</span>
+</div>
 </div>
 </div>
 </div>
 
-<!-- ===== OVER NAVIGATOR ===== -->
+<!-- ===== OVER ORGHEALTH ===== -->
 <div class="step" id="step-about">
 <div class="step-badge" style="background:var(--warm-bg);color:var(--warm)">🏛️ Over</div>
 <h2>Wie zitten hierachter?</h2>
@@ -1920,7 +1985,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <div class="about-card"><div class="a-icon">🏢</div><h4>Onafhankelijk platform</h4><p>OrgHealth is ontwikkeld als onafhankelijk assessment-platform. We verkopen geen licenties en zijn niet gebonden aan één leverancier. Ons advies is gebaseerd op uw situatie, niet op onze marge.</p></div>
 <div class="about-card"><div class="a-icon">🇪🇺</div><h4>Europees perspectief</h4><p>Ontworpen vanuit Europese waarden: privacy, soevereiniteit en transparantie. Alle data wordt verwerkt in EU-datacenters. Conform AVG, AI Act en het Europese kader voor betrouwbare AI.</p></div>
 <div class="about-card"><div class="a-icon">🏛️</div><h4>Sinds 1991</h4><p>Gebouwd op de ervaring van e-office, sinds 1991 actief in digitale werkplekken. Honderden MKB-organisaties begeleid in zorg, onderwijs en finance. Nu gefocust op de AI-transitie.</p></div>
-<div class="about-card"><div class="a-icon">🔍</div><h4>Open methodiek</h4><p>Ons 6-lagenmodel is gebaseerd op internationale frameworks (NIST, ISO 27001, EU AI Act risico-classificatie) en aangepast voor de MKB-praktijk. De methodiek is gedocumenteerd en toetsbaar.</p></div>
+<div class="about-card"><div class="a-icon">🔍</div><h4>Open methodiek</h4><p>Ons 7-lagenmodel is gebaseerd op internationale frameworks (NIST, ISO 27001, EU AI Act risico-classificatie) en aangepast voor de MKB-praktijk. De methodiek is gedocumenteerd en toetsbaar.</p></div>
 </div>
 
 <!-- Put People First -->
@@ -1935,7 +2000,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 </div>
 
 <!-- Microsoft Partner Badges -->
-<h3 style="font-size:17px;margin-bottom:12px">Microsoft-partnerstatus</h3>
+<h3 style="font-size:16px;margin-bottom:12px">Microsoft-partnerstatus</h3>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px">
 <div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🏅</div><div style="font-size:12px;font-weight:700">Solution Partner</div><div style="font-size:11px;color:var(--text-sec)">Modern Work, Data & AI, Digital & App Innovation</div></div>
 <div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">⚡</div><div style="font-size:12px;font-weight:700">FastTrack Ready</div><div style="font-size:11px;color:var(--text-sec)">Microsoft FastTrack Ready Partner</div></div>
@@ -1944,7 +2009,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🌍</div><div style="font-size:12px;font-weight:700">Social Impact</div><div style="font-size:11px;color:var(--text-sec)">Strategisch partner Tech for Social Impact</div></div>
 </div>
 
-<h3 style="font-size:17px;margin-bottom:12px">Hoe we met uw data omgaan</h3>
+<h3 style="font-size:16px;margin-bottom:12px">Hoe we met uw data omgaan</h3>
 <div class="card" style="margin-bottom:20px">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
 <div><div style="font-size:20px;margin-bottom:6px">🔒</div><div style="font-size:13px;font-weight:600;margin-bottom:3px">Versleuteld</div><div style="font-size:12px;color:var(--text-sec)">AES-256 versleuteling in transit en at rest. Uw data is onleesbaar voor anderen.</div></div>
@@ -1955,7 +2020,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);font-style:italic">Conform AVG Art. 5 (dataminimalisatie), Art. 17 (recht op vergetelheid), Art. 20 (dataportabiliteit) · ISO 27001 · SOC 2 Type II in voorbereiding</div>
 </div>
 
-<h3 style="font-size:17px;margin-bottom:12px">Het team</h3>
+<h3 style="font-size:16px;margin-bottom:12px">Het team</h3>
 <p style="font-size:14px;color:var(--text-sec);margin-bottom:16px">OrgHealth wordt ontwikkeld door een team met gecombineerde ervaring in Microsoft-technologie, Europese regelgeving en MKB-consultancy.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px">
 <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;margin-bottom:6px">🖥️</div><div style="font-size:13px;font-weight:600">Werkplek-specialisten</div><div style="font-size:12px;color:var(--text-sec)">Microsoft certified engineers met MKB-ervaring</div></div>
@@ -2046,7 +2111,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
       <div class="sp-context" id="sp-context-label">📍 U bent bij: Laag 1 · Platform</div>
       <div class="sp-chat-area" id="sp-chat-area">
         <div class="sp-chat-msg ai">
-          <div class="sp-chat-av">N</div>
+          <div class="sp-chat-av">OH</div>
           <div class="sp-chat-bubble">Hallo! Stel elke vraag over AI, regelgeving, uw resultaten of de huidige stap. Ik antwoord in begrijpelijke taal.<div class="sp-chat-source">35 jaar expertise</div></div>
         </div>
       </div>
@@ -2156,7 +2221,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
         <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.5 (63) · Vanaf €115/u</div><div class="pc-sp-cta">Contact →</div></div>
       </div>
 
-      <div class="mp-join">🤝 <span>Bent u consultant? <a href="#">Word partner op OrgHealth →</a></span></div>
+      <div class="mp-join">🤝 <span>Bent u consultant? <a href="#" onclick="alert('Partnerprogramma wordt binnenkort gelanceerd');return false">Word partner op OrgHealth →</a></span></div>
     </div>
 
     <!-- CHAT INPUT (always visible at bottom of panel) -->
@@ -2188,7 +2253,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
-const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-dashboard':'Dashboard','step-activity':'Activiteit','step-integrations':'Koppelingen','step-teams':'Teams Hub','step-billing':'Abonnement','step-model':'7 Lagen Model','step-about':'Over OrgHealth','step-sources':'Bronnen'};
+const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-dashboard':'Dashboard','step-activity':'Activiteit','step-integrations':'Koppelingen','step-teams':'Teams Hub','step-billing':'Abonnement','step-model':'7 Lagen Model','step-about':'Over OrgHealth','step-sources':'Bronnen','step-news':'Nieuws'};
 
 function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));var el=document.getElementById(id);if(el)el.classList.add('active');window.scrollTo(0,0)}
 
@@ -2211,6 +2276,9 @@ function updateProgress(){const p=Math.round(completedSteps.size/7*100);var pp=d
 function pick(el){el.closest('.option-list').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected')}
 function pickChip(el){el.closest('.chip-grid').querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
 function showUpload(input){for(const f of input.files){const d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px;font-size:13px;margin-top:6px';d.innerHTML=`📄 <span style="flex:1">${f.name}</span> <span style="color:var(--green);font-size:12px">✓</span>`;input.closest('.upload-zone').insertAdjacentElement('afterend',d)}}
+
+const countryLangMap={nl:'nl',be:'nl',de:'de',fr:'fr',es:'es',it:'it',pt:'pt',at:'de',ch:'de',ie:'en',dk:'da',se:'sv',no:'no',fi:'fi',pl:'pl',cz:'cs',lu:'fr',gb:'en'};
+function updateLang(country){const l=document.getElementById('sel-lang');if(l&&countryLangMap[country]){l.value=countryLangMap[country]}}
 
 // Support panel
 let supportOpen = false;
@@ -2249,7 +2317,7 @@ function spSend(){
     else if(t.includes('nis2')||t.includes('security'))r=`NIS2 vereist incidentmelding binnen 24 uur, risicobeheer en bestuurlijke aansprakelijkheid. Boetes tot €10M. Tip: start met een gap-analyse.<div class="sp-chat-source">NIS2 Richtlijn 2022/2555</div>`;
     else if(t.includes('kosten')||t.includes('prijs'))r=`De verkenning zelf is gratis. Online diensten variëren van gratis (M365 scan) tot €99 (Shadow AI inventarisatie). Voor intensievere trajecten met een partner liggen tarieven tussen €95-135/uur.`;
     else r=`Goede vraag. Op basis van uw huidige positie in ${stepNames[currentStep]||'de verkenning'}: het belangrijkste is om stap voor stap te werken en niet alles tegelijk te willen veranderen. Wilt u hier dieper op ingaan?`;
-    area.innerHTML+=`<div class="sp-chat-msg ai" style="animation:fadeIn .3s ease"><div class="sp-chat-av">N</div><div class="sp-chat-bubble">${r}</div></div>`;
+    area.innerHTML+=`<div class="sp-chat-msg ai" style="animation:fadeIn .3s ease"><div class="sp-chat-av">OH</div><div class="sp-chat-bubble">${r}</div></div>`;
     area.scrollTop=area.scrollHeight;
   },600);
 }
@@ -2290,7 +2358,7 @@ var activeRole='all';
 var roleNames={all:'Alle rollen',dga:'DGA / Bestuurder',cfo:'CFO / Financieel',coo:'COO / Operationeel',ciso:'CISO / Security',cco:'CCO / Sales & Marketing'};
 var roleDescriptions={
   dga:'<strong>Uw perspectief: strategische besturing.</strong> U ziet de items die relevant zijn voor bestuurlijke besluitvorming, aansprakelijkheid en langetermijnstrategie. Focus: <span class="role-focus">Risico & compliance</span> <span class="role-focus">Digitale strategie</span> <span class="role-focus">Soevereiniteit</span> <span class="role-focus">Budget</span>',
-  cfo:'<strong>Uw perspectief: financieel risico en rendement.</strong> U ziet de items met financiele impact: boetes, licentiekosten, investeringen en ROI. Focus: <span class="role-focus">Compliance-boetes</span> <span class="role-focus">Licentiekosten</span> <span class="role-focus">AI-rendement</span> <span class="role-focus">Budget 2026</span>',
+  cfo:'<strong>Uw perspectief: financieel risico en rendement.</strong> U ziet de items met financiële impact: boetes, licentiekosten, investeringen en ROI. Focus: <span class="role-focus">Compliance-boetes</span> <span class="role-focus">Licentiekosten</span> <span class="role-focus">AI-rendement</span> <span class="role-focus">Budget 2026</span>',
   coo:'<strong>Uw perspectief: operationele uitvoering.</strong> U ziet de items voor implementatie, adoptie en dagelijkse operatie. Focus: <span class="role-focus">Werkplek & platform</span> <span class="role-focus">Data-kwaliteit</span> <span class="role-focus">Adoptie & training</span> <span class="role-focus">Uitrol</span>',
   ciso:'<strong>Uw perspectief: beveiliging en compliance.</strong> U ziet de items rondom informatiebeveiliging, regelgeving en governance. Focus: <span class="role-focus">NIS2 / AI Act</span> <span class="role-focus">Shadow AI</span> <span class="role-focus">Toegangsbeheer</span> <span class="role-focus">Soevereiniteit</span>',
   cco:'<strong>Uw perspectief: klantwaarde en groei.</strong> U ziet de items die raken aan productiviteit, marktpositie en klantgerichte innovatie. Focus: <span class="role-focus">Copilot-adoptie</span> <span class="role-focus">Vaardigheden</span> <span class="role-focus">AI-productiviteit</span> <span class="role-focus">Marktpositie</span>'
