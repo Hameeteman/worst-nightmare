@@ -579,6 +579,203 @@ body.role-active .sidebar-role-indicator{display:block}
 .budget-grand-value{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
 .budget-grand-sub{font-size:11px;color:var(--text-sec);margin-top:2px}
 @media(max-width:800px){.budget-grand{grid-template-columns:1fr 1fr;gap:12px}.budget-layer-totals{display:none}}
+
+/* ===== HEALTH DASHBOARD ===== */
+.health-hero{background:linear-gradient(135deg,#0a1628 0%,#0d2137 50%,#0a2a1f 100%);border-radius:var(--radius);padding:32px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden}
+.health-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(0,210,150,.15) 0%,transparent 70%);border-radius:50%}
+.health-hero-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;position:relative;z-index:1}
+.health-hero-stat{text-align:center}
+.health-hero-stat .hh-val{font-size:28px;font-weight:700;color:#00d296}
+.health-hero-stat .hh-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-top:4px}
+.health-ring{width:140px;height:140px;border-radius:50%;background:conic-gradient(#00d296 0deg,#00d296 calc(var(--ring-pct)*3.6deg),rgba(255,255,255,.08) calc(var(--ring-pct)*3.6deg));display:flex;align-items:center;justify-content:center;position:relative}
+.health-ring-inner{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#0d1f30,#0a2a1f);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.health-ring-score{font-size:36px;font-weight:800;color:#fff}
+.health-ring-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.5)}
+.health-ring-sub{font-size:12px;color:#00d296;margin-top:2px}
+.health-insight{background:rgba(255,255,255,.06);border-radius:12px;padding:16px;margin-top:20px;position:relative;z-index:1}
+.health-insight h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.health-insight p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.5;margin:0}
+.health-cards{display:flex;flex-direction:column;gap:12px}
+.health-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .2s}
+.health-card.open .hc-body{display:block}
+.hc-header{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+.hc-header:hover{background:var(--bg)}
+.hc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hc-info{flex:1;min-width:0}
+.hc-name{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.hc-meta{font-size:12px;color:var(--text-sec);margin-top:2px}
+.hc-score-area{display:flex;align-items:center;gap:16px}
+.hc-score{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;min-width:36px;text-align:right}
+.hc-trend{font-size:11px;font-weight:600;padding:3px 8px;border-radius:10px}
+.hc-trend-up{background:var(--green-bg);color:var(--green)}
+.hc-trend-down{background:var(--accent-bg);color:var(--accent)}
+.hc-trend-flat{background:var(--bg);color:var(--text-muted)}
+.hc-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
+.hc-status-great{background:#d4edda;color:#155724}
+.hc-status-good{background:var(--blue-bg);color:var(--blue)}
+.hc-status-warn{background:#fff3cd;color:#856404}
+.hc-status-alert{background:var(--accent-bg);color:var(--accent)}
+.hc-chevron{font-size:11px;color:var(--text-muted);transition:transform .2s}
+.health-card.open .hc-chevron{transform:rotate(180deg)}
+.hc-body{display:none;border-top:1px solid var(--border);padding:18px}
+.hc-chart{height:80px;display:flex;align-items:flex-end;gap:3px;margin-bottom:16px;padding:0 4px}
+.hc-bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.hc-bar{width:100%;border-radius:3px 3px 0 0;min-height:2px;transition:height .3s}
+.hc-bar-label{font-size:9px;color:var(--text-muted)}
+.hc-bar-val{font-size:10px;font-weight:600;color:var(--text-sec);margin-bottom:2px}
+.hc-timeline{display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-bottom:16px;padding:0 4px}
+.hc-avg-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm)}
+.hc-avg-bar{flex:1;height:6px;background:var(--border);border-radius:3px;position:relative;overflow:visible}
+.hc-avg-fill{height:100%;border-radius:3px;position:relative}
+.hc-avg-marker{position:absolute;top:-4px;width:2px;height:14px;background:var(--text);border-radius:1px}
+.hc-avg-label{font-size:11px;color:var(--text-sec);min-width:65px}
+.hc-avg-value{font-size:13px;font-weight:600;min-width:30px;text-align:right}
+.hc-actions{margin-top:16px}
+.hc-actions h5{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px}
+.hc-action{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.hc-action:last-child{border-bottom:none}
+.hc-action-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.hc-action-text{font-size:13px;line-height:1.5}
+.hc-action-text strong{font-weight:600}
+.hc-impact{font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;margin-left:6px}
+.hc-impact-high{background:var(--green-bg);color:var(--green)}
+.hc-impact-med{background:var(--blue-bg);color:var(--blue)}
+@media(max-width:800px){.health-hero-grid{grid-template-columns:1fr;gap:16px;text-align:center}.health-ring{margin:0 auto}}
+/* ===== DASHBOARD ===== */
+.db-overall{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden}
+.db-hero{background:linear-gradient(135deg,#f0f4f8 0%,#e8f5f0 100%);padding:24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.db-ring{width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--green) 0deg,var(--green) 165deg,var(--border) 165deg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.db-ring-in{width:78px;height:78px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.db-ring-score{font-size:28px;font-weight:800}
+.db-ring-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted)}
+.db-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex:1;min-width:0}
+@media(max-width:600px){.db-kpis{grid-template-columns:1fr 1fr}}
+.db-kpi{background:rgba(0,0,0,.03);border-radius:8px;padding:10px 14px}
+.db-kpi-v{font-size:18px;font-weight:700}
+.db-kpi-l{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+.db-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 16px;background:var(--bg)}
+.db-tab{padding:12px 16px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.db-tab:hover{color:var(--text-sec)}
+.db-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.db-pan{display:none;padding:20px}
+.db-pan.active{display:block}
+
+.db-hrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+.db-hrow:last-child{border-bottom:none}
+.db-hdot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.db-hname{font-size:13px;font-weight:600;min-width:110px}
+.db-hbar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;min-width:60px}
+.db-hbar-f{height:100%;border-radius:4px}
+.db-hspark{display:flex;align-items:flex-end;gap:1px;height:18px;min-width:42px}
+.db-hspark i{flex:1;border-radius:1px 1px 0 0;min-height:1px;display:block;font-style:normal}
+.db-hsc{font-size:15px;font-weight:700;min-width:28px;text-align:right}
+.db-htr{font-size:11px;font-weight:600;min-width:48px;text-align:right}
+.t-up{color:var(--green)}.t-down{color:var(--accent)}
+
+.db-insight{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:12px 14px;margin-top:14px;font-size:13px;color:var(--text-sec);line-height:1.6}
+.db-insight strong{color:var(--text)}
+
+.db-scroll{overflow-x:auto}
+.db-ptable{width:100%;border-collapse:collapse;font-size:12px}
+.db-ptable th{padding:8px 6px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);border-bottom:2px solid var(--border)}
+.db-qnow{color:var(--green)!important;border-bottom-color:var(--green)!important}
+.db-ptable td{padding:6px;vertical-align:top;border-bottom:1px solid var(--border)}
+.db-ptable tr:last-child td{border-bottom:none}
+.db-player{display:flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap}
+.db-pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.db-pp{padding:4px 7px;border-radius:4px;margin-bottom:3px;font-size:11px;line-height:1.3}
+.db-pd{background:var(--green-bg);color:var(--green)}
+.db-pa{background:var(--blue-bg);color:var(--blue)}
+.db-ppl{background:var(--bg);border:1px solid var(--border);color:var(--text-sec)}
+.db-pw{background:var(--accent-bg);color:var(--accent)}
+.db-pcount{font-size:11px;color:var(--text-muted);margin-top:12px}
+
+.db-bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+@media(max-width:600px){.db-bgrid{grid-template-columns:1fr 1fr}}
+.db-bcard{background:var(--bg);border-radius:8px;padding:12px;text-align:center}
+.db-bv{font-size:18px;font-weight:800}
+.db-bl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
+.db-bs{font-size:10px;color:var(--text-sec);margin-top:1px}
+.db-brow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.db-brow:last-child{border-bottom:none}
+.db-btotal{font-weight:700;border-top:2px solid var(--border);padding-top:12px;margin-top:4px}
+.db-bdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.db-bn{font-weight:600;flex:1;min-width:0}
+.db-bval{text-align:right;min-width:55px;font-variant-numeric:tabular-nums}
+.db-bbar{width:70px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.db-bbar-f{height:100%;border-radius:3px}
+.db-bpct{font-size:12px;font-weight:600;min-width:30px;text-align:right}
+.db-flag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px}
+.db-fok{background:var(--green-bg);color:var(--green)}
+.db-fw{background:var(--accent-bg);color:var(--accent)}
+.db-fgr{background:var(--green-bg);color:var(--green)}
+
+/* Layer cards */
+.dlc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.dlc.open .dlc-body{display:block}
+.dlc.open .dlc-chev{transform:rotate(180deg)}
+.dlc-hdr{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.dlc-hdr:hover{background:var(--bg)}
+.dlc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dlc-info{flex:1;min-width:0}
+.dlc-name{font-size:14px;font-weight:700}
+.dlc-sub{font-size:11px;color:var(--text-muted);margin-top:1px}
+.dlc-score{font-size:24px;font-weight:800;line-height:1}
+.dlc-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.dlc-trend{font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px}
+.tr-up{background:var(--green-bg);color:var(--green)}
+.tr-down{background:var(--accent-bg);color:var(--accent)}
+.dlc-st{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.st-great{color:var(--green)}.st-good{color:var(--blue)}.st-warn{color:var(--accent)}.st-alert{color:var(--red,#dc3545)}
+.dlc-spark{display:flex;align-items:flex-end;gap:2px;height:28px;min-width:60px}
+.dlc-spark i{flex:1;border-radius:2px 2px 0 0;min-height:2px;display:block;font-style:normal}
+.dlc-chev{color:var(--text-muted);font-size:10px;transition:transform .15s;flex-shrink:0}
+.dlc-body{display:none;border-top:1px solid var(--border)}
+.dlc-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 16px;overflow-x:auto}
+.dlc-tab{padding:10px 14px;font-size:11px;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.dlc-tab:hover{color:var(--text-sec)}
+.dlc-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.dlc-pan{padding:16px;display:none}
+.dlc-pan.active{display:block}
+.dlc-chart{display:flex;align-items:flex-end;gap:3px;height:80px;margin-bottom:6px}
+.dlc-cg{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.dlc-cv{font-size:9px;font-weight:600;color:var(--text-sec)}
+.dlc-cb{width:100%;border-radius:3px 3px 0 0;min-height:2px}
+.dlc-tl{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-bottom:12px}
+.dlc-adv{margin-top:14px;padding:12px 14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--green)}
+.dlc-advw{border-left-color:var(--accent)}
+.dlc-adv h5{font-size:11px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;color:var(--green)}
+.dlc-advw h5{color:var(--accent)}
+.dlc-ai{display:flex;align-items:flex-start;gap:6px;padding:5px 0;font-size:12px;line-height:1.5}
+.dlc-ai+.dlc-ai{border-top:1px solid var(--border)}
+.dlc-imp{font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.imp-h{background:var(--green-bg);color:var(--green)}
+.imp-m{background:var(--blue-bg);color:var(--blue)}
+
+.dlc-qg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.dlc-qg{grid-template-columns:1fr 1fr}}
+.dlc-qc{background:var(--bg);border-radius:8px;padding:12px;min-height:60px}
+.dlc-now{border:1px solid var(--green-border);background:var(--green-bg)}
+.dlc-ql{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.dlc-qn{font-size:8px;background:var(--green);color:#fff;padding:1px 5px;border-radius:3px;font-weight:700}
+.dlc-pp{padding:5px 8px;border-radius:5px;margin-bottom:4px;font-size:11px;font-weight:500;line-height:1.3}
+.dlc-ppd{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+.dlc-ppa{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
+.dlc-ppp{background:var(--white,#fff);border:1px solid var(--border);color:var(--text-sec)}
+.dlc-ppw{background:var(--accent-bg);border:1px solid rgba(220,53,69,.2);color:var(--accent)}
+
+.dlc-bs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.dlc-bc{background:var(--bg);border-radius:8px;padding:12px;text-align:center}
+.dlc-bv{font-size:18px;font-weight:800}
+.dlc-bl2{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
+.dlc-br{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.dlc-br:last-child{border-bottom:none}
+.dlc-brt{font-weight:700;border-top:2px solid var(--border);padding-top:12px;margin-top:4px}
+.dlc-brn{flex:1;font-weight:500;min-width:0}
+.dlc-brv{text-align:right;min-width:55px;font-variant-numeric:tabular-nums}
+.dlc-brbar{width:50px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.dlc-brbar-f{height:100%;border-radius:2px}
 </style>
 </head>
 <body>
@@ -655,8 +852,7 @@ body.role-active .sidebar-role-indicator{display:block}
       <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Organisatie</div>
       <div class="sidebar-item" data-step="step-7" onclick="goStep('step-7')"><div class="s-dot"></div>7. Richting</div>
       <div class="sidebar-label">Extra</div>
-      <div class="sidebar-item" data-step="step-results" onclick="goStep('step-results')"><div class="s-dot"></div>📊 Resultaten</div>
-      <div class="sidebar-item" data-step="step-budget" onclick="goStep('step-budget')"><div class="s-dot"></div>💶 Budget</div>
+      <div class="sidebar-item" data-step="step-dashboard" onclick="goStep('step-dashboard')"><div class="s-dot"></div>📊 Dashboard</div>
       <div class="sidebar-item" data-step="step-integrations" onclick="goStep('step-integrations')"><div class="s-dot"></div>🔗 Integraties</div>
       <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
       <div class="sidebar-label">Info</div>
@@ -675,7 +871,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="q-group"><div class="q-label">Gebruikt u Microsoft 365?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, uitgebreid</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, beperkt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee, iets anders</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Weet ik niet</strong></div></div></div></div>
 <div class="q-label" style="margin-top:24px">Optioneel: deel een document</div>
 <div class="upload-zone" onclick="this.querySelector('input').click()"><div class="uz-icon">📎</div><div class="uz-text">IT-overzicht, contract of screenshot</div><input type="file" style="display:none" multiple onchange="showUpload(this)"></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="go('screen-intro')">← Terug</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-1');goStep('step-2')">Volgende: Bescherming →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="go('screen-intro')">← Terug</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-1');goStep('step-2')">Volgende: Bescherming →</button></div></div>
 </div>
 
 <!-- STEP 2 --><div class="step" id="step-2">
@@ -686,7 +882,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="q-group"><div class="q-label">Kent u de Europese regelgeving?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, goed op de hoogte</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins — AVG wel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niet echt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nooit van gehoord</strong></div></div></div></div>
 <div class="q-label" style="margin-top:24px">Optioneel: deel een document</div>
 <div class="upload-zone" onclick="this.querySelector('input').click()"><div class="uz-icon">📎</div><div class="uz-text">Security-rapport, audit of beleidsdocument</div><input type="file" style="display:none" multiple onchange="showUpload(this)"></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-1')">← Platform</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-2');goStep('step-3')">Volgende: Informatie →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-1')">← Platform</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-2');goStep('step-3')">Volgende: Informatie →</button></div></div>
 </div>
 
 <!-- STEP 3 --><div class="step" id="step-3">
@@ -695,7 +891,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="context-box"><div class="c-icon">📊</div><div class="c-body"><strong>Cruciaal:</strong> Organisaties met gestructureerde data halen 3x meer waarde uit AI. "Garbage in, garbage out" geldt sterker dan ooit.<div class="c-source">Bron: McKinsey Global AI Survey 2025 · Gartner Data Quality Guide</div></div></div>
 <div class="q-group"><div class="q-label">Hoe is informatie georganiseerd?</div><div class="q-help">Documenten, mappen, SharePoint, gedeelde schijven.</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Goed gestructureerd</strong><span class="sub">Mappenstructuur, naamconventies, metadata</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Per afdeling verschilt het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Veel dubbel en verouderd</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Iedereen doet eigen ding</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Heeft u inzicht in wie waar bij kan?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, rechten goed ingericht</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Deels</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Iedereen kan overal bij</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Geen idee</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-2')">← Bescherming</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-3');goStep('step-4')">Volgende: Intelligentie →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-2')">← Bescherming</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-3');goStep('step-4')">Volgende: Intelligentie →</button></div></div>
 </div>
 
 <!-- STEP 4 --><div class="step" id="step-4">
@@ -704,7 +900,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="context-box"><div class="c-icon">🤖</div><div class="c-body"><strong>Realiteit:</strong> Slechts 3,3% van M365-gebruikers zet Copilot productief in. Het probleem is zelden de technologie — het is het fundament.<div class="c-source">Bron: Directions on Microsoft 2025 · M365 Copilot Adoption Report</div></div></div>
 <div class="q-group"><div class="q-label">Wordt er AI gebruikt in uw organisatie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel met beleid</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, maar ad hoc</strong><span class="sub">Individueel, geen beleid</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We verkennen het</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Kent u de AI-mogelijkheden in uw software?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, benutten we actief</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>We weten het maar gebruiken nauwelijks</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Zitten er AI-functies in?</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-3')">← Informatie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-4');goStep('step-5')">Volgende: Mens →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-3')">← Informatie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-4');goStep('step-5')">Volgende: Mens →</button></div></div>
 </div>
 
 <!-- STEP 5 --><div class="step" id="step-5">
@@ -713,7 +909,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="context-box"><div class="c-icon">👥</div><div class="c-body"><strong>Wettelijk verplicht:</strong> Sinds feb 2025 moeten alle medewerkers die met AI werken een basisniveau "AI-geletterdheid" hebben.<div class="c-source">Bron: EU AI Act, Artikel 4 · Autoriteit Persoonsgegevens 2025</div></div></div>
 <div class="q-group"><div class="q-label">Hoe digitaal vaardig zijn uw medewerkers?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Hoog niveau</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Wisselend per team</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Beperkt</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Groot probleem</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Is er een trainingsprogramma?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, structureel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Soms, ad hoc</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-4')">← Intelligentie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-5');goStep('step-6')">Volgende: Organisatie →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-4')">← Intelligentie</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-5');goStep('step-6')">Volgende: Organisatie →</button></div></div>
 </div>
 
 
@@ -723,7 +919,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="context-box"><div class="c-icon">🏢</div><div class="c-body"><strong>Waarom dit ertoe doet:</strong> 73% van AI-transformaties faalt niet door technologie maar door organisatorische weerstand. Structuur, besluitvorming en processen moeten meebewegen.<div class="c-source">Bron: McKinsey State of AI 2025 · MIT Sloan Management Review</div></div></div>
 <div class="q-group"><div class="q-label">Hoe snel kan uw organisatie zich aanpassen aan veranderingen?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Wendbaar</strong><span class="sub">Korte beslislijnen, snel schakelen</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Redelijk flexibel</strong><span class="sub">Aanpassingen kosten enkele maanden</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Stroperig</strong><span class="sub">Veel lagen, trage besluitvorming</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Star</strong><span class="sub">Verandering stuit op grote weerstand</span></div></div></div></div>
 <div class="q-group"><div class="q-label">Zijn rollen en verantwoordelijkheden voor AI en compliance belegd?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, formeel vastgelegd</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Gedeeltelijk, informeel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee, nog niet</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-5')">← Mens</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-results')">📊 Resultaten</button><button class="btn btn-primary" onclick="completeStep('step-6');goStep('step-7')">Volgende: Richting →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-5')">← Mens</button><div class="step-nav-right"><button class="btn btn-outline btn-sm" onclick="goStep('step-dashboard')">📊 Dashboard</button><button class="btn btn-primary" onclick="completeStep('step-6');goStep('step-7')">Volgende: Richting →</button></div></div>
 </div>
 
 <!-- STEP 7 --><div class="step" id="step-7">
@@ -732,558 +928,122 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="context-box"><div class="c-icon">🧭</div><div class="c-body"><strong>Het verschil:</strong> Organisaties met expliciete digitale strategie realiseren 2,5x meer waarde uit tech-investeringen.<div class="c-source">Bron: Deloitte Digital Maturity Index 2025 · MIT CISR</div></div></div>
 <div class="q-group"><div class="q-label">Heeft u een digitale strategie?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Ja, helder en actueel</strong><span class="sub">Vastgesteld, met budget en roadmap</span></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Enigszins, niet formeel</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Moet, maar nog niet aan toegekomen</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Nee</strong></div></div></div></div>
 <div class="q-group"><div class="q-label">Wie is verantwoordelijk?</div><div class="option-list"><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>CIO of CDO</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Directie gezamenlijk</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>IT-manager (naast andere taken)</strong></div></div><div class="opt" onclick="pick(this)"><div class="opt-radio"></div><div class="opt-text"><strong>Niemand specifiek</strong></div></div></div></div>
-<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-6')">← Organisatie</button><div class="step-nav-right"><button class="btn btn-primary" onclick="completeStep('step-7');goStep('step-results')">Bekijk eindresultaten →</button></div></div>
+<div class="step-nav"><button class="btn btn-ghost" onclick="goStep('step-6')">← Organisatie</button><div class="step-nav-right"><button class="btn btn-primary" onclick="completeStep('step-7');goStep('step-dashboard')">Bekijk eindresultaten →</button></div></div>
 </div>
 
-<!-- RESULTS --><div class="step" id="step-results">
-<div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Resultaten</div><h2>Uw AI-Readiness Score</h2>
-<p class="step-desc">Op basis van uw antwoorden.</p>
-<div class="role-summary" id="rs-results"></div>
-<div class="card" style="margin-bottom:20px"><div class="score-hero"><div class="score-ring"><div class="s-num">5.4</div><div class="s-label">van 10</div></div><h3 style="font-size:18px;margin-bottom:6px">Gemiddeld voor uw sector</h3><p style="font-size:14px;color:var(--text-sec)">Vergelijkbaar met 62% in uw sector.</p></div>
-<div style="margin-top:20px">
-<div class="layer-row"><div class="layer-name">1. Platform</div><div class="layer-bar"><div class="layer-bar-fill" style="width:60%;background:var(--blue)"></div></div><div class="layer-val">6.0</div></div>
-<div class="layer-row"><div class="layer-name">2. Bescherming</div><div class="layer-bar"><div class="layer-bar-fill" style="width:48%;background:var(--accent)"></div></div><div class="layer-val">4.8</div></div>
-<div class="layer-row"><div class="layer-name">3. Informatie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:42%;background:var(--accent)"></div></div><div class="layer-val">4.2</div></div>
-<div class="layer-row"><div class="layer-name">4. Intelligentie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:35%;background:var(--accent)"></div></div><div class="layer-val">3.5</div></div>
-<div class="layer-row"><div class="layer-name">5. Mens</div><div class="layer-bar"><div class="layer-bar-fill" style="width:55%;background:var(--blue)"></div></div><div class="layer-val">5.5</div></div>
-<div class="layer-row"><div class="layer-name">6. Organisatie</div><div class="layer-bar"><div class="layer-bar-fill" style="width:32%;background:var(--accent)"></div></div><div class="layer-val">3.2</div></div>
-<div class="layer-row"><div class="layer-name">7. Richting</div><div class="layer-bar"><div class="layer-bar-fill" style="width:38%;background:var(--accent)"></div></div><div class="layer-val">3.8</div></div>
-</div></div>
-<h3 style="font-size:17px;margin-bottom:12px">Wat opvalt</h3>
-<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text" data-roles="ciso,dga,cfo"><h4>Regelgeving verdient aandacht</h4><p>Uw sector valt onder nieuwe Europese regelgeving. Geen paniek, maar actie nodig.</p><div class="finding-source">EU AI Act Art. 6 · NIS2 2022/2555</div></div></div>
-<div class="finding warn"><div class="finding-icon">⚠️</div><div class="finding-text" data-roles="ciso,dga"><h4>AI zonder kader</h4><p>Medewerkers gebruiken waarschijnlijk al AI-tools zonder governance.</p><div class="finding-source">Microsoft: 78% is 'shadow AI'</div></div></div>
-<div class="finding good"><div class="finding-icon">✅</div><div class="finding-text" data-roles="coo"><h4>Goede werkplek-basis</h4><p>Uw digitale werkplek is een goed vertrekpunt.</p></div></div>
-<div class="finding info"><div class="finding-icon">💡</div><div class="finding-text" data-roles="dga,ciso"><h4>Advies: begin bij governance</h4><p>Hoogste impact: eerst governance en datastructuur, dan pas AI-tools.</p></div></div>
+<!-- ===== DASHBOARD (replaces old results+budget+health) ===== -->
+<div class="step" id="step-dashboard">
+<div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Dashboard</div>
+<h2>Uw digitale gezondheid</h2>
+<p class="step-desc">Alles in één overzicht: score, projecten en budget per laag.</p>
+<div class="role-summary" id="rs-dashboard"></div>
 
-<!-- ===== EXPANDABLE INSIGHT CARDS ===== -->
-<div class="insight-cards">
+<!-- OVERALL -->
+<div class="db-overall">
+  <div class="db-hero">
+    <div class="db-ring"><div class="db-ring-in"><div class="db-ring-score">4.6</div><div class="db-ring-lbl">van 10</div></div></div>
+    <div class="db-kpis">
+      <div class="db-kpi"><div class="db-kpi-v" style="color:var(--green)">+1.2</div><div class="db-kpi-l">Boven MKB-gem.</div></div>
+      <div class="db-kpi"><div class="db-kpi-v" style="color:var(--green)">↑ 11%</div><div class="db-kpi-l">Groei 6 maanden</div></div>
+      <div class="db-kpi"><div class="db-kpi-v">€ 511k</div><div class="db-kpi-l">Totaalbudget</div></div>
+      <div class="db-kpi"><div class="db-kpi-v">48</div><div class="db-kpi-l">Projecten</div></div>
+    </div>
+  </div>
+  <div class="db-tabs">
+    <div class="db-tab active" onclick="dbTab('db-oh',this)">📈 Gezondheid</div>
+    <div class="db-tab" onclick="dbTab('db-op',this)">🗺️ Alle projecten</div>
+    <div class="db-tab" onclick="dbTab('db-ob',this)">💶 Totaal budget</div>
+  </div>
 
-<!-- STRATEGISCHE MATRIX -->
-<div class="insight-card open" data-roles="dga,cfo,coo,ciso,cco" id="ic-matrix">
-<div class="insight-header" onclick="toggleCard('ic-matrix')">
-  <div class="insight-icon" style="background:linear-gradient(135deg,var(--blue-bg),var(--purple-bg));color:var(--blue)">🗺️</div>
-  <div class="insight-title"><h4>Uw Strategische Roadmap</h4><p>Alle lagen × kwartalen in één overzicht — met status</p></div>
-  <div class="insight-chevron">▼</div>
+  <!-- Overall: Health -->
+  <div class="db-pan active" id="db-oh">
+    <div class="db-hrow"><div class="db-hdot" style="background:var(--blue)"></div><div class="db-hname">1. Platform</div><div class="db-hbar"><div class="db-hbar-f" style="width:65%;background:var(--blue)"></div></div><div class="db-hspark"><i style="height:50%;background:var(--blue);opacity:.3"></i><i style="height:56%;background:var(--blue);opacity:.4"></i><i style="height:63%;background:var(--blue);opacity:.6"></i><i style="height:69%;background:var(--blue);opacity:.7"></i><i style="height:75%;background:var(--blue);opacity:.85"></i><i style="height:82%;background:var(--blue)"></i></div><div class="db-hsc" style="color:var(--blue)">6.5</div><div class="db-htr t-up">↑+12%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:var(--accent)"></div><div class="db-hname">2. Bescherming</div><div class="db-hbar"><div class="db-hbar-f" style="width:52%;background:var(--accent)"></div></div><div class="db-hspark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.4"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="db-hsc" style="color:var(--accent)">5.2</div><div class="db-htr t-up">↑+8%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:#e67e22"></div><div class="db-hname">3. Informatie</div><div class="db-hbar"><div class="db-hbar-f" style="width:42%;background:#e67e22"></div></div><div class="db-hspark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.4"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="db-hsc" style="color:var(--red)">4.2</div><div class="db-htr t-down">↓-3%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:var(--purple)"></div><div class="db-hname">4. Intelligentie</div><div class="db-hbar"><div class="db-hbar-f" style="width:35%;background:var(--purple)"></div></div><div class="db-hspark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.4"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="db-hsc" style="color:var(--purple)">3.5</div><div class="db-htr t-up">↑+22%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:var(--green)"></div><div class="db-hname">5. Mens</div><div class="db-hbar"><div class="db-hbar-f" style="width:55%;background:var(--green)"></div></div><div class="db-hspark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.4"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="db-hsc" style="color:var(--green)">5.5</div><div class="db-htr t-up">↑+15%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:#e67e22"></div><div class="db-hname">6. Organisatie</div><div class="db-hbar"><div class="db-hbar-f" style="width:32%;background:#e67e22"></div></div><div class="db-hspark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.4"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="db-hsc" style="color:var(--accent)">3.2</div><div class="db-htr t-up">↑+5%</div></div>
+    <div class="db-hrow"><div class="db-hdot" style="background:var(--text-muted)"></div><div class="db-hname">7. Richting</div><div class="db-hbar"><div class="db-hbar-f" style="width:38%;background:var(--text-muted)"></div></div><div class="db-hspark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.4"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="db-hsc">3.8</div><div class="db-htr t-up">↑+10%</div></div>
+    <div class="db-insight"><strong>💡 Prioriteit:</strong> Sterkste laag: <strong>Platform (6.5)</strong>. Focus nu op <strong>Informatie</strong> (enige dalende laag) en <strong>Organisatie</strong>. Zonder die twee stagneert Intelligentie (+22% groei).</div>
+  </div>
+
+  <!-- Overall: Projects -->
+  <div class="db-pan" id="db-op">
+    <div class="db-scroll"><table class="db-ptable"><thead><tr><th>Laag</th><th>Q4 '25</th><th class="db-qnow">Q1 '26</th><th>Q2 '26</th><th>Q3–Q4</th></tr></thead><tbody>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:var(--blue)"></div>1. Platform</div></td><td><div class="db-pp db-pd">✓ M365</div></td><td><div class="db-pp db-pa">▶ Werkplek</div><div class="db-pp db-pa">▶ Cloud PC</div></td><td><div class="db-pp db-ppl">Cloud PC uitrol</div><div class="db-pp db-ppl">Intune</div></td><td><div class="db-pp db-ppl">AI-Ready</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:var(--accent)"></div>2. Bescherming</div></td><td><div class="db-pp db-pd">✓ MFA</div><div class="db-pp db-pd">✓ AVG</div></td><td><div class="db-pp db-pa">▶ NIS2</div></td><td><div class="db-pp db-ppl">Labels</div><div class="db-pp db-ppl">Incident-resp.</div></td><td><div class="db-pp db-ppl">AI-register</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:#e67e22"></div>3. Informatie</div></td><td><div class="db-pp db-pd">✓ SP scan</div></td><td><div class="db-pp db-pa">▶ Rechten</div></td><td><div class="db-pp db-ppl">Opschoning</div><div class="db-pp db-ppl">Metadata</div></td><td><div class="db-pp db-ppl">Data-ready</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:var(--purple)"></div>4. Intelligentie</div></td><td><div class="db-pp db-pd">✓ AI-scan</div></td><td><div class="db-pp db-pa">▶ AI-beleid</div><div class="db-pp db-pw">⚠ Geletterdh.</div></td><td><div class="db-pp db-ppl">Copilot pilot</div></td><td><div class="db-pp db-ppl">Uitrol+Agents</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:var(--green)"></div>5. Mens</div></td><td><div class="db-pp db-pd">✓ Scan</div></td><td><div class="db-pp db-pa">▶ MT training</div></td><td><div class="db-pp db-ppl">Allen trainen</div><div class="db-pp db-ppl">Champions</div></td><td><div class="db-pp db-ppl">Adoptie</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:#e67e22"></div>6. Organisatie</div></td><td><div class="db-pp db-pd">✓ Structuur</div></td><td><div class="db-pp db-pa">▶ Governance</div><div class="db-pp db-pw">⚠ AI Act</div></td><td><div class="db-pp db-ppl">Procesontwerp</div></td><td><div class="db-pp db-ppl">Evaluatie</div></td></tr>
+      <tr><td><div class="db-player"><div class="db-pdot" style="background:var(--text-muted)"></div>7. Richting</div></td><td><div class="db-pp db-pd">✓ Assessment</div></td><td><div class="db-pp db-pa">▶ MT-pres.</div><div class="db-pp db-pa">▶ Budget</div></td><td><div class="db-pp db-ppl">Strategie 1.0</div></td><td><div class="db-pp db-ppl">Review</div></td></tr>
+    </tbody></table></div>
+    <div class="db-pcount"><strong>10</strong> afgerond · <strong>11</strong> actief · <strong>24</strong> gepland · <strong>3</strong> deadline = 48 projecten</div>
+  </div>
+
+  <!-- Overall: Budget -->
+  <div class="db-pan" id="db-ob">
+    <div class="db-bgrid">
+      <div class="db-bcard"><div class="db-bv">€ 511k</div><div class="db-bl">Totaal</div></div>
+      <div class="db-bcard"><div class="db-bv" style="color:var(--green)">€ 59k</div><div class="db-bl">Gerealiseerd</div><div class="db-bs">12%</div></div>
+      <div class="db-bcard"><div class="db-bv">€ 452k</div><div class="db-bl">Resterend</div><div class="db-bs">3 kwartalen</div></div>
+      <div class="db-bcard"><div class="db-bv" style="color:var(--accent)">3</div><div class="db-bl">Boven budget</div></div>
+    </div>
+    <div class="db-brow"><div class="db-bdot" style="background:var(--blue)"></div><div class="db-bn">1. Platform</div><div class="db-bval">€ 105k</div><div class="db-bbar"><div class="db-bbar-f" style="width:15%;background:var(--blue)"></div></div><div class="db-bpct">15%</div><span class="db-flag db-fok">OK</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:var(--accent)"></div><div class="db-bn">2. Bescherming</div><div class="db-bval">€ 52k</div><div class="db-bbar"><div class="db-bbar-f" style="width:24%;background:var(--accent)"></div></div><div class="db-bpct">24%</div><span class="db-flag db-fok">OK</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:#e67e22"></div><div class="db-bn">3. Informatie</div><div class="db-bval">€ 55k</div><div class="db-bbar"><div class="db-bbar-f" style="width:15%;background:#e67e22"></div></div><div class="db-bpct">15%</div><span class="db-flag db-fw">Boven</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:var(--purple)"></div><div class="db-bn">4. Intelligentie</div><div class="db-bval">€ 93k</div><div class="db-bbar"><div class="db-bbar-f" style="width:8%;background:var(--purple)"></div></div><div class="db-bpct">8%</div><span class="db-flag db-fw">Boven</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:var(--green)"></div><div class="db-bn">5. Mens</div><div class="db-bval">€ 48k</div><div class="db-bbar"><div class="db-bbar-f" style="width:11%;background:var(--green)"></div></div><div class="db-bpct">11%</div><span class="db-flag db-fok">OK</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:#e67e22"></div><div class="db-bn">6. Organisatie</div><div class="db-bval">€ 42k</div><div class="db-bbar"><div class="db-bbar-f" style="width:16%;background:#e67e22"></div></div><div class="db-bpct">16%</div><span class="db-flag db-fw">Boven</span></div>
+    <div class="db-brow"><div class="db-bdot" style="background:var(--text-muted)"></div><div class="db-bn">7. Richting</div><div class="db-bval">€ 24k</div><div class="db-bbar"><div class="db-bbar-f" style="width:11%;background:var(--text-muted)"></div></div><div class="db-bpct">11%</div><span class="db-flag db-fok">OK</span></div>
+    <div class="db-brow db-btotal"><div class="db-bdot" style="background:transparent"></div><div class="db-bn">Totaal</div><div class="db-bval" style="font-size:15px">€ 511k</div><div class="db-bbar"><div class="db-bbar-f" style="width:12%;background:var(--green)"></div></div><div class="db-bpct">12%</div><span class="db-flag db-fok">OK</span></div>
+    <div class="db-insight" style="margin-top:16px"><strong>💡</strong> 88% beschikbaar voor 3 kwartalen. <strong>Informatie</strong>, <strong>Intelligentie</strong> en <strong>Organisatie</strong> overschrijden op projectniveau.</div>
+  </div>
 </div>
-<div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Iedere rij is een laag, iedere kolom een kwartaal. U ziet in één blik wat er is gedaan, wat nu loopt en wat er aankomt.</p>
 
-  <div class="matrix-wrap">
-  <table class="matrix">
-    <thead><tr>
-      <th></th>
-      <th style="opacity:.6">Q4 2025<span class="q-sub">Afgerond</span></th>
-      <th class="q-current">Q1 2026<span class="q-sub">Nu</span></th>
-      <th>Q2 2026<span class="q-sub">Apr–Jun</span></th>
-      <th>Q3 2026<span class="q-sub">Jul–Sep</span></th>
-      <th>Q4 2026<span class="q-sub">Okt–Dec</span></th>
-    </tr></thead>
-    <tbody>
+<!-- ===== LAYER CARDS ===== -->
+<h3 style="font-size:16px;margin:24px 0 12px">Per laag</h3>
 
-    <!-- 1. PLATFORM -->
-    <tr data-roles="coo,cfo">
-      <td><div class="layer-label"><div class="layer-dot" style="background:var(--blue)"></div>1. Platform</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>M365 licentie-inventarisatie</strong></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>Werkplek-standaardisatie</strong><div class="mx-sub">Eén standaard laptop + M365 config</div></div>
-        <div class="mx-item active"><strong>Cloud PC pilot</strong><div class="mx-sub">10 gebruikers testgroep</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Cloud PC uitrol</strong><div class="mx-sub">Alle medewerkers</div></div>
-        <div class="mx-item planned"><strong>Intune device management</strong></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>AI-Ready werkplek</strong><div class="mx-sub">Copilot-klare configuratie</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Evaluatie & optimalisatie</strong></div>
-      </div></td>
-    </tr>
-
-    <!-- 2. BESCHERMING -->
-    <tr data-roles="ciso,dga,cfo">
-      <td><div class="layer-label"><div class="layer-dot" style="background:var(--accent)"></div>2. Bescherming</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>MFA uitgerold</strong></div>
-        <div class="mx-item done"><strong>AVG-register bijgewerkt</strong></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>NIS2 gap-analyse</strong><div class="mx-sub">Status: essentieel / belangrijk?</div></div>
-        <div class="mx-item deadline"><strong>NIS2 nationale wet</strong><div class="mx-sub">Deadline: okt 2025</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Information protection labels</strong></div>
-        <div class="mx-item planned"><strong>Incident-respons protocol</strong><div class="mx-sub">24-uurs meldplicht NIS2</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item deadline"><strong>AI Act volledig actief</strong><div class="mx-sub">Deadline: 2 aug 2026</div></div>
-        <div class="mx-item planned"><strong>AI-register opstellen</strong></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Security audit</strong><div class="mx-sub">Externe toetsing</div></div>
-      </div></td>
-    </tr>
-
-    <!-- 3. INFORMATIE -->
-    <tr data-roles="coo,ciso">
-      <td><div class="layer-label"><div class="layer-dot" style="background:var(--warm)"></div>3. Informatie</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>SharePoint inventarisatie</strong></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>Rechtenstructuur opzetten</strong><div class="mx-sub">Wie mag waar bij?</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Data opschoning</strong><div class="mx-sub">Verouderde docs archiveren</div></div>
-        <div class="mx-item planned"><strong>Metadata & labels</strong><div class="mx-sub">Sensitivity + retention labels</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Copilot data-readiness test</strong><div class="mx-sub">Geeft Copilot goede antwoorden?</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Kennismanagement inrichten</strong><div class="mx-sub">Viva Topics of alternatief</div></div>
-      </div></td>
-    </tr>
-
-    <!-- 4. INTELLIGENTIE -->
-    <tr data-roles="ciso,coo,cco">
-      <td><div class="layer-label"><div class="layer-dot" style="background:var(--purple)"></div>4. Intelligentie</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>AI-tools inventarisatie</strong><div class="mx-sub">Shadow AI in kaart</div></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>AI-beleid opstellen</strong><div class="mx-sub">Welke tools, welke regels?</div></div>
-        <div class="mx-item deadline"><strong>AI-geletterdheid</strong><div class="mx-sub">Nu al verplicht (Art. 4)</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Copilot pilot — 20 users</strong><div class="mx-sub">Na data-readiness check</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Copilot evaluatie & uitrol</strong><div class="mx-sub">ROI-meting na pilot</div></div>
-        <div class="mx-item planned"><strong>Custom agents verkennen</strong><div class="mx-sub">Copilot Studio / Power Platform</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>AI-orkestratie strategie</strong><div class="mx-sub">Welke processen automatiseren?</div></div>
-      </div></td>
-    </tr>
-
-    <!-- 5. MENS -->
-    <tr data-roles="coo,cco">
-      <td><div class="layer-label"><div class="layer-dot" style="background:var(--green)"></div>5. Mens</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>Digitale vaardigheden-scan</strong></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>AI-geletterdheid management</strong><div class="mx-sub">MT + teamleiders eerst</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>AI-geletterdheid alle medewerkers</strong><div class="mx-sub">E-learning + workshops</div></div>
-        <div class="mx-item planned"><strong>Champions-netwerk opzetten</strong><div class="mx-sub">1 champion per afdeling</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Copilot-training</strong><div class="mx-sub">Praktijkgericht per rol</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Adoptie-meting</strong><div class="mx-sub">Gebruik, tevredenheid, impact</div></div>
-      </div></td>
-    </tr>
-
-    
-    <!-- 6. ORGANISATIE -->
-    <tr data-roles="dga,coo,cfo">
-      <td><div class="layer-label"><div class="layer-dot" style="background:#E67E22"></div>6. Organisatie</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>Huidige structuur in kaart</strong></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>AI-governance rollen definiëren</strong><div class="mx-sub">Wie beslist over AI-inzet?</div></div>
-        <div class="mx-item deadline"><strong>AI Act organisatie-eisen</strong><div class="mx-sub">Verantwoordelijkheden beleggen</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Procesherontwerp AI-integratie</strong><div class="mx-sub">Werkprocessen aanpassen</div></div>
-        <div class="mx-item planned"><strong>Compliance-structuur NIS2/AI Act</strong><div class="mx-sub">Rollen, rapportage, audit trail</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Organisatie-evaluatie</strong><div class="mx-sub">Past de structuur bij AI-werkwijze?</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Aanpassingsplan 2027</strong><div class="mx-sub">Structuur, teams, besluitvorming</div></div>
-      </div></td>
-    </tr>
-
-    <!-- 7. RICHTING -->
-    <tr data-roles="dga,cfo">
-      <td><div class="layer-label"><div class="layer-dot" style="background:#555"></div>7. Richting</div></td>
-      <td style="opacity:.8"><div class="mx-cell">
-        <div class="mx-item done"><strong>Navigator assessment</strong><div class="mx-sub">Deze verkenning</div></div>
-      </div></td>
-      <td class="q-current-col"><div class="mx-cell">
-        <div class="mx-item active"><strong>MT-presentatie & besluit</strong><div class="mx-sub">Prioriteiten vaststellen</div></div>
-        <div class="mx-item active"><strong>Budget allocatie 2026</strong></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Digitale strategie 1.0</strong><div class="mx-sub">Vastgesteld door bestuur</div></div>
-        <div class="mx-item planned"><strong>Soevereiniteits-evaluatie</strong><div class="mx-sub">Leverancier-afhankelijkheid</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Kwartaalreview</strong><div class="mx-sub">Voortgang vs. roadmap</div></div>
-      </div></td>
-      <td><div class="mx-cell">
-        <div class="mx-item planned"><strong>Strategie 2027 voorbereiden</strong><div class="mx-sub">Op basis van geleerde lessen</div></div>
-      </div></td>
-    </tr>
-
-    </tbody>
-  </table>
+<!-- L1: PLATFORM -->
+<div class="dlc open" id="dl1">
+  <div class="dlc-hdr" onclick="dtog(1)"><div class="dlc-dot" style="background:var(--blue)"></div><div class="dlc-info"><div class="dlc-name">💻 1. Platform</div><div class="dlc-sub">Werkplek, devices, configuratie</div></div><div class="dlc-score" style="color:var(--blue)">6.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+12%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:50%;background:var(--blue);opacity:.3"></i><i style="height:56%;background:var(--blue);opacity:.4"></i><i style="height:63%;background:var(--blue);opacity:.5"></i><i style="height:69%;background:var(--blue);opacity:.65"></i><i style="height:75%;background:var(--blue);opacity:.8"></i><i style="height:82%;background:var(--blue)"></i></div><div class="dlc-chev">▼</div></div>
+  <div class="dlc-body">
+    <div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(1,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(1,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(1,'b',this)">💶 Budget</div></div>
+    <div class="dlc-pan active" id="dl1h">
+      <div class="dlc-chart"><div class="dlc-cg"><div class="dlc-cv">4.0</div><div class="dlc-cb" style="height:50px;background:var(--blue);opacity:.3"></div></div><div class="dlc-cg"><div class="dlc-cv">4.5</div><div class="dlc-cb" style="height:56px;background:var(--blue);opacity:.4"></div></div><div class="dlc-cg"><div class="dlc-cv">5.0</div><div class="dlc-cb" style="height:63px;background:var(--blue);opacity:.5"></div></div><div class="dlc-cg"><div class="dlc-cv">5.5</div><div class="dlc-cb" style="height:69px;background:var(--blue);opacity:.65"></div></div><div class="dlc-cg"><div class="dlc-cv">6.0</div><div class="dlc-cb" style="height:75px;background:var(--blue);opacity:.8"></div></div><div class="dlc-cg"><div class="dlc-cv">6.5</div><div class="dlc-cb" style="height:82px;background:var(--blue)"></div></div></div>
+      <div class="dlc-tl"><span>Sep</span><span>Okt</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span></div>
+      <div class="dlc-adv"><h5>🔧 Waar kunt u aan draaien</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Werkplek-standaardisatie</strong> — Basis voor alle lagen</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Cloud PC pilot evalueren</strong> — Schaalbaar</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Intune management</strong> — Centraal beheer</div></div></div>
+    </div>
+    <div class="dlc-pan" id="dl1p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ M365 inventarisatie</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Werkplek-standaard</div><div class="dlc-pp dlc-ppa">▶ Cloud PC pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q2 '26</div><div class="dlc-pp dlc-ppp">Cloud PC uitrol</div><div class="dlc-pp dlc-ppp">Intune</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-Ready werkplek</div></div></div></div>
+    <div class="dlc-pan" id="dl1b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 105k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 15.9k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div></div></div><div class="dlc-br"><div class="dlc-brn">M365 inventarisatie</div><div class="dlc-brv">€ 2.5k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:100%;background:var(--green)"></div></div><span class="db-flag db-fgr">Onder</span></div><div class="dlc-br"><div class="dlc-brn">Werkplek-standaard</div><div class="dlc-brv">€ 18k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:55%;background:var(--blue)"></div></div><span class="db-flag db-fok">OK</span></div><div class="dlc-br dlc-brt"><div class="dlc-brn">Totaal</div><div class="dlc-brv">€ 105k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:15%;background:var(--blue)"></div></div><span class="db-flag db-fok">OK</span></div></div>
   </div>
+</div>
 
-  <div class="mx-legend">
-    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--green-bg);border:1px solid var(--green-border)"></div> Afgerond</div>
-    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--blue-bg);border:1px solid var(--blue-border)"></div> Actief</div>
-    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--bg);border:1px solid var(--border)"></div> Gepland</div>
-    <div class="mx-legend-item"><div class="mx-legend-dot" style="background:var(--accent-bg);border:1px solid var(--accent)"></div> Deadline</div>
-  </div>
+<!-- L2: BESCHERMING -->
+<div class="dlc" id="dl2"><div class="dlc-hdr" onclick="dtog(2)"><div class="dlc-dot" style="background:var(--accent)"></div><div class="dlc-info"><div class="dlc-name">🛡️ 2. Bescherming</div><div class="dlc-sub">Beveiliging, compliance, NIS2</div></div><div class="dlc-score" style="color:var(--accent)">5.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+8%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.5"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(2,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(2,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(2,'b',this)">💶 Budget</div></div><div class="dlc-pan active" id="dl2h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>NIS2 gap-analyse</strong> — Deadline nadert</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Info protection labels</strong> — Voorwaarde AI</div></div></div></div><div class="dlc-pan" id="dl2p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ MFA</div><div class="dlc-pp dlc-ppd">✅ AVG</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ NIS2</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Labels</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-register</div></div></div></div><div class="dlc-pan" id="dl2b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 52k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 12.5k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">24%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
 
+<!-- L3: INFORMATIE -->
+<div class="dlc" id="dl3"><div class="dlc-hdr" onclick="dtog(3)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">📁 3. Informatie</div><div class="dlc-sub">Data-kwaliteit, rechten</div></div><div class="dlc-score" style="color:var(--red)">4.2</div><div class="dlc-meta"><span class="dlc-trend tr-down">↓-3%</span><span class="dlc-st st-alert">Kritiek</span></div><div class="dlc-spark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.5"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(3,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(3,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(3,'b',this)">💶</div></div><div class="dlc-pan active" id="dl3h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert AI</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Rechtenstructuur</strong> — Basis Copilot</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Data opschoning</strong> — Verouderde docs</div></div></div></div><div class="dlc-pan" id="dl3p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ SP scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Rechten</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Opschoning</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Data-ready</div></div></div></div><div class="dlc-pan" id="dl3b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 55k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 8.2k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+
+<!-- L4: INTELLIGENTIE -->
+<div class="dlc" id="dl4"><div class="dlc-hdr" onclick="dtog(4)"><div class="dlc-dot" style="background:var(--purple)"></div><div class="dlc-info"><div class="dlc-name">🧠 4. Intelligentie</div><div class="dlc-sub">AI-beleid, Copilot, agents</div></div><div class="dlc-score" style="color:var(--purple)">3.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+22%</span><span class="dlc-st st-good">Snelle groei</span></div><div class="dlc-spark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.5"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(4,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(4,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(4,'b',this)">💶</div></div><div class="dlc-pan active" id="dl4h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-beleid</strong> — Governance eerst</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid</strong> — Wettelijk verplicht</div></div></div></div><div class="dlc-pan" id="dl4p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ AI-scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ AI-beleid</div><div class="dlc-pp dlc-ppw">⚠ Geletterdheid</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Copilot pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Uitrol+Agents</div></div></div></div><div class="dlc-pan" id="dl4b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 93k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 7.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">8%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+
+<!-- L5: MENS -->
+<div class="dlc" id="dl5"><div class="dlc-hdr" onclick="dtog(5)"><div class="dlc-dot" style="background:var(--green)"></div><div class="dlc-info"><div class="dlc-name">👥 5. Mens</div><div class="dlc-sub">Training, adoptie, champions</div></div><div class="dlc-score" style="color:var(--green)">5.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+15%</span><span class="dlc-st st-great">Goed op weg</span></div><div class="dlc-spark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.5"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(5,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(5,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(5,'b',this)">💶</div></div><div class="dlc-pan active" id="dl5h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid uitbreiden</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Champions-netwerk</strong></div></div></div></div><div class="dlc-pan" id="dl5p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT training</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Allen trainen</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Adoptie</div></div></div></div><div class="dlc-pan" id="dl5b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 48k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 5.3k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+
+<!-- L6: ORGANISATIE -->
+<div class="dlc" id="dl6"><div class="dlc-hdr" onclick="dtog(6)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">🏢 6. Organisatie</div><div class="dlc-sub">Governance, processen</div></div><div class="dlc-score" style="color:var(--accent)">3.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+5%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.5"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(6,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(6,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(6,'b',this)">💶</div></div><div class="dlc-pan active" id="dl6h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert transformatie</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-governance rollen</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI Act eisen</strong> — Deadline aug 2026</div></div></div></div><div class="dlc-pan" id="dl6p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Structuur</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Governance</div><div class="dlc-pp dlc-ppw">⚠ AI Act</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Procesontwerp</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Evaluatie</div></div></div></div><div class="dlc-pan" id="dl6b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 42k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 6.8k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">16%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+
+<!-- L7: RICHTING -->
+<div class="dlc" id="dl7"><div class="dlc-hdr" onclick="dtog(7)"><div class="dlc-dot" style="background:var(--text-muted)"></div><div class="dlc-info"><div class="dlc-name">🧭 7. Richting</div><div class="dlc-sub">Strategie, soevereiniteit</div></div><div class="dlc-score">3.8</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+10%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.5"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(7,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(7,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(7,'b',this)">💶</div></div><div class="dlc-pan active" id="dl7h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Digitale strategie 1.0</strong> — Bestuursbesluit</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Soevereiniteits-evaluatie</strong></div></div></div></div><div class="dlc-pan" id="dl7p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Assessment</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT-pres.</div><div class="dlc-pp dlc-ppa">▶ Budget</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Strategie 1.0</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Review</div></div></div></div><div class="dlc-pan" id="dl7b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 24k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 2.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+
+<div class="step-nav" style="margin-top:24px">
+<button class="btn btn-ghost" onclick="goStep('step-7')">← Terug naar verkenning</button>
+<div class="step-nav-right">
+<button class="btn btn-outline" onclick="goStep('step-integrations')">🔗 Integraties</button>
+<button class="btn btn-primary" onclick="openM('m-pres')">📊 Presentatie</button>
 </div></div>
 </div>
-
-<!-- ROADMAP -->
-<div class="insight-card" data-roles="dga,ciso,cfo" id="ic-roadmap">
-<div class="insight-header" onclick="toggleCard('ic-roadmap')">
-  <div class="insight-icon" style="background:var(--blue-bg);color:var(--blue)">📋</div>
-  <div class="insight-title"><h4>Uw Roadmap</h4><p>Tijdlijn met deadlines en wanneer wat te doen</p></div>
-  <div class="insight-chevron">▼</div>
-</div>
-<div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Op basis van uw sector en antwoorden. Harde deadlines in het rood — die kunt u niet verschuiven.</p>
-  <div class="roadmap-tl">
-    <div class="tl-item urgent">
-      <div class="tl-dot"></div>
-      <div class="tl-date">Nu — al van kracht</div>
-      <div class="tl-title">AI-geletterdheid verplicht</div>
-      <div class="tl-desc">Alle medewerkers die met AI-systemen werken moeten een basisniveau AI-kennis hebben. Dit geldt nu al.</div>
-      <div class="tl-source">EU AI Act, Artikel 4 — sinds 2 februari 2025</div>
-    </div>
-    <div class="tl-item urgent">
-      <div class="tl-dot"></div>
-      <div class="tl-date">17 oktober 2025</div>
-      <div class="tl-title">NIS2 omgezet in nationale wet</div>
-      <div class="tl-desc">Strengere eisen voor informatiebeveiliging. Incidentmelding binnen 24 uur. Bestuurders persoonlijk aansprakelijk.</div>
-      <div class="tl-source">NIS2 Richtlijn 2022/2555 — Nederlandse implementatiewet</div>
-    </div>
-    <div class="tl-item soon">
-      <div class="tl-dot"></div>
-      <div class="tl-date">17 januari 2026</div>
-      <div class="tl-title">DORA van kracht (financiële sector)</div>
-      <div class="tl-desc">Digitale operationele weerbaarheid voor financiële instellingen en hun ICT-leveranciers.</div>
-      <div class="tl-source">Verordening (EU) 2022/2554 — DORA</div>
-    </div>
-    <div class="tl-item soon">
-      <div class="tl-dot"></div>
-      <div class="tl-date">2 augustus 2026</div>
-      <div class="tl-title">AI Act volledig van kracht</div>
-      <div class="tl-desc">Hoog-risico AI-systemen moeten voldoen aan documentatie-, transparantie- en toezichteisen. In de zorg zijn bijna alle AI-toepassingen hoog-risico.</div>
-      <div class="tl-source">EU AI Act, Verordening 2024/1689</div>
-    </div>
-    <div class="tl-item planned">
-      <div class="tl-dot"></div>
-      <div class="tl-date">September 2025</div>
-      <div class="tl-title">Data Act van toepassing</div>
-      <div class="tl-desc">Nieuwe regels over toegang tot en delen van data. Raakt uw cloudcontracten en leveranciersbeheer.</div>
-      <div class="tl-source">Verordening (EU) 2023/2854 — Data Act</div>
-    </div>
-    <div class="tl-item planned">
-      <div class="tl-dot"></div>
-      <div class="tl-date">Q1 2026</div>
-      <div class="tl-title">Aanbevolen: governance-framework opstellen</div>
-      <div class="tl-desc">Leg vast welke AI-tools worden gebruikt, wie verantwoordelijk is en hoe u controleert. Dit vormt de basis voor compliance.</div>
-    </div>
-    <div class="tl-item planned">
-      <div class="tl-dot"></div>
-      <div class="tl-date">Q2 2026</div>
-      <div class="tl-title">Aanbevolen: data-omgeving op orde</div>
-      <div class="tl-desc">Schoon uw SharePoint op, stel rechten in en structureer documenten. Noodzakelijk vóórdat AI-tools zinvol worden.</div>
-    </div>
-  </div>
-</div></div>
-</div>
-
-<!-- RISICO'S -->
-<div class="insight-card" data-roles="dga,ciso,cfo" id="ic-risks">
-<div class="insight-header" onclick="toggleCard('ic-risks')">
-  <div class="insight-icon" style="background:var(--accent-bg);color:var(--accent)">⚠️</div>
-  <div class="insight-title"><h4>Uw Risico's</h4><p>Gestructureerd overzicht per laag met urgentie</p></div>
-  <div class="insight-chevron">▼</div>
-</div>
-<div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Risico's op basis van uw antwoorden, gerangschikt op urgentie. Niet om u bang te maken — wel om prioriteiten te stellen.</p>
-  <div class="risk-grid">
-    <div class="risk-row" data-roles="ciso,dga,coo">
-      <div class="risk-level high">Hoog</div>
-      <div class="risk-info"><h5>Shadow AI zonder governance</h5><p>Medewerkers gebruiken AI-tools zonder beleid. Risico op datalekken, onjuiste output en non-compliance met de AI Act.</p><div class="risk-layer">Laag 4 · Intelligentie + Laag 2 · Bescherming</div></div>
-    </div>
-    <div class="risk-row" data-roles="ciso,dga,cfo">
-      <div class="risk-level high">Hoog</div>
-      <div class="risk-info"><h5>AI Act non-compliance</h5><p>Zonder AI-register en geletterdheidsbeleid loopt u nu al risico. Boetes tot €35 miljoen of 7% omzet.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 5 · Mens</div></div>
-    </div>
-    <div class="risk-row" data-roles="ciso,dga,cfo">
-      <div class="risk-level high">Hoog</div>
-      <div class="risk-info"><h5>NIS2 bestuurlijke aansprakelijkheid</h5><p>Bestuurders zijn persoonlijk aansprakelijk voor informatiebeveiliging. Onvoldoende maatregelen = persoonlijke boete.</p><div class="risk-layer">Laag 2 · Bescherming + Laag 7 · Richting</div></div>
-    </div>
-    <div class="risk-row" data-roles="coo,cco">
-      <div class="risk-level medium">Midden</div>
-      <div class="risk-info"><h5>Data-kwaliteit blokkeert AI-waarde</h5><p>Uw informatie is onvoldoende gestructureerd. AI-tools als Copilot zullen slechte resultaten geven.</p><div class="risk-layer">Laag 3 · Informatie</div></div>
-    </div>
-    <div class="risk-row" data-roles="dga,cfo,ciso">
-      <div class="risk-level medium">Midden</div>
-      <div class="risk-info"><h5>Vendor lock-in risico</h5><p>Hoge afhankelijkheid van één leverancier (Microsoft) voor werkplek, data en AI. Beperkt uw keuzevrijheid.</p><div class="risk-layer">Laag 1 · Platform + Laag 4 · Intelligentie</div></div>
-    </div>
-    <div class="risk-row" data-roles="coo,cco">
-      <div class="risk-level low">Laag</div>
-      <div class="risk-info"><h5>Digitale vaardigheidsgap</h5><p>Wisselende vaardigheden maken adoptie van nieuwe tools lastig. Vertraagt uw digitale strategie.</p><div class="risk-layer">Laag 5 · Mens</div></div>
-    </div>
-  </div>
-</div></div>
-</div>
-
-<!-- VOLGENDE STAP -->
-<div class="insight-card" data-roles="dga,coo,cco" id="ic-actions">
-<div class="insight-header" onclick="toggleCard('ic-actions')">
-  <div class="insight-icon" style="background:var(--green-bg);color:var(--green)">🧭</div>
-  <div class="insight-title"><h4>Uw Volgende Stap</h4><p>Wat u morgen, deze maand en dit kwartaal kunt doen</p></div>
-  <div class="insight-chevron">▼</div>
-</div>
-<div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Concrete acties, geprioriteerd van urgent naar belangrijk. Vink af wat u doet.</p>
-
-  <div class="action-group">
-    <div class="action-period"><span class="action-period-label now">Deze week</span><div class="action-period-line"></div></div>
-    <div class="action-item" data-roles="ciso,coo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Inventariseer AI-gebruik</strong><span class="sub">Vraag elke afdeling: welke AI-tools worden er gebruikt? Maak een lijst.</span></div></div>
-    <div class="action-item" data-roles="dga,ciso"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Bespreek AI Act in MT</strong><span class="sub">AI-geletterdheid is al verplicht. Zorg dat het bestuur dit weet.</span></div></div>
-    <div class="action-item" data-roles="dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Deel deze presentatie</strong><span class="sub">Genereer de MT-presentatie en plan een gesprek met uw team.</span></div></div>
-  </div>
-
-  <div class="action-group">
-    <div class="action-period"><span class="action-period-label month">Deze maand</span><div class="action-period-line"></div></div>
-    <div class="action-item" data-roles="ciso,cfo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Start een AI Act compliance-check</strong><span class="sub">Gebruik de online dienst of schakel een partner in voor een quick scan.</span></div></div>
-    <div class="action-item" data-roles="ciso,dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Controleer NIS2-status</strong><span class="sub">Val uw organisatie onder NIS2? Check of u "essentieel" of "belangrijk" bent.</span></div></div>
-    <div class="action-item" data-roles="coo,cco"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Plan AI-geletterdheids­training</strong><span class="sub">Kies een programma en start met management en AI-gebruikers.</span></div></div>
-  </div>
-
-  <div class="action-group">
-    <div class="action-period"><span class="action-period-label quarter">Dit kwartaal</span><div class="action-period-line"></div></div>
-    <div class="action-item" data-roles="ciso,dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Stel een AI-governance framework op</strong><span class="sub">Wie beslist over AI-tools? Welke regels gelden? Leg het vast.</span></div></div>
-    <div class="action-item" data-roles="coo"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Structureer uw data-omgeving</strong><span class="sub">SharePoint-rechten, mappenstructuur, verouderde documenten opschonen.</span></div></div>
-    <div class="action-item" data-roles="dga"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Formuleer een digitale strategie</strong><span class="sub">Maak keuzes: waar investeert u wel/niet in? Met welk doel? Leg het vast.</span></div></div>
-    <div class="action-item" data-roles="dga,cfo,ciso"><div class="action-check" onclick="this.classList.toggle('done')"></div><div class="action-text"><strong>Evalueer leveranciersafhankelijkheid</strong><span class="sub">Breng in kaart hoe afhankelijk u bent en welke alternatieven er zijn.</span></div></div>
-  </div>
-</div></div>
-</div>
-
-<!-- SOEVEREINITEIT -->
-<div class="insight-card" data-roles="dga,ciso" id="ic-sovereignty">
-<div class="insight-header" onclick="toggleCard('ic-sovereignty')">
-  <div class="insight-icon" style="background:var(--purple-bg);color:var(--purple)">🇪🇺</div>
-  <div class="insight-title"><h4>Uw Digitale Soevereiniteit</h4><p>Hoe afhankelijk bent u — en wat zijn de alternatieven?</p></div>
-  <div class="insight-chevron">▼</div>
-</div>
-<div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Digitale soevereiniteit gaat over keuzevrijheid: kunt u zelf beslissen over uw data, tools en leveranciers? Dit is geen ideologisch verhaal — het is risicobeheer.</p>
-
-  <div class="sov-section" data-roles="dga,cfo,coo">
-    <div class="sov-label">☁️ Cloud & Werkplek</div>
-    <div class="sov-meter"><div class="sov-fill" style="width:78%;background:var(--accent)"></div></div>
-    <div class="sov-desc"><strong>78% afhankelijk</strong> — Uw werkplek draait volledig op Microsoft 365. Dit werkt goed, maar betekent dat Microsoft bepaalt wat u krijgt, wat het kost en waar uw data staat.</div>
-    <div class="sov-alt-grid">
-      <div class="sov-alt"><h5>Alternatief: Nextcloud</h5><p>Europees open-source platform voor bestanden en samenwerking. Zelf te hosten.</p></div>
-      <div class="sov-alt"><h5>Alternatief: Open-Xchange</h5><p>Europese e-mail en productiviteit. Gebruikt door overheidsorganisaties in DE en FR.</p></div>
-    </div>
-    <div class="sov-source">Bron: European Cloud Alliance · Gaia-X Initiative 2025</div>
-  </div>
-
-  <div class="sov-section" data-roles="dga,ciso,cco">
-    <div class="sov-label">🤖 AI & Intelligentie</div>
-    <div class="sov-meter"><div class="sov-fill" style="width:85%;background:var(--accent)"></div></div>
-    <div class="sov-desc"><strong>85% afhankelijk</strong> — Als u Copilot gebruikt, verwerkt Microsoft al uw organisatiedata in een Amerikaans AI-model. De Data Act en AI Act stellen hier nieuwe eisen aan.</div>
-    <div class="sov-alt-grid">
-      <div class="sov-alt"><h5>Alternatief: Mistral (FR)</h5><p>Europees AI-model. Kan on-premise draaien. Voldoet aan EU data-vereisten.</p></div>
-      <div class="sov-alt"><h5>Alternatief: Aleph Alpha (DE)</h5><p>Duits AI-bedrijf. "Sovereign AI" voor overheid en zorg. BSI-gecertificeerd.</p></div>
-    </div>
-    <div class="sov-source">Bron: EU AI Office · BSI Certification · Mistral.ai</div>
-  </div>
-
-  <div class="sov-section" data-roles="ciso,dga">
-    <div class="sov-label">📊 Data & Opslag</div>
-    <div class="sov-meter"><div class="sov-fill" style="width:65%;background:var(--warm)"></div></div>
-    <div class="sov-desc"><strong>65% afhankelijk</strong> — Uw data staat bij Microsoft in EU-datacenters, maar valt onder Amerikaans recht (CLOUD Act). Bij conflict kan de VS toegang eisen.</div>
-    <div class="sov-alt-grid">
-      <div class="sov-alt"><h5>Hybride aanpak</h5><p>Gevoelige data lokaal of bij Europese provider. Operationele data in M365.</p></div>
-      <div class="sov-alt"><h5>EU Data Boundary</h5><p>Microsoft biedt sinds 2024 een EU Data Boundary. Controleer of dit voldoet aan uw sector-eisen.</p></div>
-    </div>
-    <div class="sov-source">Bron: US CLOUD Act · Microsoft EU Data Boundary · EDPB Recommendations</div>
-  </div>
-
-  <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius-sm);padding:14px 18px;margin-top:12px">
-    <div style="font-size:14px;font-weight:600;margin-bottom:6px">💡 Geen alles-of-niets keuze</div>
-    <div style="font-size:13px;color:var(--text-sec);line-height:1.6">Digitale soevereiniteit betekent niet dat u Microsoft moet verlaten. Het betekent dat u <strong>bewust kiest</strong>, dat u weet waar uw data is, en dat u een plan B heeft. De sterkste positie is een hybride aanpak: gebruik waar Microsoft uitblinkt, bescherm waar het gevoelig is.</div>
-  </div>
-</div></div>
-</div>
-
-</div><!-- /insight-cards -->
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
-<button class="btn btn-primary" onclick="openM('m-pres')">📊 Genereer presentatie</button>
-<button class="btn btn-outline" onclick="toggleSupport()">💬 Hulp nodig?</button>
-<button class="btn btn-ghost" onclick="goStep('step-1')">← Terug</button>
-</div>
-</div>
-
-<!-- ===== BUDGET ===== -->
-<div class="step" id="step-budget">
-<div class="step-badge" style="background:var(--green-bg);color:var(--green)">💶 Budget</div>
-<h2>Budget &amp; Voortgang</h2>
-<p class="step-desc">Overzicht per laag: geplande investeringen, realisatie en prognose. Gebaseerd op uw Strategische Roadmap.</p>
-<div class="role-summary" id="rs-budget"></div>
-<div class="budget-grand" data-roles="dga,cfo">
-<div class="budget-grand-item"><div class="budget-grand-label">Totaal Budget</div><div class="budget-grand-value">€ 377.500</div><div class="budget-grand-sub">40 projecten</div></div>
-<div class="budget-grand-item"><div class="budget-grand-label">Gerealiseerd</div><div class="budget-grand-value">€ 52.300</div><div class="budget-grand-sub">14% besteed</div></div>
-<div class="budget-grand-item"><div class="budget-grand-label">Resterend</div><div class="budget-grand-value">€ 325.200</div><div class="budget-grand-sub">3 kwartalen</div></div>
-<div class="budget-grand-item"><div class="budget-grand-label">Status</div><div class="budget-grand-value" style="font-size:16px">7 ✅ 9 ▶️ 24 ⏳</div><div class="budget-grand-sub">afgerond / actief / gepland</div></div>
-</div>
-<div style="margin-top:20px">
-<div class="budget-layer open" id="bl-1" data-roles="coo,cfo">
-<div class="budget-layer-header" onclick="document.getElementById('bl-1').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--blue)"></div><div class="budget-layer-name">1. Platform</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 105.000</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">M365 licentie-inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.500</td><td>€ 2.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">Werkplek-standaardisatie</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 18.000</td><td>€ 9.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:55%;background:var(--blue)"></div></div>55%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Cloud PC pilot</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 8.500</td><td>€ 4.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:45%;background:var(--blue)"></div></div>45%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Cloud PC uitrol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 45.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Intune device management</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI-Ready werkplek</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Evaluatie &amp; optimalisatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Platform</td><td>7 projecten</td><td>€ 105.000</td><td>€ 15.900</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:15%;background:var(--accent)"></div></div>15%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer open" id="bl-2" data-roles="ciso,dga,cfo">
-<div class="budget-layer-header" onclick="document.getElementById('bl-2').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--accent)"></div><div class="budget-layer-name">2. Bescherming</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 52.000</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">MFA uitgerold</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 3.500</td><td>€ 3.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">AVG-register bijgewerkt</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">NIS2 gap-analyse</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 12.000</td><td>€ 7.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:60%;background:var(--blue)"></div></div>60%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Information protection labels</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Incident-respons protocol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 6.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI-register opstellen</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Security audit</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Bescherming</td><td>7 projecten</td><td>€ 52.000</td><td>€ 12.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:24%;background:var(--accent)"></div></div>24%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer" id="bl-3" data-roles="coo,ciso">
-<div class="budget-layer-header" onclick="document.getElementById('bl-3').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--warm)"></div><div class="budget-layer-name">3. Informatie</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 55.500</span> <span class="bt-prognose bt-over">1x boven budget</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">SharePoint inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 3.000</td><td>€ 2.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">Rechtenstructuur opzetten</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 9.000</td><td>€ 5.400</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:58%;background:var(--blue)"></div></div>58%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-<tr><td class="bt-project">Data opschoning</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 14.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Metadata &amp; labels</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 7.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Copilot data-readiness test</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Kennismanagement inrichten</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 18.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Informatie</td><td>6 projecten</td><td>€ 55.500</td><td>€ 8.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:15%;background:var(--accent)"></div></div>15%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer" id="bl-4" data-roles="ciso,coo,cco">
-<div class="budget-layer-header" onclick="document.getElementById('bl-4').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--purple)"></div><div class="budget-layer-name">4. Intelligentie</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 93.000</span> <span class="bt-prognose bt-over">1x boven budget</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">AI-tools inventarisatie</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">AI-beleid opstellen</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 6.000</td><td>€ 3.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:62%;background:var(--blue)"></div></div>62%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI-geletterdheid (Art. 4)</td><td><span class="bt-status bt-deadline">⚠️ Deadline</span></td><td>€ 8.000</td><td>€ 2.400</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:30%;background:var(--accent)"></div></div>30%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-<tr><td class="bt-project">Copilot pilot (20 users)</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 22.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Copilot evaluatie &amp; uitrol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 35.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Custom agents verkennen</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI-orkestratie strategie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Intelligentie</td><td>7 projecten</td><td>€ 93.000</td><td>€ 7.700</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:8%;background:var(--accent)"></div></div>8%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer" id="bl-5" data-roles="coo,cco">
-<div class="budget-layer-header" onclick="document.getElementById('bl-5').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:var(--green)"></div><div class="budget-layer-name">5. Mens</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 48.000</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">Digitale vaardigheden-scan</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.500</td><td>€ 2.100</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">AI-geletterdheid management</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 5.000</td><td>€ 3.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:65%;background:var(--blue)"></div></div>65%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI-geletterdheid medewerkers</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 18.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Champions-netwerk opzetten</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Copilot-training per rol</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 15.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Adoptie-meting</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 3.500</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Mens</td><td>6 projecten</td><td>€ 48.000</td><td>€ 5.300</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:11%;background:var(--accent)"></div></div>11%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer" id="bl-6" data-roles="dga,coo,cfo">
-<div class="budget-layer-header" onclick="document.getElementById('bl-6').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#E67E22"></div><div class="budget-layer-name">6. Organisatie</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 42.000</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">Huidige structuur in kaart</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>€ 2.000</td><td>€ 1.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-under">Onder budget</span></td></tr>
-<tr><td class="bt-project">AI-governance rollen definiëren</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 6.000</td><td>€ 3.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:58%;background:var(--blue)"></div></div>58%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">AI Act organisatie-eisen</td><td><span class="bt-status bt-deadline">⚠️ Deadline</span></td><td>€ 5.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:30%;background:var(--accent)"></div></div>30%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-<tr><td class="bt-project">Procesherontwerp AI-integratie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 12.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Compliance-structuur NIS2/AI Act</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Organisatie-evaluatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Aanpassingsplan 2027</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Organisatie</td><td>7 projecten</td><td>€ 42.000</td><td>€ 6.800</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:16%;background:var(--accent)"></div></div>16%</td><td><span class="bt-prognose bt-over">Boven budget</span></td></tr>
-</tbody></table></div></div>
-<div class="budget-layer" id="bl-7" data-roles="dga,cfo">
-<div class="budget-layer-header" onclick="document.getElementById('bl-7').classList.toggle('open')">
-<div class="budget-layer-left"><div class="budget-layer-dot" style="background:#555"></div><div class="budget-layer-name">7. Richting</div></div>
-<div class="budget-layer-totals"><span class="blt-budget">€ 24.000</span></div>
-<div class="budget-layer-chevron">▼</div>
-</div>
-<div class="budget-layer-body"><table class="budget-table">
-<thead><tr><th>Project</th><th>Status</th><th>Budget</th><th>Realisatie</th><th>Voortgang</th><th>Prognose</th></tr></thead><tbody>
-<tr><td class="bt-project">Navigator assessment</td><td><span class="bt-status bt-done">✅ Afgerond</span></td><td>-</td><td>-</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:100%;background:var(--green)"></div></div>100%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">MT-presentatie &amp; besluit</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 3.000</td><td>€ 1.500</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:50%;background:var(--blue)"></div></div>50%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Budget allocatie 2026</td><td><span class="bt-status bt-active">▶️ Actief</span></td><td>€ 2.000</td><td>€ 1.200</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:60%;background:var(--blue)"></div></div>60%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Digitale strategie 1.0</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 8.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Soevereiniteits-evaluatie</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 5.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Kwartaalreview</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 2.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr><td class="bt-project">Strategie 2027 voorbereiden</td><td><span class="bt-status bt-planned">⏳ Gepland</span></td><td>€ 4.000</td><td>-</td><td><span style="color:var(--text-muted)">-</span></td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-<tr class="budget-total-row"><td>Totaal Richting</td><td>7 projecten</td><td>€ 24.000</td><td>€ 2.700</td><td><div class="budget-prog-bar"><div class="budget-prog-fill" style="width:11%;background:var(--accent)"></div></div>11%</td><td><span class="bt-prognose bt-on">Op schema</span></td></tr>
-</tbody></table></div></div>
-</div>
-<div style="background:var(--bg);border-radius:var(--radius);padding:16px;margin-top:16px"><div style="font-size:13px;color:var(--text-sec);line-height:1.6">
-<strong>💡 Toelichting</strong><br>
-Budgetten zijn indicatief en gebaseerd op marktgemiddelden voor MKB-organisaties (200-500 medewerkers). 
-Werkelijke kosten hangen af van uw huidige situatie, licentiemodel en interne capaciteit. 
-Projecten uit de <a href="#" onclick="goStep('step-results');return false" style="color:var(--blue)">Strategische Roadmap</a> zijn hier vertaald naar budget-regels.
-</div></div>
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
-<button class="btn btn-primary" onclick="goStep('step-results')">📊 Naar Resultaten</button>
-<button class="btn btn-outline" onclick="openM('m-pres')">📊 Presentatie</button>
-</div></div>
-
-<!-- ===== INTEGRATIES ===== -->
 <div class="step" id="step-integrations">
 <div class="step-badge" style="background:var(--purple-bg);color:var(--purple)">🔗 Integraties</div>
 <h2>Navigator groeit met u mee</h2>
@@ -1834,7 +1594,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
-const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-results':'Resultaten','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
+const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-dashboard':'Dashboard','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
 
 function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
 
@@ -1902,6 +1662,9 @@ function spSend(){
 
 // Expandable insight cards
 function toggleCard(id){document.getElementById(id).classList.toggle('open')}
+function dbTab(id,btn){document.querySelectorAll('.db-tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.db-pan').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');var p=document.getElementById(id);if(p)p.classList.add('active')}
+function dtog(n){document.getElementById('dl'+n).classList.toggle('open')}
+function dltab(n,t,btn){var c=document.getElementById('dl'+n);c.querySelectorAll('.dlc-tab').forEach(function(x){x.classList.remove('active')});c.querySelectorAll('.dlc-pan').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');var p=document.getElementById('dl'+n+t);if(p)p.classList.add('active')}
 function filterNews(cat,btn){
   document.querySelectorAll('.news-filter-btn').forEach(function(b){b.classList.remove('active')});
   btn.classList.add('active');
@@ -1947,7 +1710,7 @@ function setRole(role,btn){
     if(role==='all'){ind.style.display='none'}
     else{ind.style.display='block';ind.textContent=roleNames[role]||role}
   }
-  var rsList=['rs-results','rs-news','rs-budget'];
+  var rsList=['rs-dashboard','rs-news','rs-budget'];
   for(var i=0;i<rsList.length;i++){
     var el=document.getElementById(rsList[i]);
     if(el){
@@ -1965,7 +1728,7 @@ function setRole(role,btn){
     } else if(roles && roles.indexOf(role)!==-1){
       el.classList.remove('role-dimmed');
       el.classList.add('role-highlight');
-      el.setAttribute('data-role-label',roleNames[role]||role);
+            el.setAttribute('data-role-label',roleNames[role]||role);
     } else {
       el.classList.remove('role-highlight');
       el.classList.add('role-dimmed');
