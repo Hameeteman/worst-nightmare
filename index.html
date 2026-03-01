@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navigator — Uw digitale toekomst, stap voor stap</title>
+<title>OrgHealth — Organizational Health Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -776,27 +776,151 @@ body.role-active .sidebar-role-indicator{display:block}
 .dlc-brv{text-align:right;min-width:55px;font-variant-numeric:tabular-nums}
 .dlc-brbar{width:50px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .dlc-brbar-f{height:100%;border-radius:2px}
+/* Source badges */
+.src-hand{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;background:#eee;color:#555;letter-spacing:.2px}
+.src-m365{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--blue-bg);color:var(--blue);letter-spacing:.2px}
+.src-ext{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--purple-bg);color:var(--purple);letter-spacing:.2px}
+.dlc-src{font-size:10px;color:var(--text-muted);margin-top:3px;display:flex;align-items:center;gap:6px}
+
+/* Activity page */
+.act-filter{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.act-fl{padding:6px 12px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;color:var(--text-sec);background:var(--white,#fff);transition:all .12s}
+.act-fl:hover{border-color:var(--blue-border)}
+.act-fl.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+.act-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+@media(max-width:600px){.act-summary{grid-template-columns:1fr 1fr}}
+.act-sc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.act-sv{font-size:22px;font-weight:800}
+.act-sl{font-size:10px;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.act-timeline{position:relative;padding-left:20px}
+.act-timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border)}
+.act-date{font-size:11px;font-weight:700;color:var(--text-muted);margin:20px 0 8px -20px;text-transform:uppercase;letter-spacing:.5px;background:var(--bg);display:inline-block;padding:3px 10px;border-radius:4px}
+.act-entry{position:relative;display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
+.act-entry:last-child{border-bottom:none}
+.act-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;position:relative;z-index:1}
+.act-info{flex:1;min-width:0}
+.act-layer{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.act-what{font-size:13px;color:var(--text);line-height:1.5;margin-bottom:4px}
+.act-meta{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.act-legend{background:var(--bg);border-radius:8px;padding:16px;margin-top:24px}
+.act-legend h5{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px}
+.act-leg-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;color:var(--text-sec);line-height:1.5}
+/* Per-layer log */
+.dlc-log{display:flex;flex-direction:column;gap:0}
+.dlc-le{display:grid;grid-template-columns:60px 1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:start}
+.dlc-le:last-child{border-bottom:none}
+.dlc-led{font-weight:700;color:var(--text-muted);font-size:11px;white-space:nowrap}
+.dlc-lew{color:var(--text);line-height:1.5}
+.dlc-lem{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text-muted);white-space:nowrap}
+/* 7 Lagen Model */
+.model-stack{display:flex;flex-direction:column;gap:0;margin:20px 0}
+.model-layer{display:flex;gap:14px;padding:16px 18px;border:1px solid var(--border);border-bottom:none;background:var(--card);transition:all .15s}
+.model-layer:first-child{border-radius:var(--radius) var(--radius) 0 0}
+.model-layer:last-child{border-bottom:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)}
+.model-layer:hover{background:var(--bg)}
+.ml-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0;color:#fff}
+.ml7 .ml-num{background:var(--text-muted)}.ml6 .ml-num{background:#e67e22}.ml5 .ml-num{background:var(--green)}.ml4 .ml-num{background:var(--purple)}.ml3 .ml-num{background:#e67e22}.ml2 .ml-num{background:var(--accent)}.ml1 .ml-num{background:var(--blue)}
+.ml-info{flex:1;min-width:0}
+.ml-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.ml-what{font-size:12px;color:var(--text-sec);margin-bottom:6px}
+.ml-why{font-size:12px;color:var(--text-sec);line-height:1.6;margin-bottom:4px}
+.ml-src{font-size:10px;color:var(--text-muted);font-style:italic}
+/* Teams Hub */
+.th-status{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:600px){.th-status{grid-template-columns:1fr 1fr}}
+.th-sc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.th-sv{font-size:22px;font-weight:800}
+.th-sl{font-size:10px;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.th-team-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#7B83EB11;border:1px solid #7B83EB33;border-radius:var(--radius);margin-bottom:16px}
+.th-team-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0}
+.th-team-info{flex:1}
+.th-team-name{font-size:14px;font-weight:700}
+.th-team-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
+.th-open-teams{font-size:12px;color:#7B83EB;font-weight:600;text-decoration:none;white-space:nowrap}
+.th-open-teams:hover{text-decoration:underline}
+.th-ch{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;background:var(--card);overflow:hidden;transition:all .15s}
+.th-ch.open{box-shadow:var(--shadow)}
+.th-ch-hdr{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:background .12s}
+.th-ch-hdr:hover{background:var(--bg)}
+.th-ch-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.th-ch-name{font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;flex:1}
+.th-ch-layer{font-size:11px;color:var(--text-muted);padding:2px 8px;background:var(--bg);border-radius:4px}
+.th-ch-unread{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:2px 7px;border-radius:10px;min-width:18px;text-align:center}
+.th-ch-chev{font-size:10px;color:var(--text-muted);transition:transform .15s}
+.th-ch.open .th-ch-chev{transform:rotate(180deg)}
+.th-ch-body{display:none;border-top:1px solid var(--border);padding:0}
+.th-ch.open .th-ch-body{display:block}
+.th-msg{display:flex;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.th-msg:last-of-type{border-bottom:none}
+.th-msg-new{background:#7B83EB08}
+.th-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0}
+.th-msg-body{flex:1;min-width:0}
+.th-msg-hdr{font-size:12px;margin-bottom:4px}
+.th-msg-hdr strong{font-size:13px}
+.th-msg-time{color:var(--text-muted);font-size:11px;margin-left:6px}
+.th-msg-txt{font-size:13px;color:var(--text);line-height:1.6}
+.th-msg-react{display:flex;gap:6px;margin-top:6px}
+.th-react{font-size:11px;padding:2px 8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;cursor:default}
+.th-badge-new{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;background:#7B83EB22;color:#7B83EB;text-transform:uppercase;letter-spacing:.3px;margin-left:4px}
+.th-badge-alert{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--red-bg);color:var(--red);text-transform:uppercase;letter-spacing:.3px;margin-left:4px}
+.th-reply-bar{display:flex;gap:8px;padding:8px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.th-reply-input{flex:1;border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;background:var(--card);color:var(--text-muted)}
+.th-reply-btn{font-size:11px;font-weight:600;color:#7B83EB;background:none;border:1px solid #7B83EB44;border-radius:6px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.th-reply-btn:hover{background:#7B83EB11}
+/* Billing */
+.bill-toggle{display:flex;gap:0;background:var(--bg);border-radius:8px;padding:3px;margin-bottom:24px;width:fit-content}
+.bill-tg{padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text-sec);transition:all .12s}
+.bill-tg.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
+.bill-save{font-size:10px;font-weight:700;color:var(--green);background:var(--green-bg);padding:2px 6px;border-radius:3px;margin-left:4px}
+.bill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+@media(max-width:900px){.bill-grid{grid-template-columns:1fr}}
+.bill-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:relative;transition:all .15s}
+.bill-card:hover{box-shadow:var(--shadow)}
+.bill-pop{border:2px solid var(--blue);box-shadow:var(--shadow)}
+.bill-pop-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:10px;white-space:nowrap;text-transform:uppercase;letter-spacing:.4px}
+.bill-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;background:var(--bg);color:var(--text-muted);display:inline-block;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
+.bill-name{font-size:22px;font-weight:800;margin-bottom:6px}
+.bill-desc{font-size:13px;color:var(--text-sec);line-height:1.6;margin-bottom:16px;min-height:48px}
+.bill-price{display:flex;align-items:baseline;gap:2px}
+.bill-cur{font-size:18px;font-weight:700;color:var(--text-sec)}
+.bill-amount{font-size:36px;font-weight:900;line-height:1}
+.bill-per{font-size:11px;color:var(--text-muted);margin-top:4px;height:16px}
+.bill-features{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.bill-feat{font-size:12px;color:var(--text);line-height:1.5;padding:3px 0}
+.bill-feat.dim{color:var(--text-muted)}
+.bill-feat strong{font-weight:700}
+.bill-ideal{font-size:11px;color:var(--text-muted);margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-style:italic;line-height:1.5}
+.bill-compare{margin-top:8px}
+.bill-table{width:100%;border-collapse:collapse;font-size:12px}
+.bill-table th{text-align:left;padding:8px 12px;background:var(--bg);font-weight:700;border-bottom:2px solid var(--border)}
+.bill-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-sec)}
+.bill-table td:first-child{font-weight:600;color:var(--text)}
+.bill-table tr:hover td{background:var(--bg)}
+.bill-faq{display:flex;flex-direction:column;gap:10px}
+.bill-fq{font-size:12px;color:var(--text-sec);line-height:1.6;padding:8px 0;border-bottom:1px solid var(--border)}
+.bill-fq:last-child{border-bottom:none}
+.bill-fq strong{color:var(--text);display:block;margin-bottom:2px}
 </style>
 </head>
 <body>
 
 <!-- WELCOME -->
 <div class="screen active" id="screen-welcome">
-  <div class="welcome-wrap"><div class="topbar-brand"><div class="mark">N</div> Navigator</div><div class="privacy-badge">🔒 Uw data blijft van u</div></div>
+  <div class="welcome-wrap"><div class="topbar-brand"><div class="mark">OH</div> OrgHealth</div><div class="privacy-badge">🔒 Uw data blijft van u</div></div>
   <div class="welcome-hero">
-    <h1>Uw organisatie. Uw strategie.<br>Uw keuzes.</h1>
-    <p class="subtitle">AI verandert alles. Europa stelt nieuwe regels. Grote techbedrijven bepalen steeds meer. Maar úw digitale toekomst bepaalt u zelf. Hier bouwt u — stap voor stap — uw eigen strategie.</p>
-    <button class="btn btn-primary" onclick="go('screen-intro')" style="padding:14px 32px;font-size:16px">Begin uw verkenning →</button>
-    <div style="margin-top:10px"><button class="btn btn-ghost" onclick="go('screen-app')">Ik heb al een account</button></div>
+    <h1>Uw organisatie. Uw gezondheid.<br>Uw keuzes.</h1>
+    <p class="subtitle">Hoe gezond is uw digitale organisatie? OrgHealth meet, volgt en visualiseert uw organizational health over 7 lagen — van werkplek tot strategie. Gevoed door assessments, systeemsnapshots en handmatige input.</p>
+    <button class="btn btn-primary" onclick="go('screen-app')" style="padding:14px 32px;font-size:16px">Open Dashboard →</button>
+    <div style="margin-top:10px"><button class="btn btn-ghost" onclick="go('screen-intro')">Start kickstart-assessment</button></div>
     <div class="promise-cards">
-      <div class="promise-card"><div class="p-icon">🤖</div><h3>AI op uw voorwaarden</h3><p>Ontdek wat AI kan betekenen — zonder afhankelijk te worden.</p></div>
-      <div class="promise-card"><div class="p-icon">🇪🇺</div><h3>Europese spelregels</h3><p>AI Act, NIS2, DORA — weet waar u aan toe bent.</p></div>
-      <div class="promise-card"><div class="p-icon">🧭</div><h3>Uw eigen koers</h3><p>Geen verkooppraatje. Een strategie die bij ú past.</p></div>
+      <div class="promise-card"><div class="p-icon">📊</div><h3>Levend overzicht</h3><p>Score per laag, gevoed door projecten, systemen en handmatige input.</p></div>
+      <div class="promise-card"><div class="p-icon">🔍</div><h3>Transparante bronnen</h3><p>Bij elke datapunt ziet u wanneer, door wie en vanuit welk systeem.</p></div>
+      <div class="promise-card"><div class="p-icon">🧭</div><h3>7-lagen model</h3><p>Van werkplek tot strategie — compleet beeld van uw organizational health.</p></div>
     </div>
     <div class="trust-row"><div class="trust-item">🔒 Data blijft van u</div><div class="trust-item">🇪🇺 Opgeslagen in Europa</div><div class="trust-item">⏱ 15 minuten</div><div class="trust-item">🏛️ Onafhankelijk advies</div></div>
     <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:center;gap:24px;flex-wrap:wrap">
       <a href="#" onclick="go('screen-app');goStep('step-news');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📰 Nieuws</a>
-      <a href="#" onclick="go('screen-app');goStep('step-about');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🏛️ Over Navigator</a>
+      <a href="#" onclick="go('screen-app');goStep('step-about');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🏛️ Over</a>
       <a href="#" onclick="go('screen-app');goStep('step-sources');return false" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📚 Bronnen & methodiek</a>
       <a href="#" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">🔒 Privacybeleid</a>
       <a href="#" style="font-size:13px;color:var(--text-sec);text-decoration:none;display:flex;align-items:center;gap:5px">📧 Contact</a>
@@ -806,7 +930,7 @@ body.role-active .sidebar-role-indicator{display:block}
 
 <!-- INTRO -->
 <div class="screen" id="screen-intro">
-  <div class="topbar"><div class="topbar-brand" onclick="go('screen-welcome')"><div class="mark">N</div> Navigator</div><div class="topbar-right"><div class="privacy-badge">🔒 Uw data blijft van u</div></div></div>
+  <div class="topbar"><div class="topbar-brand" onclick="go('screen-welcome')"><div class="mark">OH</div> OrgHealth</div><div class="topbar-right"><div class="privacy-badge">🔒 Uw data blijft van u</div></div></div>
   <div style="padding-top:80px">
     <div class="intro-container">
       <div style="text-align:center;margin-bottom:32px"><div style="font-size:44px;margin-bottom:14px">👋</div><h2 style="font-size:24px;margin-bottom:10px">Fijn dat u er bent</h2><p style="color:var(--text-sec)">Korte kennismaking zodat we afstemmen op uw situatie.</p></div>
@@ -823,7 +947,7 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="screen" id="screen-app">
   <div class="topbar" style="height:auto;flex-direction:column;align-items:stretch">
     <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 24px">
-      <div class="topbar-brand"><div class="mark">N</div> Navigator</div>
+      <div class="topbar-brand"><div class="mark">OH</div> OrgHealth</div>
       <div class="topbar-right">
         <button class="topbar-btn" onclick="openM('m-pres')">📊 Presentatie</button>
         <div class="privacy-badge">🔒 Versleuteld</div>
@@ -841,29 +965,36 @@ body.role-active .sidebar-role-indicator{display:block}
   </div>
   <div class="app-layout">
     <div class="sidebar">
-      <div class="sidebar-progress"><div class="prog-label">Verkenning</div><div class="prog-pct" id="prog-pct">0%</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div></div>
       <div class="sidebar-role-indicator" id="sidebar-role-ind"></div>
-      <div class="sidebar-label">7 lagen</div>
-      <div class="sidebar-item active" data-step="step-1" onclick="goStep('step-1')"><div class="s-dot"></div>1. Platform</div>
-      <div class="sidebar-item" data-step="step-2" onclick="goStep('step-2')"><div class="s-dot"></div>2. Bescherming</div>
-      <div class="sidebar-item" data-step="step-3" onclick="goStep('step-3')"><div class="s-dot"></div>3. Informatie</div>
-      <div class="sidebar-item" data-step="step-4" onclick="goStep('step-4')"><div class="s-dot"></div>4. Intelligentie</div>
-      <div class="sidebar-item" data-step="step-5" onclick="goStep('step-5')"><div class="s-dot"></div>5. Mens</div>
-      <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Organisatie</div>
-      <div class="sidebar-item" data-step="step-7" onclick="goStep('step-7')"><div class="s-dot"></div>7. Richting</div>
-      <div class="sidebar-label">Extra</div>
-      <div class="sidebar-item" data-step="step-dashboard" onclick="goStep('step-dashboard')"><div class="s-dot"></div>📊 Dashboard</div>
-      <div class="sidebar-item" data-step="step-integrations" onclick="goStep('step-integrations')"><div class="s-dot"></div>🔗 Integraties</div>
-      <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
+      <div class="sidebar-label" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="var el=document.getElementById('assess-items');el.style.display=el.style.display==='none'?'block':'none';this.querySelector('.sb-chev').textContent=el.style.display==='none'?'▶':'▼'">Assessment <span class="sb-chev" style="font-size:9px">▼</span></div>
+      <div id="assess-items">
+        <div class="sidebar-progress"><div class="prog-label">Kickstart-verkenning</div><div class="prog-pct" id="prog-pct">0%</div><div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div></div>
+        <div class="sidebar-item" data-step="step-1" onclick="goStep('step-1')"><div class="s-dot"></div>1. Platform</div>
+        <div class="sidebar-item" data-step="step-2" onclick="goStep('step-2')"><div class="s-dot"></div>2. Bescherming</div>
+        <div class="sidebar-item" data-step="step-3" onclick="goStep('step-3')"><div class="s-dot"></div>3. Informatie</div>
+        <div class="sidebar-item" data-step="step-4" onclick="goStep('step-4')"><div class="s-dot"></div>4. Intelligentie</div>
+        <div class="sidebar-item" data-step="step-5" onclick="goStep('step-5')"><div class="s-dot"></div>5. Mens</div>
+        <div class="sidebar-item" data-step="step-6" onclick="goStep('step-6')"><div class="s-dot"></div>6. Organisatie</div>
+        <div class="sidebar-item" data-step="step-7" onclick="goStep('step-7')"><div class="s-dot"></div>7. Richting</div>
+      </div>
+      <div class="sidebar-label">Overzicht</div>
+      <div class="sidebar-item active" data-step="step-dashboard" onclick="goStep('step-dashboard')"><div class="s-dot"></div>📊 Dashboard</div>
+      <div class="sidebar-item" data-step="step-activity" onclick="goStep('step-activity')"><div class="s-dot"></div>📋 Activiteit</div>
+      <div class="sidebar-item" data-step="step-integrations" onclick="goStep('step-integrations')"><div class="s-dot"></div>🔗 Koppelingen</div>
       <div class="sidebar-label">Info</div>
+      <div class="sidebar-item" data-step="step-model" onclick="goStep('step-model')"><div class="s-dot"></div>🧱 7 Lagen Model</div>
       <div class="sidebar-item" data-step="step-news" onclick="goStep('step-news')"><div class="s-dot"></div>📰 Nieuws</div>
-      <div class="sidebar-item" data-step="step-about" onclick="goStep('step-about')"><div class="s-dot"></div>🏛️ Over Navigator</div>
+      <div class="sidebar-item" data-step="step-about" onclick="goStep('step-about')"><div class="s-dot"></div>🏛️ Over</div>
       <div class="sidebar-item" data-step="step-sources" onclick="goStep('step-sources')"><div class="s-dot"></div>📚 Bronnen</div>
+      <div class="sidebar-label">Extra</div>
+      <div class="sidebar-item" data-step="step-teams" onclick="goStep('step-teams')"><div class="s-dot"></div>💬 Teams Hub</div>
+      <div class="sidebar-item" onclick="openM('m-pres')"><div class="s-dot"></div>📑 Presentatie</div>
+      <div class="sidebar-item" data-step="step-billing" onclick="goStep('step-billing')"><div class="s-dot"></div>💳 Abonnement</div>
     </div>
 
     <div class="main-area">
 
-<!-- STEP 1 --><div class="step active" id="step-1">
+<!-- STEP 1 --><div class="step" id="step-1">
 <div class="step-badge">Laag 1 van 7 · Platform</div><h2>Werkt uw digitale werkplek?</h2>
 <p class="step-desc">We beginnen bij het fundament. Zonder werkende, gestandaardiseerde werkplek is alles erboven instabiel.</p>
 <div class="context-box"><div class="c-icon">💡</div><div class="c-body"><strong>Waarom dit belangrijk is:</strong> 67% van MKB-organisaties heeft onvoldoende inzicht in hun IT-omgeving.<div class="c-source">Bron: OECD SME Digital Gap Report 2025 · Microsoft Work Trend Index 2025</div></div></div>
@@ -932,10 +1063,10 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- ===== DASHBOARD (replaces old results+budget+health) ===== -->
-<div class="step" id="step-dashboard">
-<div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Dashboard</div>
-<h2>Uw digitale gezondheid</h2>
-<p class="step-desc">Alles in één overzicht: score, projecten en budget per laag.</p>
+<div class="step active" id="step-dashboard">
+<div class="step-badge" style="background:var(--green-bg);color:var(--green)">📊 Organizational Health</div>
+<h2>Digitale organisatiegezondheid</h2>
+<p class="step-desc">Levend overzicht vanuit projecten, systemen en handmatige input — per laag, met herkomst en datum.</p>
 <div class="role-summary" id="rs-dashboard"></div>
 
 <!-- OVERALL -->
@@ -1006,9 +1137,9 @@ body.role-active .sidebar-role-indicator{display:block}
 
 <!-- L1: PLATFORM -->
 <div class="dlc open" id="dl1">
-  <div class="dlc-hdr" onclick="dtog(1)"><div class="dlc-dot" style="background:var(--blue)"></div><div class="dlc-info"><div class="dlc-name">💻 1. Platform</div><div class="dlc-sub">Werkplek, devices, configuratie</div></div><div class="dlc-score" style="color:var(--blue)">6.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+12%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:50%;background:var(--blue);opacity:.3"></i><i style="height:56%;background:var(--blue);opacity:.4"></i><i style="height:63%;background:var(--blue);opacity:.5"></i><i style="height:69%;background:var(--blue);opacity:.65"></i><i style="height:75%;background:var(--blue);opacity:.8"></i><i style="height:82%;background:var(--blue)"></i></div><div class="dlc-chev">▼</div></div>
+  <div class="dlc-hdr" onclick="dtog(1)"><div class="dlc-dot" style="background:var(--blue)"></div><div class="dlc-info"><div class="dlc-name">💻 1. Platform</div><div class="dlc-sub">Werkplek, devices, configuratie</div><div class="dlc-src">Bijgewerkt 28 feb · <span class="src-m365">M365</span> <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--blue)">6.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+12%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:50%;background:var(--blue);opacity:.3"></i><i style="height:56%;background:var(--blue);opacity:.4"></i><i style="height:63%;background:var(--blue);opacity:.5"></i><i style="height:69%;background:var(--blue);opacity:.65"></i><i style="height:75%;background:var(--blue);opacity:.8"></i><i style="height:82%;background:var(--blue)"></i></div><div class="dlc-chev">▼</div></div>
   <div class="dlc-body">
-    <div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(1,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(1,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(1,'b',this)">💶 Budget</div></div>
+    <div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(1,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(1,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(1,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(1,'l',this)">📋 Log</div></div>
     <div class="dlc-pan active" id="dl1h">
       <div class="dlc-chart"><div class="dlc-cg"><div class="dlc-cv">4.0</div><div class="dlc-cb" style="height:50px;background:var(--blue);opacity:.3"></div></div><div class="dlc-cg"><div class="dlc-cv">4.5</div><div class="dlc-cb" style="height:56px;background:var(--blue);opacity:.4"></div></div><div class="dlc-cg"><div class="dlc-cv">5.0</div><div class="dlc-cb" style="height:63px;background:var(--blue);opacity:.5"></div></div><div class="dlc-cg"><div class="dlc-cv">5.5</div><div class="dlc-cb" style="height:69px;background:var(--blue);opacity:.65"></div></div><div class="dlc-cg"><div class="dlc-cv">6.0</div><div class="dlc-cb" style="height:75px;background:var(--blue);opacity:.8"></div></div><div class="dlc-cg"><div class="dlc-cv">6.5</div><div class="dlc-cb" style="height:82px;background:var(--blue)"></div></div></div>
       <div class="dlc-tl"><span>Sep</span><span>Okt</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span></div>
@@ -1016,26 +1147,35 @@ body.role-active .sidebar-role-indicator{display:block}
     </div>
     <div class="dlc-pan" id="dl1p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ M365 inventarisatie</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Werkplek-standaard</div><div class="dlc-pp dlc-ppa">▶ Cloud PC pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q2 '26</div><div class="dlc-pp dlc-ppp">Cloud PC uitrol</div><div class="dlc-pp dlc-ppp">Intune</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-Ready werkplek</div></div></div></div>
     <div class="dlc-pan" id="dl1b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 105k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 15.9k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div></div></div><div class="dlc-br"><div class="dlc-brn">M365 inventarisatie</div><div class="dlc-brv">€ 2.5k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:100%;background:var(--green)"></div></div><span class="db-flag db-fgr">Onder</span></div><div class="dlc-br"><div class="dlc-brn">Werkplek-standaard</div><div class="dlc-brv">€ 18k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:55%;background:var(--blue)"></div></div><span class="db-flag db-fok">OK</span></div><div class="dlc-br dlc-brt"><div class="dlc-brn">Totaal</div><div class="dlc-brv">€ 105k</div><div class="dlc-brbar"><div class="dlc-brbar-f" style="width:15%;background:var(--blue)"></div></div><span class="db-flag db-fok">OK</span></div></div>
+    <div class="dlc-pan" id="dl1l">
+      <div class="dlc-log">
+        <div class="dlc-le"><div class="dlc-led">28 feb</div><div class="dlc-lew">Cloud PC pilot: 8/10 gebruikers succesvol</div><div class="dlc-lem"><span class="src-m365">M365</span> Intune</div></div>
+        <div class="dlc-le"><div class="dlc-led">28 feb</div><div class="dlc-lew">3 ongebruikte E5-licenties gedetecteerd</div><div class="dlc-lem"><span class="src-m365">M365</span> Admin center</div></div>
+        <div class="dlc-le"><div class="dlc-led">21 feb</div><div class="dlc-lew">Werkplek-standaard template goedgekeurd</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div>
+        <div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Platform score 6.0</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div>
+        <div class="dlc-le"><div class="dlc-led">10 feb</div><div class="dlc-lew">M365 licentie-inventarisatie voltooid</div><div class="dlc-lem"><span class="src-m365">M365</span> Admin center</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- L2: BESCHERMING -->
-<div class="dlc" id="dl2"><div class="dlc-hdr" onclick="dtog(2)"><div class="dlc-dot" style="background:var(--accent)"></div><div class="dlc-info"><div class="dlc-name">🛡️ 2. Bescherming</div><div class="dlc-sub">Beveiliging, compliance, NIS2</div></div><div class="dlc-score" style="color:var(--accent)">5.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+8%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.5"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(2,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(2,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(2,'b',this)">💶 Budget</div></div><div class="dlc-pan active" id="dl2h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>NIS2 gap-analyse</strong> — Deadline nadert</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Info protection labels</strong> — Voorwaarde AI</div></div></div></div><div class="dlc-pan" id="dl2p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ MFA</div><div class="dlc-pp dlc-ppd">✅ AVG</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ NIS2</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Labels</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-register</div></div></div></div><div class="dlc-pan" id="dl2b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 52k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 12.5k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">24%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl2"><div class="dlc-hdr" onclick="dtog(2)"><div class="dlc-dot" style="background:var(--accent)"></div><div class="dlc-info"><div class="dlc-name">🛡️ 2. Bescherming</div><div class="dlc-sub">Beveiliging, compliance, NIS2</div><div class="dlc-src">Bijgewerkt 25 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">5.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+8%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:44%;background:var(--accent);opacity:.3"></i><i style="height:48%;background:var(--accent);opacity:.5"></i><i style="height:50%;background:var(--accent);opacity:.6"></i><i style="height:56%;background:var(--accent);opacity:.7"></i><i style="height:60%;background:var(--accent);opacity:.85"></i><i style="height:65%;background:var(--accent)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(2,'h',this)">📈 Gezondheid</div><div class="dlc-tab" onclick="dltab(2,'p',this)">🗺️ Projecten</div><div class="dlc-tab" onclick="dltab(2,'b',this)">💶 Budget</div><div class="dlc-tab" onclick="dltab(2,'l',this)">📋 Log</div></div><div class="dlc-pan active" id="dl2h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>NIS2 gap-analyse</strong> — Deadline nadert</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Info protection labels</strong> — Voorwaarde AI</div></div></div></div><div class="dlc-pan" id="dl2p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4 '25</div><div class="dlc-pp dlc-ppd">✅ MFA</div><div class="dlc-pp dlc-ppd">✅ AVG</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 '26 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ NIS2</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Labels</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">AI-register</div></div></div></div><div class="dlc-pan" id="dl2b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 52k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 12.5k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">24%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl2l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">25 feb</div><div class="dlc-lew">NIS2 gap-analyse gestart, eerste resultaten verwacht 15 mrt</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> M. Bakker</div></div><div class="dlc-le"><div class="dlc-led">18 feb</div><div class="dlc-lew">MFA-status: 100% uitgerold op alle accounts</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Entra ID</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Bescherming score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <!-- L3: INFORMATIE -->
-<div class="dlc" id="dl3"><div class="dlc-hdr" onclick="dtog(3)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">📁 3. Informatie</div><div class="dlc-sub">Data-kwaliteit, rechten</div></div><div class="dlc-score" style="color:var(--red)">4.2</div><div class="dlc-meta"><span class="dlc-trend tr-down">↓-3%</span><span class="dlc-st st-alert">Kritiek</span></div><div class="dlc-spark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.5"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(3,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(3,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(3,'b',this)">💶</div></div><div class="dlc-pan active" id="dl3h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert AI</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Rechtenstructuur</strong> — Basis Copilot</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Data opschoning</strong> — Verouderde docs</div></div></div></div><div class="dlc-pan" id="dl3p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ SP scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Rechten</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Opschoning</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Data-ready</div></div></div></div><div class="dlc-pan" id="dl3b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 55k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 8.2k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl3"><div class="dlc-hdr" onclick="dtog(3)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">📁 3. Informatie</div><div class="dlc-sub">Data-kwaliteit, rechten</div><div class="dlc-src">Bijgewerkt 20 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--red)">4.2</div><div class="dlc-meta"><span class="dlc-trend tr-down">↓-3%</span><span class="dlc-st st-alert">Kritiek</span></div><div class="dlc-spark"><i style="height:50%;background:#e67e22;opacity:.3"></i><i style="height:53%;background:#e67e22;opacity:.5"></i><i style="height:56%;background:#e67e22;opacity:.6"></i><i style="height:54%;background:#e67e22;opacity:.7"></i><i style="height:50%;background:#e67e22;opacity:.85"></i><i style="height:53%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(3,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(3,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(3,'b',this)">💶</div><div class="dlc-tab" onclick="dltab(3,'l',this)">📋</div></div><div class="dlc-pan active" id="dl3h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert AI</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Rechtenstructuur</strong> — Basis Copilot</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Data opschoning</strong> — Verouderde docs</div></div></div></div><div class="dlc-pan" id="dl3p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ SP scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Rechten</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Opschoning</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Data-ready</div></div></div></div><div class="dlc-pan" id="dl3b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 55k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 8.2k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">15%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl3l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">SharePoint: 12.400 docs, 38% ouder dan 3 jaar</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> SharePoint Admin</div></div><div class="dlc-le"><div class="dlc-led">20 feb</div><div class="dlc-lew">Sensitivity labels: 0% gelabeld (vereist voor Copilot)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Purview</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Informatie score 4.2</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <!-- L4: INTELLIGENTIE -->
-<div class="dlc" id="dl4"><div class="dlc-hdr" onclick="dtog(4)"><div class="dlc-dot" style="background:var(--purple)"></div><div class="dlc-info"><div class="dlc-name">🧠 4. Intelligentie</div><div class="dlc-sub">AI-beleid, Copilot, agents</div></div><div class="dlc-score" style="color:var(--purple)">3.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+22%</span><span class="dlc-st st-good">Snelle groei</span></div><div class="dlc-spark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.5"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(4,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(4,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(4,'b',this)">💶</div></div><div class="dlc-pan active" id="dl4h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-beleid</strong> — Governance eerst</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid</strong> — Wettelijk verplicht</div></div></div></div><div class="dlc-pan" id="dl4p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ AI-scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ AI-beleid</div><div class="dlc-pp dlc-ppw">⚠ Geletterdheid</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Copilot pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Uitrol+Agents</div></div></div></div><div class="dlc-pan" id="dl4b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 93k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 7.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">8%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl4"><div class="dlc-hdr" onclick="dtog(4)"><div class="dlc-dot" style="background:var(--purple)"></div><div class="dlc-info"><div class="dlc-name">🧠 4. Intelligentie</div><div class="dlc-sub">AI-beleid, Copilot, agents</div><div class="dlc-src">Bijgewerkt 27 feb · <span class="src-hand">Handmatig</span> <span class="src-ext">Extern</span></div></div><div class="dlc-score" style="color:var(--purple)">3.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+22%</span><span class="dlc-st st-good">Snelle groei</span></div><div class="dlc-spark"><i style="height:19%;background:var(--purple);opacity:.3"></i><i style="height:25%;background:var(--purple);opacity:.5"></i><i style="height:28%;background:var(--purple);opacity:.6"></i><i style="height:31%;background:var(--purple);opacity:.7"></i><i style="height:38%;background:var(--purple);opacity:.85"></i><i style="height:44%;background:var(--purple)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(4,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(4,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(4,'b',this)">💶</div><div class="dlc-tab" onclick="dltab(4,'l',this)">📋</div></div><div class="dlc-pan active" id="dl4h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-beleid</strong> — Governance eerst</div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid</strong> — Wettelijk verplicht</div></div></div></div><div class="dlc-pan" id="dl4p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ AI-scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ AI-beleid</div><div class="dlc-pp dlc-ppw">⚠ Geletterdheid</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Copilot pilot</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Uitrol+Agents</div></div></div></div><div class="dlc-pan" id="dl4b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 93k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 7.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">8%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl4l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-beleidsdocument v1.0 afgerond</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> J. de Groot</div></div><div class="dlc-le"><div class="dlc-led">27 feb</div><div class="dlc-lew">AI-geletterdheidstoets: 14/55 voltooid (25%)</div><div class="dlc-lem"><span class="src-ext">Extern</span> LMS</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Intelligentie score 2.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <!-- L5: MENS -->
-<div class="dlc" id="dl5"><div class="dlc-hdr" onclick="dtog(5)"><div class="dlc-dot" style="background:var(--green)"></div><div class="dlc-info"><div class="dlc-name">👥 5. Mens</div><div class="dlc-sub">Training, adoptie, champions</div></div><div class="dlc-score" style="color:var(--green)">5.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+15%</span><span class="dlc-st st-great">Goed op weg</span></div><div class="dlc-spark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.5"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(5,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(5,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(5,'b',this)">💶</div></div><div class="dlc-pan active" id="dl5h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid uitbreiden</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Champions-netwerk</strong></div></div></div></div><div class="dlc-pan" id="dl5p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT training</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Allen trainen</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Adoptie</div></div></div></div><div class="dlc-pan" id="dl5b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 48k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 5.3k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl5"><div class="dlc-hdr" onclick="dtog(5)"><div class="dlc-dot" style="background:var(--green)"></div><div class="dlc-info"><div class="dlc-name">👥 5. Mens</div><div class="dlc-sub">Training, adoptie, champions</div><div class="dlc-src">Bijgewerkt 26 feb · <span class="src-m365">M365</span></div></div><div class="dlc-score" style="color:var(--green)">5.5</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+15%</span><span class="dlc-st st-great">Goed op weg</span></div><div class="dlc-spark"><i style="height:44%;background:var(--green);opacity:.3"></i><i style="height:50%;background:var(--green);opacity:.5"></i><i style="height:53%;background:var(--green);opacity:.6"></i><i style="height:60%;background:var(--green);opacity:.7"></i><i style="height:65%;background:var(--green);opacity:.85"></i><i style="height:69%;background:var(--green)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(5,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(5,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(5,'b',this)">💶</div><div class="dlc-tab" onclick="dltab(5,'l',this)">📋</div></div><div class="dlc-pan active" id="dl5h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-geletterdheid uitbreiden</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Champions-netwerk</strong></div></div></div></div><div class="dlc-pan" id="dl5p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Scan</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT training</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Allen trainen</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Adoptie</div></div></div></div><div class="dlc-pan" id="dl5b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 48k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 5.3k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl5l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Teams-adoptie gestegen van 72% naar 78%</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Usage reports</div></div><div class="dlc-le"><div class="dlc-led">26 feb</div><div class="dlc-lew">Copilot: 340 prompts afgelopen week (+15%)</div><div class="dlc-lem"><span class="src-m365">Microsoft 365</span> Copilot dashboard</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Mens score 4.8</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <!-- L6: ORGANISATIE -->
-<div class="dlc" id="dl6"><div class="dlc-hdr" onclick="dtog(6)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">🏢 6. Organisatie</div><div class="dlc-sub">Governance, processen</div></div><div class="dlc-score" style="color:var(--accent)">3.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+5%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.5"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(6,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(6,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(6,'b',this)">💶</div></div><div class="dlc-pan active" id="dl6h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert transformatie</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-governance rollen</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI Act eisen</strong> — Deadline aug 2026</div></div></div></div><div class="dlc-pan" id="dl6p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Structuur</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Governance</div><div class="dlc-pp dlc-ppw">⚠ AI Act</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Procesontwerp</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Evaluatie</div></div></div></div><div class="dlc-pan" id="dl6b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 42k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 6.8k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">16%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl6"><div class="dlc-hdr" onclick="dtog(6)"><div class="dlc-dot" style="background:#e67e22"></div><div class="dlc-info"><div class="dlc-name">🏢 6. Organisatie</div><div class="dlc-sub">Governance, processen</div><div class="dlc-src">Bijgewerkt 22 feb · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score" style="color:var(--accent)">3.2</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+5%</span><span class="dlc-st st-warn">Aandacht</span></div><div class="dlc-spark"><i style="height:31%;background:#e67e22;opacity:.3"></i><i style="height:31%;background:#e67e22;opacity:.5"></i><i style="height:35%;background:#e67e22;opacity:.6"></i><i style="height:38%;background:#e67e22;opacity:.7"></i><i style="height:38%;background:#e67e22;opacity:.85"></i><i style="height:40%;background:#e67e22"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(6,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(6,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(6,'b',this)">💶</div><div class="dlc-tab" onclick="dltab(6,'l',this)">📋</div></div><div class="dlc-pan active" id="dl6h"><div class="dlc-adv dlc-advw"><h5>⚠️ Blokkeert transformatie</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI-governance rollen</strong></div></div><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>AI Act eisen</strong> — Deadline aug 2026</div></div></div></div><div class="dlc-pan" id="dl6p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Structuur</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ Governance</div><div class="dlc-pp dlc-ppw">⚠ AI Act</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Procesontwerp</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Evaluatie</div></div></div></div><div class="dlc-pan" id="dl6b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 42k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--accent)">€ 6.8k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">16%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl6l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">22 feb</div><div class="dlc-lew">Governance-raamwerk v0.2: rollen gedefinieerd</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Organisatie score 3.0</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <!-- L7: RICHTING -->
-<div class="dlc" id="dl7"><div class="dlc-hdr" onclick="dtog(7)"><div class="dlc-dot" style="background:var(--text-muted)"></div><div class="dlc-info"><div class="dlc-name">🧭 7. Richting</div><div class="dlc-sub">Strategie, soevereiniteit</div></div><div class="dlc-score">3.8</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+10%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.5"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(7,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(7,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(7,'b',this)">💶</div></div><div class="dlc-pan active" id="dl7h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Digitale strategie 1.0</strong> — Bestuursbesluit</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Soevereiniteits-evaluatie</strong></div></div></div></div><div class="dlc-pan" id="dl7p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Assessment</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT-pres.</div><div class="dlc-pp dlc-ppa">▶ Budget</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Strategie 1.0</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Review</div></div></div></div><div class="dlc-pan" id="dl7b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 24k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 2.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div></div></div></div></div></div>
+<div class="dlc" id="dl7"><div class="dlc-hdr" onclick="dtog(7)"><div class="dlc-dot" style="background:var(--text-muted)"></div><div class="dlc-info"><div class="dlc-name">🧭 7. Richting</div><div class="dlc-sub">Strategie, soevereiniteit</div><div class="dlc-src">Bijgewerkt 1 mrt · <span class="src-hand">Handmatig</span></div></div><div class="dlc-score">3.8</div><div class="dlc-meta"><span class="dlc-trend tr-up">↑+10%</span><span class="dlc-st st-good">Op schema</span></div><div class="dlc-spark"><i style="height:25%;background:var(--text-muted);opacity:.3"></i><i style="height:31%;background:var(--text-muted);opacity:.5"></i><i style="height:38%;background:var(--text-muted);opacity:.6"></i><i style="height:40%;background:var(--text-muted);opacity:.7"></i><i style="height:44%;background:var(--text-muted);opacity:.85"></i><i style="height:48%;background:var(--text-muted)"></i></div><div class="dlc-chev">▼</div></div><div class="dlc-body"><div class="dlc-tabs"><div class="dlc-tab active" onclick="dltab(7,'h',this)">📈</div><div class="dlc-tab" onclick="dltab(7,'p',this)">🗺️</div><div class="dlc-tab" onclick="dltab(7,'b',this)">💶</div><div class="dlc-tab" onclick="dltab(7,'l',this)">📋</div></div><div class="dlc-pan active" id="dl7h"><div class="dlc-adv"><h5>🔧 Acties</h5><div class="dlc-ai"><span class="dlc-imp imp-h">Hoog</span><div><strong>Digitale strategie 1.0</strong> — Bestuursbesluit</div></div><div class="dlc-ai"><span class="dlc-imp imp-m">Mid</span><div><strong>Soevereiniteits-evaluatie</strong></div></div></div></div><div class="dlc-pan" id="dl7p"><div class="dlc-qg"><div class="dlc-qc"><div class="dlc-ql">Q4</div><div class="dlc-pp dlc-ppd">✅ Assessment</div></div><div class="dlc-qc dlc-now"><div class="dlc-ql">Q1 <span class="dlc-qn">Nu</span></div><div class="dlc-pp dlc-ppa">▶ MT-pres.</div><div class="dlc-pp dlc-ppa">▶ Budget</div></div><div class="dlc-qc"><div class="dlc-ql">Q2</div><div class="dlc-pp dlc-ppp">Strategie 1.0</div></div><div class="dlc-qc"><div class="dlc-ql">Q3–Q4</div><div class="dlc-pp dlc-ppp">Review</div></div></div></div><div class="dlc-pan" id="dl7b"><div class="dlc-bs"><div class="dlc-bc"><div class="dlc-bv">€ 24k</div><div class="dlc-bl2">Budget</div></div><div class="dlc-bc"><div class="dlc-bv" style="color:var(--green)">€ 2.7k</div><div class="dlc-bl2">Gerealiseerd</div></div><div class="dlc-bc"><div class="dlc-bv">11%</div><div class="dlc-bl2">Besteed</div><div class="dlc-pan" id="dl7l"><div class="dlc-log"><div class="dlc-le"><div class="dlc-led">1 mrt</div><div class="dlc-lew">MT-presentatie status → "in voorbereiding"</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> R. van Staveren</div></div><div class="dlc-le"><div class="dlc-led">15 feb</div><div class="dlc-lew">Kickstart-assessment: Richting score 3.4</div><div class="dlc-lem"><span class="src-hand">Handmatig</span> Assessment</div></div></div></div></div></div></div></div></div>
 
 <div class="step-nav" style="margin-top:24px">
 <button class="btn btn-ghost" onclick="goStep('step-7')">← Terug naar verkenning</button>
@@ -1044,21 +1184,83 @@ body.role-active .sidebar-role-indicator{display:block}
 <button class="btn btn-primary" onclick="openM('m-pres')">📊 Presentatie</button>
 </div></div>
 </div>
+<div class="step" id="step-activity">
+<div class="step-badge" style="background:var(--blue-bg);color:var(--blue)">📋 Activiteit</div>
+<h2>Data-activiteit per laag</h2>
+<p class="step-desc">Elke wijziging in de organizational health wordt hier gelogd met datum, bron en laag. Zo ziet u precies waar scores op gebaseerd zijn.</p>
+
+<div class="act-filter">
+  <span class="act-fl active" onclick="actFilter('all',this)">Alle</span>
+  <span class="act-fl" onclick="actFilter('hand',this)"><span class="src-hand">Handmatig</span></span>
+  <span class="act-fl" onclick="actFilter('m365',this)"><span class="src-m365">Microsoft 365</span></span>
+  <span class="act-fl" onclick="actFilter('ext',this)"><span class="src-ext">Extern systeem</span></span>
+</div>
+
+<div class="act-summary">
+  <div class="act-sc"><div class="act-sv">34</div><div class="act-sl">Totaal logs</div></div>
+  <div class="act-sc"><div class="act-sv">12</div><div class="act-sl">Handmatig</div></div>
+  <div class="act-sc"><div class="act-sv">18</div><div class="act-sl">Microsoft 365</div></div>
+  <div class="act-sc"><div class="act-sv">4</div><div class="act-sl">Extern</div></div>
+</div>
+
+<div class="act-timeline">
+  <div class="act-date">1 maart 2026</div>
+  <div class="act-entry" data-src="hand"><div class="act-dot" style="background:var(--text-muted)"></div><div class="act-info"><div class="act-layer">7. Richting</div><div class="act-what">MT-presentatie status bijgewerkt → "in voorbereiding"</div><div class="act-meta"><span class="src-hand">Handmatig</span> · door R. van Staveren</div></div></div>
+
+  <div class="act-date">28 februari 2026</div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:var(--blue)"></div><div class="act-info"><div class="act-layer">1. Platform</div><div class="act-what">Cloud PC pilot: 10 gebruikers actief, 8 van 10 succesvol gemigreerd</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · Intune snapshot</div></div></div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:var(--blue)"></div><div class="act-info"><div class="act-layer">1. Platform</div><div class="act-what">Licentie-inventarisatie: 3 ongebruikte E5-licenties gedetecteerd</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · Admin center sync</div></div></div>
+
+  <div class="act-date">27 februari 2026</div>
+  <div class="act-entry" data-src="hand"><div class="act-dot" style="background:var(--purple)"></div><div class="act-info"><div class="act-layer">4. Intelligentie</div><div class="act-what">AI-beleidsdocument v1.0 afgerond en geüpload</div><div class="act-meta"><span class="src-hand">Handmatig</span> · door J. de Groot</div></div></div>
+  <div class="act-entry" data-src="ext"><div class="act-dot" style="background:var(--purple)"></div><div class="act-info"><div class="act-layer">4. Intelligentie</div><div class="act-what">AI-geletterdheidstoets: 14 van 55 medewerkers voltooid (25%)</div><div class="act-meta"><span class="src-ext">Extern systeem</span> · LMS-koppeling</div></div></div>
+
+  <div class="act-date">26 februari 2026</div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:var(--green)"></div><div class="act-info"><div class="act-layer">5. Mens</div><div class="act-what">Teams-adoptie: actief gebruik gestegen van 72% naar 78%</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · Usage reports</div></div></div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:var(--green)"></div><div class="act-info"><div class="act-layer">5. Mens</div><div class="act-what">Copilot-interacties: 340 prompts afgelopen week (+15% t.o.v. vorige week)</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · Copilot dashboard</div></div></div>
+
+  <div class="act-date">25 februari 2026</div>
+  <div class="act-entry" data-src="hand"><div class="act-dot" style="background:var(--accent)"></div><div class="act-info"><div class="act-layer">2. Bescherming</div><div class="act-what">NIS2 gap-analyse gestart: eerste resultaten verwacht 15 maart</div><div class="act-meta"><span class="src-hand">Handmatig</span> · door M. Bakker</div></div></div>
+
+  <div class="act-date">22 februari 2026</div>
+  <div class="act-entry" data-src="hand"><div class="act-dot" style="background:#e67e22"></div><div class="act-info"><div class="act-layer">6. Organisatie</div><div class="act-what">Governance-raamwerk v0.2: rollen gedefinieerd, wacht op MT-goedkeuring</div><div class="act-meta"><span class="src-hand">Handmatig</span> · door R. van Staveren</div></div></div>
+
+  <div class="act-date">20 februari 2026</div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:#e67e22"></div><div class="act-info"><div class="act-layer">3. Informatie</div><div class="act-what">SharePoint scan: 12.400 documenten, 38% ouder dan 3 jaar, 22% zonder eigenaar</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · SharePoint Admin</div></div></div>
+  <div class="act-entry" data-src="m365"><div class="act-dot" style="background:#e67e22"></div><div class="act-info"><div class="act-layer">3. Informatie</div><div class="act-what">Sensitivity labels: 0% van documenten gelabeld (vereist voor Copilot)</div><div class="act-meta"><span class="src-m365">Microsoft 365</span> · Purview snapshot</div></div></div>
+
+  <div class="act-date">15 februari 2026</div>
+  <div class="act-entry" data-src="hand"><div class="act-dot" style="background:var(--blue)"></div><div class="act-info"><div class="act-layer">1. Platform</div><div class="act-what">Kickstart-assessment voltooid — initiële scores per laag vastgelegd</div><div class="act-meta"><span class="src-hand">Handmatig</span> · Assessment · door R. van Staveren</div></div></div>
+</div>
+
+<div class="act-legend">
+  <h5>Brontypen</h5>
+  <div class="act-leg-row"><span class="src-hand">Handmatig</span> Ingevuld door een persoon via het assessment of handmatige logging</div>
+  <div class="act-leg-row"><span class="src-m365">Microsoft 365</span> Periodieke snapshot uit M365 Admin, Intune, Purview, Usage reports</div>
+  <div class="act-leg-row"><span class="src-ext">Extern systeem</span> Koppeling met LMS, HR-systeem, of andere externe bron</div>
+</div>
+
+<div class="step-nav" style="margin-top:24px">
+<button class="btn btn-ghost" onclick="goStep('step-dashboard')">← Dashboard</button>
+<button class="btn btn-outline" onclick="goStep('step-integrations')">🔗 Koppelingen instellen</button>
+</div>
+</div>
+
 <div class="step" id="step-integrations">
 <div class="step-badge" style="background:var(--purple-bg);color:var(--purple)">🔗 Integraties</div>
-<h2>Navigator groeit met u mee</h2>
+<h2>OrgHealth groeit met u mee</h2>
 <p class="step-desc">U bepaalt het tempo. Begin met inzicht, verbind wanneer u er klaar voor bent, automatiseer als het zinvol is.</p>
 
 <!-- FASE 1 -->
 <div class="insight-card open" id="ic-fase1" style="border-left:3px solid var(--green)">
 <div class="insight-header" onclick="toggleCard('ic-fase1')">
   <div class="insight-icon" style="background:var(--green-bg);color:var(--green)">1</div>
-  <div class="insight-title"><h4>Nu — Slim assessment</h4><p>U beantwoordt vragen, Navigator analyseert met AI</p></div>
+  <div class="insight-title"><h4>Nu — Slim assessment</h4><p>U beantwoordt vragen, OrgHealth analyseert</p></div>
   <div style="font-size:11px;font-weight:600;color:var(--green);background:var(--green-bg);padding:3px 10px;border-radius:4px;flex-shrink:0">Actief</div>
   <div class="insight-chevron">▼</div>
 </div>
 <div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Geen koppelingen nodig. U vult de assessment in, Navigator combineert uw antwoorden met kennis over regelgeving, uw sector en best practices. Het resultaat: een persoonlijke analyse, roadmap en actieplan.</p>
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Geen koppelingen nodig. U vult de assessment in, OrgHealth combineert uw antwoorden met kennis over regelgeving, uw sector en best practices. Het resultaat: een persoonlijke analyse, roadmap en actieplan.</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
     <div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px"><div style="font-size:16px;margin-bottom:4px">🧠</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">AI-analyse</div><div style="font-size:11px;color:var(--text-sec)">Uw antwoorden + regelgeving + sector-kennis = persoonlijk advies</div></div>
     <div style="background:var(--bg);border-radius:var(--radius-sm);padding:12px"><div style="font-size:16px;margin-bottom:4px">📋</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Roadmap met deadlines</div><div style="font-size:11px;color:var(--text-sec)">AI Act, NIS2, DORA — automatisch op uw tijdlijn</div></div>
@@ -1072,12 +1274,12 @@ body.role-active .sidebar-role-indicator{display:block}
 <div class="insight-card" id="ic-fase2" style="border-left:3px solid var(--blue)">
 <div class="insight-header" onclick="toggleCard('ic-fase2')">
   <div class="insight-icon" style="background:var(--blue-bg);color:var(--blue)">2</div>
-  <div class="insight-title"><h4>Verbinden — Live data uit uw omgeving</h4><p>Koppel uw systemen, Navigator haalt zelf actuele informatie op</p></div>
+  <div class="insight-title"><h4>Verbinden — Live data uit uw omgeving</h4><p>Koppel uw systemen, OrgHealth haalt zelf actuele informatie op</p></div>
   <div style="font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-bg);padding:3px 10px;border-radius:4px;flex-shrink:0">Beschikbaar</div>
   <div class="insight-chevron">▼</div>
 </div>
 <div class="insight-body"><div class="insight-content">
-  <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Verbind Navigator met uw Microsoft-omgeving. U hoeft vragen niet opnieuw te beantwoorden — het platform leest direct wat de stand van zaken is. Alle koppelingen zijn read-only: Navigator kan niets wijzigen.</p>
+  <p style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Verbind OrgHealth met uw Microsoft-omgeving. U hoeft vragen niet opnieuw te beantwoorden — het platform leest direct wat de stand van zaken is. Alle koppelingen zijn read-only: OrgHealth kan niets wijzigen.</p>
 
   <div class="integ-grid">
     <div class="integ-card">
@@ -1100,13 +1302,13 @@ body.role-active .sidebar-role-indicator{display:block}
   <div style="margin-top:14px"><h4 style="font-size:14px;margin-bottom:10px">💬 Samenwerken in Microsoft Teams</h4>
   <p style="font-size:13px;color:var(--text-sec);margin-bottom:10px">Per laag een Teams-kanaal met de juiste mensen. U bepaalt wie toegang krijgt.</p>
   <div class="teams-grid">
-    <div class="teams-row"><div class="teams-dot" style="background:var(--blue)"></div><div class="teams-layer">1. Platform</div><div class="teams-channel">#navigator-platform</div><div class="teams-members">👥 IT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:var(--accent)"></div><div class="teams-layer">2. Bescherming</div><div class="teams-channel">#navigator-security</div><div class="teams-members">👥 IT, Juridisch</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:var(--warm)"></div><div class="teams-layer">3. Informatie</div><div class="teams-channel">#navigator-data</div><div class="teams-members">👥 IT, Afdelingen</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:var(--purple)"></div><div class="teams-layer">4. Intelligentie</div><div class="teams-channel">#navigator-ai</div><div class="teams-members">👥 MT, IT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:var(--green)"></div><div class="teams-layer">5. Mens</div><div class="teams-channel">#navigator-adoptie</div><div class="teams-members">👥 HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:#E67E22"></div><div class="teams-layer">6. Organisatie</div><div class="teams-channel">#navigator-organisatie</div><div class="teams-members">👥 MT + HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
-    <div class="teams-row"><div class="teams-dot" style="background:#555"></div><div class="teams-layer">7. Richting</div><div class="teams-channel">#navigator-strategie</div><div class="teams-members">👥 MT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:var(--blue)"></div><div class="teams-layer">1. Platform</div><div class="teams-channel">#orghealth-platform</div><div class="teams-members">👥 IT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:var(--accent)"></div><div class="teams-layer">2. Bescherming</div><div class="teams-channel">#orghealth-security</div><div class="teams-members">👥 IT, Juridisch</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:var(--warm)"></div><div class="teams-layer">3. Informatie</div><div class="teams-channel">#orghealth-data</div><div class="teams-members">👥 IT, Afdelingen</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:var(--purple)"></div><div class="teams-layer">4. Intelligentie</div><div class="teams-channel">#orghealth-ai</div><div class="teams-members">👥 MT, IT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:var(--green)"></div><div class="teams-layer">5. Mens</div><div class="teams-channel">#orghealth-adoptie</div><div class="teams-members">👥 HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:#E67E22"></div><div class="teams-layer">6. Organisatie</div><div class="teams-channel">#orghealth-governance</div><div class="teams-members">👥 MT + HR</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
+    <div class="teams-row"><div class="teams-dot" style="background:#555"></div><div class="teams-layer">7. Richting</div><div class="teams-channel">#orghealth-strategie</div><div class="teams-members">👥 MT</div><div class="teams-action" onclick="alert('Demo')">+ Kanaal</div></div>
   </div>
   </div>
 
@@ -1159,6 +1361,398 @@ body.role-active .sidebar-role-indicator{display:block}
 </div>
 
 <!-- ===== NIEUWS ===== -->
+<!-- ===== BILLING ===== -->
+<div class="step" id="step-billing">
+<div class="step-badge" style="background:var(--green-bg);color:var(--green)">💳 Abonnement</div>
+<h2>Kies uw OrgHealth-plan</h2>
+<p class="step-desc">Elke organisatie begint met een gratis scan. Wilt u uw organizational health continu volgen, verbeteren en rapporteren? Kies het plan dat past bij uw ambitie.</p>
+
+<div class="bill-toggle">
+  <span class="bill-tg active" onclick="billCycle('mo',this)">Maandelijks</span>
+  <span class="bill-tg" onclick="billCycle('yr',this)">Jaarlijks <span class="bill-save">-20%</span></span>
+</div>
+
+<div class="bill-grid">
+
+  <!-- PLAN 1: SCAN -->
+  <div class="bill-card">
+    <div class="bill-tag">Kickstart</div>
+    <h3 class="bill-name">Scan</h3>
+    <p class="bill-desc">Eenmalige assessment van uw digitale organisatiegezondheid. Ideaal om inzicht te krijgen.</p>
+    <div class="bill-price"><span class="bill-amount">Gratis</span></div>
+    <div class="bill-per"></div>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin:16px 0" onclick="goStep('step-1')">Start scan →</button>
+    <div class="bill-features">
+      <div class="bill-feat">✓ 7-lagen assessment</div>
+      <div class="bill-feat">✓ Eenmalige score per laag</div>
+      <div class="bill-feat">✓ Benchmark t.o.v. MKB-gemiddelde</div>
+      <div class="bill-feat">✓ PDF-rapport met aanbevelingen</div>
+      <div class="bill-feat">✓ 7 Lagen Model uitleg</div>
+      <div class="bill-feat dim">✗ Dashboard & monitoring</div>
+      <div class="bill-feat dim">✗ Teams Hub integratie</div>
+      <div class="bill-feat dim">✗ Systeemkoppelingen</div>
+      <div class="bill-feat dim">✗ Activiteit-logging</div>
+      <div class="bill-feat dim">✗ Consultant-begeleiding</div>
+    </div>
+    <div class="bill-ideal">Ideaal voor: eerste oriëntatie, MT-presentatie voorbereiden</div>
+  </div>
+
+  <!-- PLAN 2: PROFESSIONAL -->
+  <div class="bill-card bill-pop">
+    <div class="bill-pop-badge">Meest gekozen</div>
+    <div class="bill-tag" style="background:var(--blue-bg);color:var(--blue)">Continu inzicht</div>
+    <h3 class="bill-name">Professional</h3>
+    <p class="bill-desc">Levend dashboard met periodieke snapshots, Teams-integratie en projectmonitoring per laag.</p>
+    <div class="bill-price"><span class="bill-cur">€</span><span class="bill-amount" data-mo="495" data-yr="395">495</span></div>
+    <div class="bill-per">per maand · excl. BTW</div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin:16px 0" onclick="alert('Demo: start proefperiode')">14 dagen gratis proberen</button>
+    <div class="bill-features">
+      <div class="bill-feat">✓ Alles uit Scan, plus:</div>
+      <div class="bill-feat"><strong>✓ Levend dashboard</strong> per laag</div>
+      <div class="bill-feat"><strong>✓ Teams Hub</strong> — 7 kanalen, read-only</div>
+      <div class="bill-feat"><strong>✓ Microsoft 365 snapshots</strong> — periodiek</div>
+      <div class="bill-feat">✓ Activiteit-logging met bronvermelding</div>
+      <div class="bill-feat">✓ Projecten- & budget-tracking</div>
+      <div class="bill-feat">✓ MT-presentatie generator</div>
+      <div class="bill-feat">✓ Meerdere rollen / perspectieven</div>
+      <div class="bill-feat">✓ Externe systeemkoppelingen (LMS, HR)</div>
+      <div class="bill-feat dim">✗ Dedicated consultant</div>
+      <div class="bill-feat dim">✗ Kwartaal-review</div>
+    </div>
+    <div class="bill-ideal">Ideaal voor: organisaties die zelf de regie voeren, 200-500 medewerkers</div>
+  </div>
+
+  <!-- PLAN 3: MANAGED -->
+  <div class="bill-card">
+    <div class="bill-tag" style="background:var(--purple-bg);color:var(--purple)">Volledig ontzorgd</div>
+    <h3 class="bill-name">Managed</h3>
+    <p class="bill-desc">Alles uit Professional, plus een vaste consultant die uw organizational health actief bewaakt en verbetert.</p>
+    <div class="bill-price"><span class="bill-cur">€</span><span class="bill-amount" data-mo="1.250" data-yr="995">1.250</span></div>
+    <div class="bill-per">per maand · excl. BTW</div>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin:16px 0;border-color:var(--purple);color:var(--purple)" onclick="alert('Demo: plan een kennismaking')">Plan een gesprek</button>
+    <div class="bill-features">
+      <div class="bill-feat">✓ Alles uit Professional, plus:</div>
+      <div class="bill-feat"><strong>✓ Dedicated consultant</strong> als sparringpartner</div>
+      <div class="bill-feat"><strong>✓ Kwartaal-review</strong> met MT-rapportage</div>
+      <div class="bill-feat"><strong>✓ Proactieve acties</strong> — wij signaleren, u besluit</div>
+      <div class="bill-feat">✓ Priority support (4 uur responstijd)</div>
+      <div class="bill-feat">✓ Compliance-monitoring (NIS2, AI Act, DORA)</div>
+      <div class="bill-feat">✓ Strategische routekaart op maat</div>
+      <div class="bill-feat">✓ Jaarlijkse benchmark-rapportage</div>
+      <div class="bill-feat">✓ On-site workshop per kwartaal</div>
+      <div class="bill-feat">✓ Eerste 3 maanden: intensieve onboarding</div>
+    </div>
+    <div class="bill-ideal">Ideaal voor: organisaties in gereguleerde sectoren, 500-2000 medewerkers</div>
+  </div>
+
+</div>
+
+<div class="bill-compare">
+  <h4 style="font-size:14px;margin-bottom:12px">Alle plannen vergelijken</h4>
+  <table class="bill-table">
+    <thead><tr><th></th><th>Scan</th><th style="color:var(--blue)">Professional</th><th style="color:var(--purple)">Managed</th></tr></thead>
+    <tbody>
+      <tr><td>7-lagen assessment</td><td>Eenmalig</td><td>Doorlopend</td><td>Doorlopend</td></tr>
+      <tr><td>Dashboard</td><td>—</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Teams Hub (7 kanalen)</td><td>—</td><td>Read-only</td><td>Read-only</td></tr>
+      <tr><td>Microsoft 365 koppelingen</td><td>—</td><td>Snapshots</td><td>Snapshots</td></tr>
+      <tr><td>Externe systemen (LMS, HR)</td><td>—</td><td>Tot 3</td><td>Onbeperkt</td></tr>
+      <tr><td>Activiteit-logging</td><td>—</td><td>✓</td><td>✓</td></tr>
+      <tr><td>MT-presentatie generator</td><td>1× PDF</td><td>Onbeperkt</td><td>Onbeperkt</td></tr>
+      <tr><td>Rollen / perspectieven</td><td>—</td><td>5 rollen</td><td>5 rollen + custom</td></tr>
+      <tr><td>Gebruikers</td><td>1</td><td>Tot 10</td><td>Onbeperkt</td></tr>
+      <tr><td>Support</td><td>E-mail</td><td>E-mail + chat</td><td>Priority (4 uur)</td></tr>
+      <tr><td>Dedicated consultant</td><td>—</td><td>—</td><td>✓</td></tr>
+      <tr><td>Kwartaal-review & workshop</td><td>—</td><td>—</td><td>✓</td></tr>
+      <tr><td>Compliance-monitoring</td><td>—</td><td>Basisrapport</td><td>Proactief + advies</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="padding:16px;margin-top:20px;background:var(--bg)">
+<h5 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:8px">Veelgestelde vragen</h5>
+<div class="bill-faq">
+  <div class="bill-fq"><strong>Kan ik tussentijds upgraden?</strong><br>Ja, u kunt op elk moment upgraden. Het verschil wordt verrekend.</div>
+  <div class="bill-fq"><strong>Wat gebeurt er met mijn data als ik stop?</strong><br>Uw data blijft 90 dagen beschikbaar voor export. Daarna wordt alles verwijderd conform AVG.</div>
+  <div class="bill-fq"><strong>Hoe werkt de jaarkorting?</strong><br>Bij jaarlijkse betaling bespaart u 20%. Geen verrassingen, geen verborgen kosten.</div>
+  <div class="bill-fq"><strong>Is er een minimum contractduur?</strong><br>Professional: maandelijks opzegbaar. Managed: minimaal 6 maanden (vanwege onboarding-investering).</div>
+</div>
+</div>
+
+<div class="step-nav" style="margin-top:24px">
+<button class="btn btn-ghost" onclick="goStep('step-dashboard')">← Dashboard</button>
+</div>
+</div>
+
+<!-- ===== TEAMS HUB ===== -->
+<div class="step" id="step-teams">
+<div class="step-badge" style="background:#7B83EB22;color:#7B83EB">💬 Teams Hub</div>
+<h2>Samenwerken per laag</h2>
+<p class="step-desc">Direct toegang tot de Microsoft Teams kanalen die meewerken aan de Organizational Health. Zie wat er speelt, reageer, en houd de voortgang bij — zonder OrgHealth te verlaten.</p>
+
+<div class="th-status">
+  <div class="th-sc"><div class="th-sv" style="color:#7B83EB">7</div><div class="th-sl">Kanalen</div></div>
+  <div class="th-sc"><div class="th-sv" style="color:var(--accent)">12</div><div class="th-sl">Ongelezen</div></div>
+  <div class="th-sc"><div class="th-sv">23</div><div class="th-sl">Berichten vandaag</div></div>
+  <div class="th-sc"><div class="th-sv" style="color:var(--green)">4</div><div class="th-sl">@Vermeldingen</div></div>
+</div>
+
+<div class="th-team-header">
+  <div class="th-team-icon" style="background:#7B83EB">OH</div>
+  <div class="th-team-info"><div class="th-team-name">OrgHealth — Digitale Organisatiegezondheid</div><div class="th-team-meta">7 kanalen · 18 leden · Privé team</div></div>
+  <a class="th-open-teams" href="https://teams.microsoft.com" target="_blank">Openen in Teams ↗</a>
+</div>
+
+<!-- Channel 1: Platform -->
+<div class="th-ch" id="thc1">
+  <div class="th-ch-hdr" onclick="thTog(1)">
+    <div class="th-ch-dot" style="background:var(--blue)"></div>
+    <div class="th-ch-name">#orghealth-platform</div>
+    <div class="th-ch-layer">1. Platform</div>
+    <div class="th-ch-unread">3</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg">
+      <div class="th-av" style="background:var(--blue)">PV</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Peter Visser</strong> <span class="th-msg-time">vandaag 09:42</span></div>
+        <div class="th-msg-txt">Cloud PC pilot update: 8 van 10 gebruikers succesvol gemigreerd. Twee gebruikers met printer-issues, wordt morgen opgepakt. Performance scores zijn goed — gemiddeld 4.2/5 gebruikerstevredenheid.</div>
+        <div class="th-msg-react"><span class="th-react">👍 3</span> <span class="th-react">✅ 1</span></div>
+      </div>
+    </div>
+    <div class="th-msg">
+      <div class="th-av" style="background:var(--green)">MB</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Marieke Bakker</strong> <span class="th-msg-time">vandaag 10:15</span></div>
+        <div class="th-msg-txt">@Peter mooi resultaat! Wat is de planning voor de volgende batch? We willen graag afdeling Finance meenemen in wave 2.</div>
+      </div>
+    </div>
+    <div class="th-msg th-msg-new">
+      <div class="th-av" style="background:var(--blue)">PV</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Peter Visser</strong> <span class="th-msg-time">vandaag 11:30</span> <span class="th-badge-new">Nieuw</span></div>
+        <div class="th-msg-txt">Wave 2 staat gepland voor week 11. Finance kan mee, maar we moeten eerst hun legacy Excel-add-ins testen op Cloud PC. @Jasper kun jij contact opnemen met Finance MT?</div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-platform..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 2: Bescherming -->
+<div class="th-ch" id="thc2">
+  <div class="th-ch-hdr" onclick="thTog(2)">
+    <div class="th-ch-dot" style="background:var(--accent)"></div>
+    <div class="th-ch-name">#orghealth-security</div>
+    <div class="th-ch-layer">2. Bescherming</div>
+    <div class="th-ch-unread">5</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg th-msg-new">
+      <div class="th-av" style="background:var(--accent)">JG</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Jan de Groot</strong> <span class="th-msg-time">vandaag 08:20</span> <span class="th-badge-new">Nieuw</span></div>
+        <div class="th-msg-txt">⚠️ NIS2 update: de definitieve Nederlandse implementatiewet is gepubliceerd. Deadline voor organisaties in scope: 17 oktober 2026. Ik heb een gap-analyse template klaargezet in het kanaal-tabblad. Graag vóór 15 maart eerste self-assessment invullen.</div>
+        <div class="th-msg-react"><span class="th-react">⚠️ 4</span> <span class="th-react">📌 2</span></div>
+      </div>
+    </div>
+    <div class="th-msg th-msg-new">
+      <div class="th-av" style="background:#e67e22">LK</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Lisa Kuiper</strong> <span class="th-msg-time">vandaag 09:05</span> <span class="th-badge-new">Nieuw</span></div>
+        <div class="th-msg-txt">Sensitivity labels pilot: ik heb 3 label-categorieën voorgesteld (Openbaar / Intern / Vertrouwelijk). Zie document in tabblad. Feedback welkom voordat we naar MT gaan.</div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-security..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 3: Informatie -->
+<div class="th-ch" id="thc3">
+  <div class="th-ch-hdr" onclick="thTog(3)">
+    <div class="th-ch-dot" style="background:#e67e22"></div>
+    <div class="th-ch-name">#orghealth-data</div>
+    <div class="th-ch-layer">3. Informatie</div>
+    <div class="th-ch-unread" style="background:var(--red-bg);color:var(--red)">2</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg th-msg-new">
+      <div class="th-av" style="background:#e67e22">TD</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Tom Dekker</strong> <span class="th-msg-time">gisteren 16:40</span> <span class="th-badge-alert">Actie nodig</span></div>
+        <div class="th-msg-txt">🔴 SharePoint opschoning: 2.400 documenten zonder eigenaar gevonden. Dit blokkeert Copilot-uitrol. Ik heb per afdeling een lijst gemaakt. Afdelingshoofden moeten vóór 10 maart eigenaarschap claimen. Wie helpt met communicatie?</div>
+        <div class="th-msg-react"><span class="th-react">🔴 5</span></div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-data..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 4: Intelligentie -->
+<div class="th-ch" id="thc4">
+  <div class="th-ch-hdr" onclick="thTog(4)">
+    <div class="th-ch-dot" style="background:var(--purple)"></div>
+    <div class="th-ch-name">#orghealth-ai</div>
+    <div class="th-ch-layer">4. Intelligentie</div>
+    <div class="th-ch-unread">2</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg">
+      <div class="th-av" style="background:var(--purple)">JG</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Jan de Groot</strong> <span class="th-msg-time">vandaag 10:00</span></div>
+        <div class="th-msg-txt">AI-beleid v1.0 is klaar 🎉 Kernpunten: gebruik Copilot alleen voor interne docs, geen klantdata in externe AI-tools, verplichte AI-geletterdheid training vóór gebruik. Document staat in het tabblad ter review.</div>
+        <div class="th-msg-react"><span class="th-react">🎉 6</span> <span class="th-react">👍 4</span></div>
+      </div>
+    </div>
+    <div class="th-msg th-msg-new">
+      <div class="th-av" style="background:var(--green)">SH</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Sophie Hendriks</strong> <span class="th-msg-time">vandaag 11:45</span> <span class="th-badge-new">Nieuw</span></div>
+        <div class="th-msg-txt">Copilot pilot resultaten week 8: gemiddeld 12 prompts per gebruiker per dag. Meest gebruikte features: samenvattingen (38%), e-mail drafts (29%), data-analyse (18%). Adoptie groeit maar sommige teams gebruiken het nauwelijks.</div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-ai..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 5: Mens -->
+<div class="th-ch" id="thc5">
+  <div class="th-ch-hdr" onclick="thTog(5)">
+    <div class="th-ch-dot" style="background:var(--green)"></div>
+    <div class="th-ch-name">#orghealth-adoptie</div>
+    <div class="th-ch-layer">5. Mens</div>
+    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg">
+      <div class="th-av" style="background:var(--green)">AW</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Anna Willems</strong> <span class="th-msg-time">gisteren 14:20</span></div>
+        <div class="th-msg-txt">Champions-programma: 6 van de 8 afdelingen hebben een champion aangemeld. Finance en Juridisch ontbreken nog. Wie heeft daar contacten?</div>
+        <div class="th-msg-react"><span class="th-react">👥 3</span></div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-adoptie..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 6: Organisatie -->
+<div class="th-ch" id="thc6">
+  <div class="th-ch-hdr" onclick="thTog(6)">
+    <div class="th-ch-dot" style="background:#e67e22"></div>
+    <div class="th-ch-name">#orghealth-governance</div>
+    <div class="th-ch-layer">6. Organisatie</div>
+    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg">
+      <div class="th-av" style="background:#e67e22">RvS</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>R. van Staveren</strong> <span class="th-msg-time">27 feb 15:10</span></div>
+        <div class="th-msg-txt">Governance-raamwerk v0.2 staat klaar. Rollen gedefinieerd: AI-eigenaar (MT-lid), Data-steward (per afdeling), Security-officer. Graag feedback vóór de MT-meerdaagse op 2 maart.</div>
+        <div class="th-msg-react"><span class="th-react">📋 2</span> <span class="th-react">👍 3</span></div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-governance..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- Channel 7: Richting -->
+<div class="th-ch" id="thc7">
+  <div class="th-ch-hdr" onclick="thTog(7)">
+    <div class="th-ch-dot" style="background:var(--text-muted)"></div>
+    <div class="th-ch-name">#orghealth-strategie</div>
+    <div class="th-ch-layer">7. Richting</div>
+    <div class="th-ch-unread" style="background:transparent;color:var(--text-muted)">0</div>
+    <div class="th-ch-chev">▼</div>
+  </div>
+  <div class="th-ch-body">
+    <div class="th-msg">
+      <div class="th-av" style="background:var(--text-muted)">JB</div>
+      <div class="th-msg-body">
+        <div class="th-msg-hdr"><strong>Jasper de Boer</strong> <span class="th-msg-time">26 feb 09:30</span></div>
+        <div class="th-msg-txt">MT-meerdaagse 2-4 maart: agenda staat in het tabblad. Doel is strategische richting bepalen voor digitale transformatie. Voorbereiding: lees het assessment-rapport en kom met 3 prioriteiten per afdeling.</div>
+        <div class="th-msg-react"><span class="th-react">📌 5</span> <span class="th-react">✅ 4</span></div>
+      </div>
+    </div>
+    <div class="th-reply-bar">
+      <input class="th-reply-input" placeholder="Reageer in #orghealth-strategie..." disabled>
+      <button class="th-reply-btn" onclick="alert('Demo: opent in Microsoft Teams')">↗ In Teams</button>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:16px;margin-top:20px;background:var(--bg)">
+<h5 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:8px">Hoe werkt dit?</h5>
+<p style="font-size:12px;color:var(--text-sec);line-height:1.7;margin-bottom:6px">OrgHealth leest berichten uit uw Microsoft Teams kanalen via de Graph API (read-only). Berichten worden realtime getoond. Reageren opent Microsoft Teams — OrgHealth schrijft nooit namens u.</p>
+<p style="font-size:12px;color:var(--text-sec);line-height:1.7">De kanalen worden aangemaakt binnen een privé Team. U bepaalt welke medewerkers toegang krijgen per kanaal. Alle berichten blijven in uw eigen Microsoft 365-omgeving.</p>
+</div>
+
+<div class="step-nav" style="margin-top:24px">
+<button class="btn btn-ghost" onclick="goStep('step-dashboard')">← Dashboard</button>
+<button class="btn btn-outline" onclick="goStep('step-integrations')">🔗 Koppelingen beheren</button>
+</div>
+</div>
+
+<!-- ===== 7 LAGEN MODEL ===== -->
+<div class="step" id="step-model">
+<div class="step-badge" style="background:var(--purple-bg);color:var(--purple)">🧱 Het 7 Lagen Model</div>
+<h2>Waarom 7 lagen?</h2>
+<p class="step-desc">Digitale transformatie is geen technisch project maar een organisatie-brede verschuiving. Het 7 Lagen Model maakt de complexiteit beheersbaar door uw digitale organisatie op te delen in zeven onderling afhankelijke lagen — van fundament tot strategie.</p>
+
+<div class="card" style="margin:20px 0;padding:20px">
+<h4 style="margin-bottom:12px">Ontwerp-principes</h4>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.7;margin-bottom:10px"><strong>Van onder naar boven:</strong> Elke laag bouwt voort op de vorige. Zonder stabiel platform (laag 1) is beveiliging (laag 2) onbetrouwbaar. Zonder schone data (laag 3) faalt AI (laag 4). Zonder getrainde mensen (laag 5) stagneert adoptie. Zonder governance (laag 6) ontbreekt richting (laag 7).</p>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.7"><strong>Meten over tijd:</strong> Elke laag heeft meetbare indicatoren die samen de organizational health vormen. Scores worden gevoed door projectvoortgang, systeemdata (Microsoft 365, externe systemen) en handmatige input — altijd met bronvermelding.</p>
+</div>
+
+<div class="model-stack">
+  <div class="model-layer ml7"><div class="ml-num">7</div><div class="ml-info"><div class="ml-name">Richting</div><div class="ml-what">Digitale strategie, soevereiniteit, lange-termijnvisie</div><div class="ml-why">Zonder expliciete digitale strategie mist de organisatie koers. Beslissingen worden ad hoc genomen, investeringen versnipperen. Onderzoek van Deloitte toont dat organisaties met een expliciete digitale strategie 2,5× meer waarde realiseren uit technologie-investeringen.</div><div class="ml-src">Deloitte Digital Maturity Index 2025 · MIT CISR Digital Transformation</div></div></div>
+  <div class="model-layer ml6"><div class="ml-num">6</div><div class="ml-info"><div class="ml-name">Organisatie</div><div class="ml-what">Governance, AI-beleid, rollen, processen, compliance</div><div class="ml-why">AI en digitale tools vereisen nieuwe spelregels. Wie mag wat beslissen? Wie is verantwoordelijk als AI fouten maakt? De EU AI Act (2024/1689) verplicht organisaties om governance-structuren in te richten voor AI-gebruik. Zonder deze laag ontstaat "shadow AI" — medewerkers die ongecontroleerd AI inzetten.</div><div class="ml-src">EU AI Act 2024/1689 Art. 4, 26 · NIS2 2022/2555 · Microsoft: 78% shadow AI</div></div></div>
+  <div class="model-layer ml5"><div class="ml-num">5</div><div class="ml-info"><div class="ml-name">Mens</div><div class="ml-what">Training, adoptie, AI-geletterdheid, change management</div><div class="ml-why">Technologie werkt alleen als mensen het gebruiken en begrijpen. De EU AI Act verplicht AI-geletterdheid voor alle medewerkers die AI-systemen gebruiken of ermee te maken krijgen (Art. 4). Het Microsoft Work Trend Index toont dat adoptie stagneert zonder gerichte training en champions.</div><div class="ml-src">EU AI Act Art. 4 · Microsoft Work Trend Index 2025 · McKinsey AI Survey 2025</div></div></div>
+  <div class="model-layer ml4"><div class="ml-num">4</div><div class="ml-info"><div class="ml-name">Intelligentie</div><div class="ml-what">AI-tools, Copilot, agents, automatisering</div><div class="ml-why">AI is de versneller, maar alleen effectief op een solide basis. Copilot heeft schone data (laag 3) en correcte rechten (laag 2) nodig. Zonder governance (laag 6) en training (laag 5) blijft adoptie onder 5%. De Directions-analyse toont slechts 3,3% werkelijk actief Copilot-gebruik bij organisaties zonder gestructureerde aanpak.</div><div class="ml-src">Directions on Microsoft 2025 · Gartner Data Quality Guide · OECD SME Report 2025</div></div></div>
+  <div class="model-layer ml3"><div class="ml-num">3</div><div class="ml-info"><div class="ml-name">Informatie</div><div class="ml-what">Data-kwaliteit, structuur, rechten, metadata, classificatie</div><div class="ml-why">Data is de brandstof voor AI. Maar bij veel organisaties is 30-40% van documenten verouderd, ongestructureerd of zonder eigenaar. AI-tools als Copilot doorzoeken álles — inclusief gevoelige documenten waar verkeerde mensen toegang toe hebben. Zonder deze laag is AI onbetrouwbaar of zelfs risicovol.</div><div class="ml-src">McKinsey: "poor data blocks 60% of AI projects" · Microsoft Purview docs</div></div></div>
+  <div class="model-layer ml2"><div class="ml-num">2</div><div class="ml-info"><div class="ml-name">Bescherming</div><div class="ml-what">Beveiliging, identiteit, compliance, NIS2, DORA</div><div class="ml-why">Digitalisering vergroot het aanvalsoppervlak. NIS2 verplicht organisaties in essentiële en belangrijke sectoren tot cybersecurity-maatregelen met persoonlijke bestuurdersaansprakelijkheid. DORA stelt aanvullende eisen voor de financiële sector. Zero Trust-principes vormen de basis: verifieer altijd, vertrouw nooit automatisch.</div><div class="ml-src">NIS2 Richtlijn 2022/2555 · DORA 2022/2554 · NCSC.nl richtlijnen</div></div></div>
+  <div class="model-layer ml1"><div class="ml-num">1</div><div class="ml-info"><div class="ml-name">Platform</div><div class="ml-what">Werkplek, devices, configuratie, licenties, Cloud PC</div><div class="ml-why">Het fundament. Zonder gestandaardiseerde, beheerde werkplekken is alles erboven instabiel. 67% van MKB-organisaties heeft onvoldoende inzicht in hun IT-omgeving. Een gestandaardiseerd platform maakt beveiliging, data-beheer en AI-uitrol voorspelbaar en schaalbaar.</div><div class="ml-src">OECD SME Digital Gap Report 2025 · Microsoft Intune docs</div></div></div>
+</div>
+
+<div class="card" style="margin:20px 0;padding:20px">
+<h4 style="margin-bottom:8px">Hoe verhouden de lagen zich?</h4>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.7;margin-bottom:12px">De lagen zijn niet onafhankelijk — ze vormen een <strong>stapelmodel</strong>. Zwaktes in lagere lagen planten zich voort naar boven. Een organisatie die investeert in AI (laag 4) zonder eerst data te ordenen (laag 3) en beveiliging op orde te hebben (laag 2), bouwt op drijfzand.</p>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.7;margin-bottom:12px">Tegelijk werken de bovenste lagen als <strong>versneller</strong>: een heldere strategie (laag 7) met goede governance (laag 6) en getrainde mensen (laag 5) zorgt ervoor dat technologische investeringen in de onderste lagen sneller renderen.</p>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.7">Het model is geïnspireerd op bewezen frameworks (NIST CSF, ISO 27001, CIS Controls) maar vertaald naar de praktijk van MKB-organisaties in de Nederlandse context, met specifieke aandacht voor Europese regelgeving en Microsoft-technologie.</p>
+</div>
+
+<div class="step-nav" style="margin-top:24px">
+<button class="btn btn-ghost" onclick="goStep('step-dashboard')">← Dashboard</button>
+<button class="btn btn-outline" onclick="goStep('step-sources')">📚 Bronnen</button>
+</div>
+</div>
+
 <div class="step" id="step-news">
 <div class="step-badge" style="background:var(--blue-bg);color:var(--blue)">📰 Nieuws</div>
 <h2>Wat betekent dit voor uw organisatie?</h2>
@@ -1318,12 +1912,12 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 
 <!-- ===== OVER NAVIGATOR ===== -->
 <div class="step" id="step-about">
-<div class="step-badge" style="background:var(--warm-bg);color:var(--warm)">🏛️ Over Navigator</div>
+<div class="step-badge" style="background:var(--warm-bg);color:var(--warm)">🏛️ Over</div>
 <h2>Wie zitten hierachter?</h2>
 <p class="step-desc">Transparantie is de basis van vertrouwen. Hier leest u wie we zijn, hoe we werken en waarom u op deze informatie kunt bouwen.</p>
 
 <div class="about-grid">
-<div class="about-card"><div class="a-icon">🏢</div><h4>Onafhankelijk platform</h4><p>Navigator is ontwikkeld als onafhankelijk assessment-platform. We verkopen geen licenties en zijn niet gebonden aan één leverancier. Ons advies is gebaseerd op uw situatie, niet op onze marge.</p></div>
+<div class="about-card"><div class="a-icon">🏢</div><h4>Onafhankelijk platform</h4><p>OrgHealth is ontwikkeld als onafhankelijk assessment-platform. We verkopen geen licenties en zijn niet gebonden aan één leverancier. Ons advies is gebaseerd op uw situatie, niet op onze marge.</p></div>
 <div class="about-card"><div class="a-icon">🇪🇺</div><h4>Europees perspectief</h4><p>Ontworpen vanuit Europese waarden: privacy, soevereiniteit en transparantie. Alle data wordt verwerkt in EU-datacenters. Conform AVG, AI Act en het Europese kader voor betrouwbare AI.</p></div>
 <div class="about-card"><div class="a-icon">🏛️</div><h4>Sinds 1991</h4><p>Gebouwd op de ervaring van e-office, sinds 1991 actief in digitale werkplekken. Honderden MKB-organisaties begeleid in zorg, onderwijs en finance. Nu gefocust op de AI-transitie.</p></div>
 <div class="about-card"><div class="a-icon">🔍</div><h4>Open methodiek</h4><p>Ons 6-lagenmodel is gebaseerd op internationale frameworks (NIST, ISO 27001, EU AI Act risico-classificatie) en aangepast voor de MKB-praktijk. De methodiek is gedocumenteerd en toetsbaar.</p></div>
@@ -1332,7 +1926,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <!-- Put People First -->
 <div class="card" style="margin-bottom:20px;border-left:3px solid var(--blue)">
 <h3 style="font-size:16px;margin-bottom:8px">💙 Put people first</h3>
-<p style="font-size:13px;color:var(--text-sec);line-height:1.65;margin-bottom:10px">Wij geloven in de kracht van mensen. Technologie staat niet centraal — mensen wel. Navigator is gebouwd vanuit dezelfde overtuiging: de mens bepaalt de koers, de technologie ondersteunt. AI versterkt mensen, vervangt ze niet. Daarom begint elke assessment bij uw organisatie en uw mensen, niet bij de techniek.</p>
+<p style="font-size:13px;color:var(--text-sec);line-height:1.65;margin-bottom:10px">Wij geloven in de kracht van mensen. Technologie staat niet centraal — mensen wel. OrgHealth is gebouwd vanuit dezelfde overtuiging: de mens bepaalt de koers, de technologie ondersteunt. AI versterkt mensen, vervangt ze niet. Daarom begint elke assessment bij uw organisatie en uw mensen, niet bij de techniek.</p>
 <div style="display:flex;flex-wrap:wrap;gap:8px">
 <span style="font-size:12px;padding:4px 10px;background:var(--blue-bg);color:var(--blue);border-radius:4px;font-weight:600">Engage employees</span>
 <span style="font-size:12px;padding:4px 10px;background:var(--green-bg);color:var(--green);border-radius:4px;font-weight:600">Energize teams</span>
@@ -1362,7 +1956,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 </div>
 
 <h3 style="font-size:17px;margin-bottom:12px">Het team</h3>
-<p style="font-size:14px;color:var(--text-sec);margin-bottom:16px">Navigator wordt ontwikkeld door een team met gecombineerde ervaring in Microsoft-technologie, Europese regelgeving en MKB-consultancy.</p>
+<p style="font-size:14px;color:var(--text-sec);margin-bottom:16px">OrgHealth wordt ontwikkeld door een team met gecombineerde ervaring in Microsoft-technologie, Europese regelgeving en MKB-consultancy.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px">
 <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;margin-bottom:6px">🖥️</div><div style="font-size:13px;font-weight:600">Werkplek-specialisten</div><div style="font-size:12px;color:var(--text-sec)">Microsoft certified engineers met MKB-ervaring</div></div>
 <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;margin-bottom:6px">⚖️</div><div style="font-size:13px;font-weight:600">Compliance-experts</div><div style="font-size:12px;color:var(--text-sec)">Gespecialiseerd in AI Act, NIS2 en AVG voor MKB</div></div>
@@ -1380,7 +1974,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <div class="step" id="step-sources">
 <div class="step-badge" style="background:var(--warm-bg);color:var(--warm)">📚 Bronnen & Methodiek</div>
 <h2>Waar is dit op gebaseerd?</h2>
-<p class="step-desc">Elke bewering in Navigator is gebaseerd op verifieerbare bronnen. Hier vindt u het volledige overzicht, gecategoriseerd per type.</p>
+<p class="step-desc">Elke bewering in OrgHealth is gebaseerd op verifieerbare bronnen. Hier vindt u het volledige overzicht, gecategoriseerd per type.</p>
 
 <h3 style="font-size:15px;margin-bottom:10px">🇪🇺 Europese regelgeving</h3>
 <div class="source-list" style="margin-bottom:24px">
@@ -1562,7 +2156,7 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
         <div class="pc-sp-footer"><div class="pc-sp-rating">★ 4.5 (63) · Vanaf €115/u</div><div class="pc-sp-cta">Contact →</div></div>
       </div>
 
-      <div class="mp-join">🤝 <span>Bent u consultant? <a href="#">Word partner op Navigator →</a></span></div>
+      <div class="mp-join">🤝 <span>Bent u consultant? <a href="#">Word partner op OrgHealth →</a></span></div>
     </div>
 
     <!-- CHAT INPUT (always visible at bottom of panel) -->
@@ -1594,9 +2188,9 @@ Elk artikel verwijst naar een laag in uw assessment en de bijbehorende actie in 
 <script>
 let currentStep = 'step-1';
 const completedSteps = new Set();
-const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-dashboard':'Dashboard','step-integrations':'Integraties','step-about':'Over Navigator','step-sources':'Bronnen'};
+const stepNames = {'step-1':'Laag 1 · Platform','step-2':'Laag 2 · Bescherming','step-3':'Laag 3 · Informatie','step-4':'Laag 4 · Intelligentie','step-5':'Laag 5 · Mens','step-6':'Laag 6 · Organisatie','step-7':'Laag 7 · Richting','step-dashboard':'Dashboard','step-activity':'Activiteit','step-integrations':'Koppelingen','step-teams':'Teams Hub','step-billing':'Abonnement','step-model':'7 Lagen Model','step-about':'Over OrgHealth','step-sources':'Bronnen'};
 
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));var el=document.getElementById(id);if(el)el.classList.add('active');window.scrollTo(0,0)}
 
 function goStep(id){
   currentStep=id;
@@ -1612,7 +2206,7 @@ function goStep(id){
 }
 
 function completeStep(id){completedSteps.add(id);document.querySelector(`.sidebar-item[data-step="${id}"]`)?.classList.add('completed');updateProgress()}
-function updateProgress(){const p=Math.round(completedSteps.size/7*100);document.getElementById('prog-pct').textContent=p+'%';document.getElementById('prog-bar').style.width=p+'%'}
+function updateProgress(){const p=Math.round(completedSteps.size/7*100);var pp=document.getElementById('prog-pct');var pb=document.getElementById('prog-bar');if(pp)pp.textContent=p+'%';if(pb)pb.style.width=p+'%'}
 
 function pick(el){el.closest('.option-list').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected')}
 function pickChip(el){el.closest('.chip-grid').querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
@@ -1661,10 +2255,13 @@ function spSend(){
 }
 
 // Expandable insight cards
-function toggleCard(id){document.getElementById(id).classList.toggle('open')}
+function toggleCard(id){var el=document.getElementById(id);if(el)el.classList.toggle('open')}
 function dbTab(id,btn){document.querySelectorAll('.db-tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.db-pan').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');var p=document.getElementById(id);if(p)p.classList.add('active')}
-function dtog(n){document.getElementById('dl'+n).classList.toggle('open')}
+function dtog(n){var el=document.getElementById('dl'+n);if(el)el.classList.toggle('open')}
 function dltab(n,t,btn){var c=document.getElementById('dl'+n);c.querySelectorAll('.dlc-tab').forEach(function(x){x.classList.remove('active')});c.querySelectorAll('.dlc-pan').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');var p=document.getElementById('dl'+n+t);if(p)p.classList.add('active')}
+function actFilter(src,btn){document.querySelectorAll('.act-fl').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.act-entry').forEach(function(e){if(src==='all'){e.style.display='flex'}else{e.style.display=e.getAttribute('data-src')===src?'flex':'none'}})}
+function thTog(n){var el=document.getElementById('thc'+n);if(el)el.classList.toggle('open')}
+function billCycle(c,btn){document.querySelectorAll('.bill-tg').forEach(function(t){t.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.bill-amount[data-mo]').forEach(function(el){el.textContent=c==='yr'?el.getAttribute('data-yr'):el.getAttribute('data-mo')});document.querySelectorAll('.bill-per').forEach(function(el){if(el.textContent)el.textContent=c==='yr'?'per maand · jaarabonnement · excl. BTW':'per maand · excl. BTW'})}
 function filterNews(cat,btn){
   document.querySelectorAll('.news-filter-btn').forEach(function(b){b.classList.remove('active')});
   btn.classList.add('active');
